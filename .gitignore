@@ -1,4 +1,5 @@
 api/node_modules
+api/backup
 api/.env
 
 client/node_modules
