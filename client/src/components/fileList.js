@@ -1,7 +1,7 @@
 import React from "react";
 
-const fileList = () => {
-  return <div>fileList</div>;
+const FileList = () => {
+  return <div>FileList</div>;
 };
 
-export default fileList;
+export default FileList;
