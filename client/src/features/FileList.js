@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { FaTrash } from "react-icons/fa6";
+import { FaArrowLeft } from "react-icons/fa6";
 
 const FileList = () => {
   const [folderPath, setFolderPath] = useState({
@@ -15,6 +16,9 @@ const FileList = () => {
   useEffect(() => {
     getList();
   }, []);
+  useEffect(() => {
+    getList();
+  }, [folderPath]);
 
   const handleRemove = async (filepath) => {
     const data = {
@@ -46,7 +50,12 @@ const FileList = () => {
         data
       );
       const foldersMap = response.data.result.folders.map((folder) => {
-        return <h2>{folder}</h2>;
+        return (
+          <h2>
+            {folder}
+            <FaArrowLeft onClick={(e) => handleChangeFolder(e, folder)} />
+          </h2>
+        );
       });
       const filesMap = response.data.result.files.map((file) => {
         return (
@@ -64,9 +73,20 @@ const FileList = () => {
     }
   };
 
-  const handleGetList = (e) => {
+  const handleChangeFolder = (e, folder) => {
     e.preventDefault();
-    getList();
+    const [customerFolder, subFolder] = folder.split("/");
+    setFolderPath({
+      customerFolder: customerFolder || "General",
+      subFolder: subFolder || "",
+    });
+  };
+  const handleChangeBack = (e) => {
+    e.preventDefault();
+    setFolderPath({
+      customerFolder: folderPath.customerFolder || "General",
+      subFolder: "",
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -114,6 +134,10 @@ const FileList = () => {
         </div>
         <button type="submit">Upload</button>
       </form>
+      <div>
+        Back
+        <FaArrowLeft onClick={(e) => handleChangeBack(e)} />
+      </div>
     </div>
   );
 };
