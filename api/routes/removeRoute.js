@@ -5,15 +5,10 @@ const router = express.Router();
 
 router.post("/", (req, res) => {
   try {
-    if (!req.body.customerFolder || !req.body.subFolder || !req.body.fileName) {
+    if (!req.body.fileName) {
       res.json("Data error");
     } else {
-      const result = removeController(
-        req.body.customerFolder,
-        req.body.subFolder,
-        req.body.fileName
-      );
-      console.log(result);
+      removeController(req.body.fileName);
       res.json({ message: "File removed successfully" });
     }
   } catch (err) {

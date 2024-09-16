@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post("/", (req, res) => {
   try {
-    if (!req.body.customerFolder || !req.body.subFolder) {
+    if (req.body.customerFolder == null || req.body.subFolder == null) {
       res.json("Data error");
     } else {
       async function fetchList() {

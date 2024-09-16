@@ -31,45 +31,9 @@ const Upload = () => {
     }
   };
 
-  const handleGetList = async (e) => {
-    e.preventDefault();
-    const data = {
-      customerFolder: customerFolder,
-      subFolder: subCustomerFolder,
-    };
-    try {
-      const response = await axios.post(
-        "http://localhost:3500/files/getlist",
-        data
-      );
-      console.log("List of folders and files from backend: ", response.data);
-    } catch (error) {
-      console.error("Error uploading file:", error);
-    }
-  };
-  const handleRemove = async (e) => {
-    e.preventDefault();
-    const data = {
-      // fileName: file.name,
-      // customerFolder: customerFolder,
-      // subFolder: subCustomerFolder,
-      fileName: "1492024_1837350_test123.txt",
-      customerFolder: "General",
-      subFolder: "subFolder",
-    };
-    try {
-      const response = await axios.post(
-        "http://localhost:3500/files/remove",
-        data
-      );
-      console.log("File removed: ", response.data);
-    } catch (error) {
-      console.error("Error uploading file:", error);
-    }
-  };
-
   return (
     <div className="upload">
+      Upload
       <form onSubmit={handleSubmit}>
         <div>
           <br />
@@ -81,12 +45,6 @@ const Upload = () => {
         </div>
         <button type="submit">Upload</button>
       </form>
-      <button type="submit" onClick={handleGetList}>
-        Get list
-      </button>
-      <button type="submit" onClick={handleRemove}>
-        Remove
-      </button>
     </div>
   );
 };
