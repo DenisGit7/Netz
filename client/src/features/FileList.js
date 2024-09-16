@@ -6,7 +6,7 @@ import { FaTrash } from "react-icons/fa6";
 const FileList = () => {
   const [folderPath, setFolderPath] = useState({
     customerFolder: "General",
-    subFolder: "subFolder",
+    subFolder: "",
   });
   const [folders, setFolder] = useState([]);
   const [files, setFiles] = useState([]);
@@ -98,9 +98,6 @@ const FileList = () => {
   return (
     <div>
       FileList
-      <button type="submit" onClick={handleGetList}>
-        Get list
-      </button>
       <h1>Files:</h1>
       {files}
       <h1>Folders:</h1>
