@@ -6,14 +6,11 @@ import { FaTrash } from "react-icons/fa6";
 const FileList = () => {
   const [folderPath, setFolderPath] = useState({
     customerFolder: "General",
-    subFolder: "",
+    subFolder: "subFolder",
   });
   const [folders, setFolder] = useState([]);
   const [files, setFiles] = useState([]);
-  const [file, setFile] = useState(undefined);
-  const [filePath, setFilePath] = useState("");
-  const [customerFolder, setcustomerFolder] = useState("General");
-  const [subCustomerFolder, setsubCustomerFolder] = useState("");
+  const [file, setFile] = useState([]);
 
   useEffect(() => {
     getList();
@@ -28,12 +25,10 @@ const FileList = () => {
         "http://localhost:3500/files/remove",
         data
       );
-
       console.log("File removed: ", response.data);
     } catch (error) {
       console.error("Error uploading file:", error);
     }
-
     setTimeout(() => {
       getList();
     }, 1000);
@@ -50,14 +45,6 @@ const FileList = () => {
         "http://localhost:3500/files/getlist",
         data
       );
-
-      // console.log(
-      //   "List of folders and files from backend: ",
-      //   response.data.result.files,
-      //   response.data.result.folders
-      // );
-      // setRawFiles(response.data.result.files);
-      // setRawFolder(response.data.result.folders);
       const foldersMap = response.data.result.folders.map((folder) => {
         return <h2>{folder}</h2>;
       });
@@ -85,10 +72,9 @@ const FileList = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-
     formData.append("file", file);
-    formData.append("customerFolder", customerFolder);
-    formData.append("subFolder", subCustomerFolder);
+    formData.append("customerFolder", folderPath.customerFolder);
+    formData.append("subFolder", folderPath.subFolder);
     console.log(formData);
     try {
       const response = await axios.post(
