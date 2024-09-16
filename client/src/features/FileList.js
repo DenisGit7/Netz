@@ -1,27 +1,25 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import Remove from "./Remove";
-// import getList from "../helpers/GetList.js";
 import { FaTrash } from "react-icons/fa6";
-import { Link } from "react-router-dom";
 
 const FileList = () => {
   const [folderPath, setFolderPath] = useState({
     customerFolder: "General",
-    subFolder: "subFolder",
+    subFolder: "",
   });
   const [folders, setFolder] = useState([]);
   const [files, setFiles] = useState([]);
-  // const [rawFolders, setRawFolder] = useState([]);
-  // const [rawFiles, setRawFiles] = useState([]);
+  const [file, setFile] = useState(undefined);
+  const [filePath, setFilePath] = useState("");
+  const [customerFolder, setcustomerFolder] = useState("General");
+  const [subCustomerFolder, setsubCustomerFolder] = useState("");
 
   useEffect(() => {
     getList();
   }, []);
 
   const handleRemove = async (filepath) => {
-    // e.preventDefault();
     const data = {
       fileName: filepath,
     };
@@ -84,6 +82,33 @@ const FileList = () => {
     getList();
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+
+    formData.append("file", file);
+    formData.append("customerFolder", customerFolder);
+    formData.append("subFolder", subCustomerFolder);
+    console.log(formData);
+    try {
+      const response = await axios.post(
+        "http://localhost:3500/files/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    }
+    setTimeout(() => {
+      getList();
+    }, 1000);
+  };
+
   return (
     <div>
       FileList
@@ -94,6 +119,18 @@ const FileList = () => {
       {files}
       <h1>Folders:</h1>
       {folders}
+      Upload
+      <form onSubmit={handleSubmit}>
+        <div>
+          <br />
+          <input
+            type="file"
+            id="file"
+            onChange={(e) => setFile((prev) => e.target.files[0])}
+          />
+        </div>
+        <button type="submit">Upload</button>
+      </form>
     </div>
   );
 };

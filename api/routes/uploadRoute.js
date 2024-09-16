@@ -8,7 +8,11 @@ const upload = multer({ storage });
 
 router.post("/", upload.single("file"), (req, res) => {
   try {
-    if (!req.body.customerFolder || !req.body.subFolder || !req.file) {
+    if (
+      req.body.customerFolder == null &&
+      req.body.subFolder == null &&
+      req.file == null
+    ) {
       res.json("Data error");
     } else {
       const result = uploadController(
