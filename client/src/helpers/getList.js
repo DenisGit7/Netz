@@ -1,6 +1,8 @@
 import axios from "axios";
 import { FaTrash } from "react-icons/fa6";
 import { FaArrowLeft } from "react-icons/fa6";
+import { FaFileInvoice } from "react-icons/fa6";
+import { FaDownload } from "react-icons/fa6";
 import { handleRemove } from "./handleRemove.js";
 import { handleChangeFolder } from "./handleChangeFolder.js";
 
@@ -22,20 +24,26 @@ export const getList = async (
       data
     );
     const foldersMap = response.data.result.folders.map((folder) => {
+      const folderName = folder.split("/").pop();
       return (
         <h2>
-          {folder}
+          {folderName}
           <FaArrowLeft
+            className="icon-st"
             onClick={(e) => handleChangeFolder(e, folder, setFolderPath)}
           />
         </h2>
       );
     });
     const filesMap = response.data.result.files.map((file) => {
+      const fileName = file.split("/").pop();
+
       return (
-        <>
-          <h2>{file}</h2>
+        <div className="file-container">
+          <FaFileInvoice className="icon-file" />
+          <h4 className="file-name">{fileName}</h4>
           <FaTrash
+            className="icon-remove"
             onClick={() =>
               handleRemove(
                 file,
@@ -47,7 +55,7 @@ export const getList = async (
               )
             }
           />
-        </>
+        </div>
       );
     });
     setFiles(filesMap);

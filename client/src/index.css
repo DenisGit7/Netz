@@ -1,13 +1,108 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f9f9f9;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+button {
+  border: none;
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.file-upload-label {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.file-upload-name {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #01330d;
+  color: white;
+
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.file-upload-label:hover {
+  background-color: #218838;
+}
+
+.icon-remove {
+  color: #bf6d6d;
+  scale: 2;
+
+  cursor: pointer;
+}
+.icon-remove:hover {
+  color: #a72828;
+  scale: 2.1;
+
+  cursor: pointer;
+}
+
+.icon-file {
+  color: #218838;
+  scale: 4;
+  margin: 1rem;
+
+  cursor: pointer;
+}
+
+.icon-file:hover {
+  color: #01330d;
+  scale: 4.1;
+
+  cursor: pointer;
+}
+
+.file-name {
+  font-size: 16px;
+}
+
+.folder-container {
+  border: 1px solid rgb(255, 12, 12);
+  /* display: inline-table; */
+  text-align: center;
+}
+
+.file-container {
+  padding: 15px;
+  margin: 0.5rem;
+  border: 1px solid black;
+  display: inline-block;
+
+  width: 300px;
+  text-align: center;
 }

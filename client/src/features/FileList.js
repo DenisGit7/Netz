@@ -42,6 +42,7 @@ const FileList = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(file);
     const formData = new FormData();
     formData.append("file", file);
     formData.append("customerFolder", folderPath.customerFolder);
@@ -78,15 +79,21 @@ const FileList = () => {
       {files}
       <h1>Folders:</h1>
       {folders}
-      Upload
       <form onSubmit={handleSubmit}>
         <div>
           <br />
-          <input
-            type="file"
-            id="file"
-            onChange={(e) => setFile((prev) => e.target.files[0])}
-          />
+
+          <label className="file-upload-label">
+            Choose file
+            <input
+              type="file"
+              id="file"
+              onChange={(e) => setFile((prev) => e.target.files[0])}
+            />
+          </label>
+          <h4 className="file-upload-name">
+            {!file.name ? "Waiting for file" : file.name}
+          </h4>
         </div>
         <button type="submit">Upload</button>
       </form>
