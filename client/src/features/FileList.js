@@ -22,15 +22,6 @@ const FileList = () => {
       folderPath.subFolder,
       setFolderPath
     );
-  }, []);
-  useEffect(() => {
-    getList(
-      setFiles,
-      setFolder,
-      folderPath.customerFolder,
-      folderPath.subFolder,
-      setFolderPath
-    );
   }, [folderPath]);
 
   const handleChangeBack = (e) => {
