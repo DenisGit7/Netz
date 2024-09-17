@@ -5,6 +5,7 @@ import cors from "cors";
 import uploadRoute from "./routes/uploadRoute.js";
 import getListRoute from "./routes/getListRoute.js";
 import removeRoute from "./routes/removeRoute.js";
+import downloadRoute from "./routes/downloadRoute.js";
 
 const app = express();
 const PORT = process.env.PORT || 3500;
@@ -23,5 +24,6 @@ app.get("/", (req, res) => {
 app.use("/files/upload", uploadRoute);
 app.use("/files/getlist", getListRoute);
 app.use("/files/remove", removeRoute);
+app.use("/files/download", downloadRoute);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

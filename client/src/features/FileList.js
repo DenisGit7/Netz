@@ -6,9 +6,10 @@ import { FaArrowLeft } from "react-icons/fa6";
 import { getList } from "../helpers/getList.js";
 
 const FileList = () => {
+  const [downloadURL, setDownloadURL] = useState("");
   const [folderPath, setFolderPath] = useState({
     customerFolder: "Denis",
-    subFolder: "Aug",
+    subFolder: "",
   });
   const [uploadPath, setUploadPath] = useState({
     customerFolder: "Denis",
@@ -79,7 +80,6 @@ const FileList = () => {
 
   return (
     <div>
-      <h1 className="files-header">{folderPath.customerFolder}</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <button type="submit">Upload</button>
@@ -96,6 +96,7 @@ const FileList = () => {
           </h4>
         </div>
       </form>
+      <h1 className="files-header">{folderPath.customerFolder}</h1>
       <div>
         {folderPath.subFolder === "" ? (
           ""

@@ -5,6 +5,8 @@ import { FaFileInvoice } from "react-icons/fa6";
 import { FaDownload } from "react-icons/fa6";
 import { handleRemove } from "./handleRemove.js";
 import { handleChangeFolder } from "./handleChangeFolder.js";
+import { handleDownload } from "./handleDownload.js";
+import { useState } from "react";
 
 export const getList = async (
   setFiles,
@@ -41,7 +43,12 @@ export const getList = async (
       return (
         <>
           <div className="file-container">
-            <FaFileInvoice className="icon-file" />
+            <FaFileInvoice
+              className="icon-file"
+              onClick={(e) =>
+                handleDownload(customerFolder, subFolder, fileName)
+              }
+            />
             <h4 className="file-name">{fileName}</h4>
             <FaTrash
               className="icon-remove"
