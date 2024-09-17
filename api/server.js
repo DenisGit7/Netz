@@ -7,7 +7,7 @@ import getListRoute from "./routes/getListRoute.js";
 import removeRoute from "./routes/removeRoute.js";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3500;
 
 app.use(cors());
 app.use(express.json());

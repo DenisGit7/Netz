@@ -3,88 +3,48 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { FaTrash } from "react-icons/fa6";
 import { FaArrowLeft } from "react-icons/fa6";
+import { getList } from "../helpers/getList.js";
 
 const FileList = () => {
   const [folderPath, setFolderPath] = useState({
     customerFolder: "General",
-    subFolder: "",
+    subFolder: "Oct",
   });
   const [folders, setFolder] = useState([]);
   const [files, setFiles] = useState([]);
   const [file, setFile] = useState([]);
 
   useEffect(() => {
-    getList();
+    getList(
+      setFiles,
+      setFolder,
+      folderPath.customerFolder,
+      folderPath.subFolder,
+      setFolderPath
+    );
   }, []);
   useEffect(() => {
-    getList();
+    getList(
+      setFiles,
+      setFolder,
+      folderPath.customerFolder,
+      folderPath.subFolder,
+      setFolderPath
+    );
   }, [folderPath]);
 
-  const handleRemove = async (filepath) => {
-    const data = {
-      fileName: filepath,
-    };
-    try {
-      const response = await axios.post(
-        "http://localhost:3500/files/remove",
-        data
-      );
-      console.log("File removed: ", response.data);
-    } catch (error) {
-      console.error("Error uploading file:", error);
-    }
-    setTimeout(() => {
-      getList();
-    }, 1000);
-  };
-
-  const getList = async () => {
-    console.log("getting list");
-    const data = {
-      customerFolder: folderPath.customerFolder,
-      subFolder: folderPath.subFolder,
-    };
-    try {
-      const response = await axios.post(
-        "http://localhost:3500/files/getlist",
-        data
-      );
-      const foldersMap = response.data.result.folders.map((folder) => {
-        return (
-          <h2>
-            {folder}
-            <FaArrowLeft onClick={(e) => handleChangeFolder(e, folder)} />
-          </h2>
-        );
-      });
-      const filesMap = response.data.result.files.map((file) => {
-        return (
-          <>
-            <h2>{file}</h2>
-            <FaTrash onClick={() => handleRemove(file)} />
-          </>
-        );
-      });
-      setFiles(filesMap);
-      setFolder(foldersMap);
-      console.log(files);
-    } catch (error) {
-      console.error("Error uploading file:", error);
-    }
-  };
-
-  const handleChangeFolder = (e, folder) => {
-    e.preventDefault();
-    const [customerFolder, subFolder] = folder.split("/");
-    setFolderPath({
-      customerFolder: customerFolder || "General",
-      subFolder: subFolder || "",
-    });
-  };
   const handleChangeBack = (e) => {
     e.preventDefault();
     setFolderPath({
       customerFolder: folderPath.customerFolder || "General",
+      subFolder: "",
+    });
+  };
+
+  const handleChangeAdminBack = (e) => {
+    e.preventDefault();
+    setFolderPath({
+      customerFolder: "",
       subFolder: "",
     });
   };
@@ -111,7 +71,12 @@ const FileList = () => {
       console.error("Error uploading file:", error);
     }
     setTimeout(() => {
-      getList();
+      getList(
+        setFiles,
+        setFolder,
+        folderPath.customerFolder,
+        folderPath.subFolder
+      );
     }, 1000);
   };
 
@@ -137,6 +102,10 @@ const FileList = () => {
       <div>
         Back
         <FaArrowLeft onClick={(e) => handleChangeBack(e)} />
+      </div>
+      <div>
+        Admin Back
+        <FaArrowLeft onClick={(e) => handleChangeAdminBack(e)} />
       </div>
     </div>
   );
