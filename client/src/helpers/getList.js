@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FaTrash } from "react-icons/fa6";
+import { FaFile, FaTrash, FaFolder } from "react-icons/fa6";
 import { FaArrowLeft } from "react-icons/fa6";
 import { FaFileInvoice } from "react-icons/fa6";
 import { FaDownload } from "react-icons/fa6";
@@ -26,36 +26,38 @@ export const getList = async (
     const foldersMap = response.data.result.folders.map((folder) => {
       const folderName = folder.split("/").pop();
       return (
-        <h2>
-          {folderName}
-          <FaArrowLeft
-            className="icon-st"
+        <div className="folder-container">
+          <FaFolder
+            className="icon-file"
             onClick={(e) => handleChangeFolder(e, folder, setFolderPath)}
           />
-        </h2>
+          <h4 className="file-name">{folderName}</h4>
+        </div>
       );
     });
     const filesMap = response.data.result.files.map((file) => {
       const fileName = file.split("/").pop();
 
       return (
-        <div className="file-container">
-          <FaFileInvoice className="icon-file" />
-          <h4 className="file-name">{fileName}</h4>
-          <FaTrash
-            className="icon-remove"
-            onClick={() =>
-              handleRemove(
-                file,
-                setFiles,
-                setFolder,
-                customerFolder,
-                subFolder,
-                setFolderPath
-              )
-            }
-          />
-        </div>
+        <>
+          <div className="file-container">
+            <FaFileInvoice className="icon-file" />
+            <h4 className="file-name">{fileName}</h4>
+            <FaTrash
+              className="icon-remove"
+              onClick={() =>
+                handleRemove(
+                  file,
+                  setFiles,
+                  setFolder,
+                  customerFolder,
+                  subFolder,
+                  setFolderPath
+                )
+              }
+            />
+          </div>
+        </>
       );
     });
     setFiles(filesMap);

@@ -7,8 +7,12 @@ import { getList } from "../helpers/getList.js";
 
 const FileList = () => {
   const [folderPath, setFolderPath] = useState({
-    customerFolder: "General",
-    subFolder: "Oct",
+    customerFolder: "Denis",
+    subFolder: "Aug",
+  });
+  const [uploadPath, setUploadPath] = useState({
+    customerFolder: "Denis",
+    subFolder: "Dec",
   });
   const [folders, setFolder] = useState([]);
   const [files, setFiles] = useState([]);
@@ -45,8 +49,8 @@ const FileList = () => {
     console.log(file);
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("customerFolder", folderPath.customerFolder);
-    formData.append("subFolder", folderPath.subFolder);
+    formData.append("customerFolder", uploadPath.customerFolder);
+    formData.append("subFolder", uploadPath.subFolder);
     console.log(formData);
     try {
       const response = await axios.post(
@@ -70,19 +74,15 @@ const FileList = () => {
         folderPath.subFolder
       );
     }, 1000);
+    setFile([]);
   };
 
   return (
     <div>
-      FileList
-      <h1>Files:</h1>
-      {files}
-      <h1>Folders:</h1>
-      {folders}
+      <h1 className="files-header">{folderPath.customerFolder}</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <br />
-
+          <button type="submit">Upload</button>
           <label className="file-upload-label">
             Choose file
             <input
@@ -95,12 +95,25 @@ const FileList = () => {
             {!file.name ? "Waiting for file" : file.name}
           </h4>
         </div>
-        <button type="submit">Upload</button>
       </form>
       <div>
-        Back
-        <FaArrowLeft onClick={(e) => handleChangeBack(e)} />
+        {folderPath.subFolder === "" ? (
+          ""
+        ) : (
+          <FaArrowLeft
+            className="icon-back"
+            onClick={(e) => handleChangeBack(e)}
+          />
+        )}
       </div>
+      {/* {folders == "" ? (
+        ""
+      ) : (
+        <h1 className="files-header">{`${folderPath.customerFolder}`}</h1>
+      )} */}
+      {folders}
+      <h1 className="files-header">{`${folderPath.subFolder}`}</h1>
+      {files}
       <div>
         Admin Back
         <FaArrowLeft onClick={(e) => handleChangeAdminBack(e)} />

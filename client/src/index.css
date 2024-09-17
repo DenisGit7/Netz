@@ -15,12 +15,13 @@ code {
 
 button {
   border: none;
+  margin-left: 0.5rem;
   padding: 10px 20px;
   background-color: #28a745;
   color: white;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 20px;
   transition: background-color 0.3s;
 }
 
@@ -35,6 +36,7 @@ input[type="file"] {
 .file-upload-label {
   display: inline-block;
   padding: 10px 20px;
+  margin-left: 0.5rem;
   border-radius: 5px;
   background-color: #28a745;
   color: white;
@@ -50,7 +52,6 @@ input[type="file"] {
   border-radius: 5px;
   background-color: #01330d;
   color: white;
-
   font-size: 16px;
   transition: background-color 0.3s;
 }
@@ -67,8 +68,19 @@ input[type="file"] {
 }
 .icon-remove:hover {
   color: #a72828;
-  scale: 2.1;
+  scale: 2.3;
+  cursor: pointer;
+}
 
+.icon-back {
+  color: #218838;
+  scale: 2;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+.icon-back:hover {
+  color: #01330d;
+  scale: 2.3;
   cursor: pointer;
 }
 
@@ -76,14 +88,13 @@ input[type="file"] {
   color: #218838;
   scale: 4;
   margin: 1rem;
-
+  margin-bottom: 0.3rem;
   cursor: pointer;
 }
 
 .icon-file:hover {
   color: #01330d;
-  scale: 4.1;
-
+  scale: 4.3;
   cursor: pointer;
 }
 
@@ -92,17 +103,19 @@ input[type="file"] {
 }
 
 .folder-container {
-  border: 1px solid rgb(255, 12, 12);
-  /* display: inline-table; */
+  padding: 10px;
+  display: inline-block;
+  width: 100px;
   text-align: center;
 }
 
 .file-container {
-  padding: 15px;
-  margin: 0.5rem;
-  border: 1px solid black;
+  padding: 10px;
   display: inline-block;
-
   width: 300px;
   text-align: center;
+}
+
+.files-header {
+  color: #01330d;
 }
