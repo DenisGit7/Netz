@@ -9,8 +9,14 @@ export const handleDownload = async (customerFolder, subFolder, fileName) => {
       "http://localhost:3500/files/download",
       data
     );
-    console.log("File downloaded: ", response.data.url);
-    return response.data.url;
+    const fileUrl = response.data.url;
+    const link = document.createElement("a");
+    link.href = fileUrl;
+    link.setAttribute("download", fileName);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    return fileUrl;
   } catch (error) {
     console.error("Error downloading file:", error);
   }

@@ -1,12 +1,8 @@
 import axios from "axios";
-import { FaFile, FaTrash, FaFolder } from "react-icons/fa6";
-import { FaArrowLeft } from "react-icons/fa6";
-import { FaFileInvoice } from "react-icons/fa6";
-import { FaDownload } from "react-icons/fa6";
+import { FaTrash, FaFolder, FaFileInvoice } from "react-icons/fa6";
 import { handleRemove } from "./handleRemove.js";
 import { handleChangeFolder } from "./handleChangeFolder.js";
 import { handleDownload } from "./handleDownload.js";
-import { useState } from "react";
 
 export const getList = async (
   setFiles,

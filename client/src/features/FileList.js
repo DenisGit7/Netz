@@ -1,12 +1,11 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { FaTrash } from "react-icons/fa6";
+
 import { FaArrowLeft } from "react-icons/fa6";
 import { getList } from "../helpers/getList.js";
 
 const FileList = () => {
-  const [downloadURL, setDownloadURL] = useState("");
   const [folderPath, setFolderPath] = useState({
     customerFolder: "Denis",
     subFolder: "",
