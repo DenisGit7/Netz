@@ -1,7 +1,21 @@
-import React from "react";
+import React from 'react'
+import classes from './Nav.module.css'
 
-const Nav = () => {
-  return <div>Nav</div>;
-};
+//controls of show / hide
 
-export default Nav;
+const Nav = ({ showUpload, setShowUpload, showFolders, setShowFolders }) => {
+  return (
+    <div className={classes.container}>
+      <ul className={classes.ul}>
+        <li className={classes.li} onClick={() => setShowUpload(!showUpload)}>
+          Upload a file
+        </li>
+        <li className={classes.li} onClick={() => setShowFolders(!showFolders)}>
+          Navigate your folders
+        </li>
+      </ul>
+    </div>
+  )
+}
+
+export default Nav

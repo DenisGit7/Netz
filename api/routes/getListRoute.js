@@ -14,9 +14,6 @@ router.post("/", (req, res) => {
             req.body.customerFolder,
             req.body.subFolder
           );
-          console.log("Folders:", result.folders);
-          console.log("Files:", result.files);
-          // return result.folders;
           res.json({
             message: "Files list fetched successfully",
             result: { folders: result.folders, files: result.files },

@@ -1,5 +1,8 @@
 import axios from "axios";
-import { FaTrash, FaFolder, FaFileInvoice } from "react-icons/fa6";
+import { FaTrash, FaFolder } from "react-icons/fa6";
+
+import { FaFileInvoice } from "react-icons/fa6";
+
 import { handleRemove } from "./handleRemove.js";
 import { handleChangeFolder } from "./handleChangeFolder.js";
 import { handleDownload } from "./handleDownload.js";
@@ -21,10 +24,10 @@ export const getList = async (
       "http://localhost:3500/files/getlist",
       data
     );
-    const foldersMap = response.data.result.folders.map((folder) => {
+    const foldersMap = response.data.result.folders.map((folder, index) => {
       const folderName = folder.split("/").pop();
       return (
-        <div className="folder-container">
+        <div key={index} className="folder-container">
           <FaFolder
             className="icon-file"
             onClick={(e) => handleChangeFolder(e, folder, setFolderPath)}
@@ -33,34 +36,30 @@ export const getList = async (
         </div>
       );
     });
-    const filesMap = response.data.result.files.map((file) => {
+    const filesMap = response.data.result.files.map((file, index) => {
       const fileName = file.split("/").pop();
 
       return (
-        <>
-          <div className="file-container">
-            <FaFileInvoice
-              className="icon-file"
-              onClick={(e) =>
-                handleDownload(customerFolder, subFolder, fileName)
-              }
-            />
-            <h4 className="file-name">{fileName}</h4>
-            <FaTrash
-              className="icon-remove"
-              onClick={() =>
-                handleRemove(
-                  file,
-                  setFiles,
-                  setFolder,
-                  customerFolder,
-                  subFolder,
-                  setFolderPath
-                )
-              }
-            />
-          </div>
-        </>
+        <div key={index} className="file-container">
+          <FaFileInvoice
+            className="icon-file"
+            onClick={(e) => handleDownload(customerFolder, subFolder, fileName)}
+          />
+          <h4 className="file-name">{fileName}</h4>
+          <FaTrash
+            className="icon-remove"
+            onClick={() =>
+              handleRemove(
+                file,
+                setFiles,
+                setFolder,
+                customerFolder,
+                subFolder,
+                setFolderPath
+              )
+            }
+          />
+        </div>
       );
     });
     setFiles(filesMap);

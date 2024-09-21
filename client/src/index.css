@@ -23,10 +23,9 @@ button {
   cursor: pointer;
   font-size: 20px;
   transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: #218838;
+  &:hover {
+    background-color: #218838;
+  }
 }
 
 input[type="file"] {
@@ -68,18 +67,6 @@ input[type="file"] {
 }
 .icon-remove:hover {
   color: #a72828;
-  scale: 2.3;
-  cursor: pointer;
-}
-
-.icon-back {
-  color: #218838;
-  scale: 2;
-  margin-left: 0.5rem;
-  cursor: pointer;
-}
-.icon-back:hover {
-  color: #01330d;
   scale: 2.3;
   cursor: pointer;
 }

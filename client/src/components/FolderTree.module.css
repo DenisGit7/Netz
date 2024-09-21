@@ -1,0 +1,30 @@
+.container {
+  text-align: center;
+  background-color: #eeeeee;
+  max-width: 800px;
+  border-radius: 2rem;
+  padding: 1rem 2rem;
+  margin: 1rem auto;
+}
+
+.navigation {
+  background-color: #31363f;
+  border-radius: 2rem;
+  width: 400px;
+  height: 100px;
+  padding: 1rem;
+  margin: 1rem auto;
+}
+
+.text {
+  text-align: center;
+}
+
+.navText {
+  text-align: center;
+  color: #fff;
+}
+
+.span {
+  font-weight: bold;
+}

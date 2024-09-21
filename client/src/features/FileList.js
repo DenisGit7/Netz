@@ -1,40 +1,27 @@
-import React from "react";
-import axios from "axios";
 import { useState, useEffect } from "react";
-
 import { FaArrowLeft } from "react-icons/fa6";
 import { getList } from "../helpers/getList.js";
+import classes from "./FileList.module.css";
 
-const FileList = () => {
-  const [folderPath, setFolderPath] = useState({
-    customerFolder: "Denis",
-    subFolder: "",
-  });
-  const [uploadPath, setUploadPath] = useState({
-    customerFolder: "Denis",
-    subFolder: "Dec",
-  });
-  const [folders, setFolder] = useState([]);
-  const [files, setFiles] = useState([]);
-  const [file, setFile] = useState([]);
+const FileList = ({
+  files,
+  setFiles,
+  folders,
+  setFolders,
+  folderPath,
+  setFolderPath,
+}) => {
+  const [downloadURL, setDownloadURL] = useState("");
 
   useEffect(() => {
     getList(
       setFiles,
-      setFolder,
+      setFolders,
       folderPath.customerFolder,
       folderPath.subFolder,
       setFolderPath
     );
   }, [folderPath]);
-
-  const handleChangeBack = (e) => {
-    e.preventDefault();
-    setFolderPath({
-      customerFolder: folderPath.customerFolder || "General",
-      subFolder: "",
-    });
-  };
 
   const handleChangeAdminBack = (e) => {
     e.preventDefault();
@@ -44,81 +31,21 @@ const FileList = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(file);
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("customerFolder", uploadPath.customerFolder);
-    formData.append("subFolder", uploadPath.subFolder);
-    console.log(formData);
-    try {
-      const response = await axios.post(
-        "http://localhost:3500/files/upload",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.error("Error uploading file:", error);
-    }
-    setTimeout(() => {
-      getList(
-        setFiles,
-        setFolder,
-        folderPath.customerFolder,
-        folderPath.subFolder
-      );
-    }, 1000);
-    setFile([]);
-  };
-
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <button type="submit">Upload</button>
-          <label className="file-upload-label">
-            Choose file
-            <input
-              type="file"
-              id="file"
-              onChange={(e) => setFile((prev) => e.target.files[0])}
-            />
-          </label>
-          <h4 className="file-upload-name">
-            {!file.name ? "Waiting for file" : file.name}
-          </h4>
-        </div>
-      </form>
-      <h1 className="files-header">{folderPath.customerFolder}</h1>
+    <>
       <div>
-        {folderPath.subFolder === "" ? (
-          ""
-        ) : (
-          <FaArrowLeft
-            className="icon-back"
-            onClick={(e) => handleChangeBack(e)}
-          />
-        )}
+        {folders}
+
+        {/* should be mapped, li created, key per item */}
+        {files}
+        {/* Add option to view file in new tab when clicking, using useRef hook */}
       </div>
-      {/* {folders == "" ? (
-        ""
-      ) : (
-        <h1 className="files-header">{`${folderPath.customerFolder}`}</h1>
-      )} */}
-      {folders}
-      <h1 className="files-header">{`${folderPath.subFolder}`}</h1>
-      {files}
-      <div>
-        Admin Back
+
+      <div className={classes.arrowContainer}>
         <FaArrowLeft onClick={(e) => handleChangeAdminBack(e)} />
+        Admin Back
       </div>
-    </div>
+    </>
   );
 };
 

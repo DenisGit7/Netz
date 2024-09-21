@@ -10,7 +10,6 @@ router.post("/", (req, res) => {
       async function downloadFile() {
         try {
           const downloadURL = await downloadController(req.body.filePath);
-          // console.log(downloadURL);
           res.json({
             message: "Files downloaded successfully",
             url: downloadURL,

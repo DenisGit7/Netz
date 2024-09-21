@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.arrow {
+  color: #218838;
+  scale: 2;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  &:hover {
+    color: #01330d;
+    scale: 2.3;
+    cursor: pointer;
+  }
+}
+
+.navText {
+  text-align: center;
+  color: #fff;
+}
