@@ -1,23 +1,49 @@
 import { User } from "../models/Users.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import {} from "dotenv/config";
 
 export const loginUser = async (req, res) => {
-  const { username, password, role } = req.body;
-  if (!username || !password || !role)
-    return res.status(400).json({ message: "All fields are required." });
-  const duplicate = await User.findOne({ username: username }).exec();
-  if (duplicate) return res.sendStatus(409);
+  const { username, password } = req.body;
 
+  if (!username || !password) {
+    return res.status(400).json({ message: "Both fields are required" });
+  }
   try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const result = await User.create({
-      username: username,
-      password: hashedPassword,
-      role: role,
-    });
-    console.log(result);
-    res.status(201).json({ message: `User ${username} created` });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    const user = await User.findOne({ username: username }).exec();
+    if (!user) return res.status(401).json({ message: "User not found" });
+    const checkPwd = await bcrypt.compare(password, user.password);
+    if (checkPwd) {
+      console.log(user.role);
+      const accessToken = jwt.sign(
+        {
+          User: {
+            username: user.username,
+            role: user.role,
+          },
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        { expiresIn: "5m" }
+      );
+      const refreshToken = jwt.sign(
+        { username: user.username },
+        process.env.REFRESH_TOKEN_SECRET,
+        { expiresIn: "1d" }
+      );
+      user.refreshToken = refreshToken;
+      const result = await user.save();
+      console.log(result);
+      res.cookie("jwt", refreshToken, {
+        httpOnly: true,
+        sameSite: "None",
+        secure: false,
+        maxAge: 24 * 60 * 60 * 1000,
+      });
+      res.json({ accessToken });
+    } else {
+      res.status(401).json({ message: "Wrong password" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
