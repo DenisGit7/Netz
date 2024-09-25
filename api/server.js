@@ -31,7 +31,7 @@ app.use("/users/register", registerRoute);
 app.use("/users/login", loginRoute);
 app.use("/users/logout", logoutRoute);
 
-app.use(jwtVerification);
+// app.use(jwtVerification);
 app.use("/files/upload", uploadRoute);
 app.use("/files/getlist", getListRoute);
 app.use("/files/remove", removeRoute);

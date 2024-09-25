@@ -41,6 +41,7 @@ export const loginUser = async (req, res) => {
       });
       res.json({ accessToken });
     } else {
+      console.log("_+_+_");
       res.status(401).json({ message: "Wrong password" });
     }
   } catch (error) {
