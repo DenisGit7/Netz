@@ -10,6 +10,7 @@ const FileList = ({
   setFolders,
   folderPath,
   setFolderPath,
+  role,
 }) => {
   const [downloadURL, setDownloadURL] = useState("");
 
@@ -30,7 +31,6 @@ const FileList = ({
       subFolder: "",
     });
   };
-
   return (
     <>
       <div>
@@ -40,11 +40,12 @@ const FileList = ({
         {files}
         {/* Add option to view file in new tab when clicking, using useRef hook */}
       </div>
-
-      <div className={classes.arrowContainer}>
-        <FaArrowLeft onClick={(e) => handleChangeAdminBack(e)} />
-        Admin Back
-      </div>
+      {role === "Admin" && (
+        <div className={classes.arrowContainer}>
+          <FaArrowLeft onClick={(e) => handleChangeAdminBack(e)} />
+          Back to Root
+        </div>
+      )}
     </>
   );
 };

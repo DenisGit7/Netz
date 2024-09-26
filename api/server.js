@@ -19,7 +19,12 @@ import { jwtVerification } from "./middleware/jwtVerfications.js";
 const app = express();
 const PORT = process.env.PORT || 3500;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Allow only your frontend origin
+    credentials: true, // Allow cookies to be sent with the request
+  })
+);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());

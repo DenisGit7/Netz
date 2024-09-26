@@ -18,6 +18,7 @@ const Authentication = ({ user, setUser, role, setRole }) => {
       if (result.username && result.role) {
         setUser(result.username);
         setRole(result.role);
+
         setMessage("");
       } else if (result.status === 401) {
         console.log("User not found");
@@ -33,6 +34,15 @@ const Authentication = ({ user, setUser, role, setRole }) => {
       console.log("error");
     }
   };
+  const logout = async (e) => {
+    e.preventDefault();
+    try {
+      const result = await handleLogout();
+      console.log(result);
+    } catch (error) {
+      console.log("error");
+    }
+  };
 
   return (
     <div className={classes.arrowContainer}>
@@ -43,6 +53,8 @@ const Authentication = ({ user, setUser, role, setRole }) => {
       </form>
 
       <label>{message}</label>
+
+      <button onClick={(e) => logout(e)}>Logout</button>
     </div>
   );
 };

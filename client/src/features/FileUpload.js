@@ -1,7 +1,7 @@
-import React from 'react'
-import axios from 'axios'
-import classes from './FileUpload.module.css'
-import { getList } from '../helpers/getList.js'
+import React from "react";
+import axios from "axios";
+import classes from "./FileUpload.module.css";
+import { getList } from "../helpers/getList.js";
 
 const FileUpload = ({
   file,
@@ -9,30 +9,26 @@ const FileUpload = ({
   uploadPath,
   setFiles,
   setFolders,
-  folderPath
+  folderPath,
 }) => {
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    console.log('1', file)
-    const formData = new FormData()
-    formData.append('file', file)
-    formData.append('customerFolder', uploadPath.customerFolder)
-    formData.append('subFolder', uploadPath.subFolder)
-    console.log('2', formData)
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("customerFolder", uploadPath.customerFolder);
+    formData.append("subFolder", uploadPath.subFolder);
     try {
       const response = await axios.post(
-        'http://localhost:3500/files/upload',
+        "http://localhost:3500/files/upload",
         formData,
         {
           headers: {
-            'Content-Type': 'multipart/form-data'
-          }
+            "Content-Type": "multipart/form-data",
+          },
         }
-      )
-      console.log('4', response.data)
+      );
     } catch (error) {
-      console.error('Error uploading file:', error)
-      console.log('5')
+      console.error("Error uploading file:", error);
     }
     setTimeout(() => {
       getList(
@@ -40,11 +36,10 @@ const FileUpload = ({
         setFolders,
         folderPath.customerFolder,
         folderPath.subFolder
-      )
-      console.log('6')
-    }, 1000)
-    setFile([])
-  }
+      );
+    }, 1000);
+    setFile([]);
+  };
 
   return (
     <div className={classes.container}>
@@ -63,12 +58,12 @@ const FileUpload = ({
             />
           </label>
           <h4 className="file-upload-name">
-            {!file.name ? 'Waiting for file' : file.name}
+            {!file.name ? "Waiting for file" : file.name}
           </h4>
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default FileUpload
+export default FileUpload;

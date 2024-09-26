@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FolderTree from "./FolderTree";
 import FileUpload from "../features/FileUpload";
 
@@ -7,17 +7,20 @@ import FileUpload from "../features/FileUpload";
 
 const Main = ({ showUpload, showFolders, role, user }) => {
   const [folderPath, setFolderPath] = useState({
-    customerFolder: user,
-    subFolder: role,
+    customerFolder: "",
+    subFolder: "",
   });
   const [files, setFiles] = useState([]);
   const [folders, setFolders] = useState([]);
   const [file, setFile] = useState("");
   const [uploadPath, setUploadPath] = useState({
-    customerFolder: user,
-    subFolder: "Dec",
+    customerFolder: "",
+    subFolder: "",
   });
-  console.log(role);
+  useEffect(() => {
+    setUploadPath({ customerFolder: user, subFolder: "Month" });
+    setFolderPath({ customerFolder: user, subFolder: "" });
+  }, [user]);
   return (
     <>
       <div>
@@ -33,11 +36,12 @@ const Main = ({ showUpload, showFolders, role, user }) => {
         )}
         {showFolders && (
           <FolderTree
+            role={role}
             files={files}
             setFiles={setFiles}
             folders={folders}
             setFolders={setFolders}
-            folderPath={user}
+            folderPath={folderPath}
             setFolderPath={setFolderPath}
           />
         )}

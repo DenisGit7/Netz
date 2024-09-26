@@ -12,6 +12,7 @@ const FolderTree = ({
   setFolders,
   folderPath,
   setFolderPath,
+  role,
 }) => {
   return (
     <div className={classes.container}>
@@ -34,6 +35,7 @@ const FolderTree = ({
       </div>
 
       <FileList
+        role={role}
         files={files}
         setFiles={setFiles}
         folders={folders}

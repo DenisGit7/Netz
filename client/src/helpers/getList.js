@@ -15,6 +15,8 @@ export const getList = async (
   setFolderPath
 ) => {
   console.log("getting list");
+  console.log("getting list" + customerFolder);
+  console.log("getting list" + subFolder);
   const data = {
     customerFolder: customerFolder,
     subFolder: subFolder,
