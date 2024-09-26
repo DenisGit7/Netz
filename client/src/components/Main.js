@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import FolderTree from "./FolderTree";
 import FileUpload from "../features/FileUpload";
-
+import CreateUser from "../features/CreateUser";
 //Main app display window. Parent to upload & navigation features
 //Controls all file related states and passes to both features the ones they need
 
@@ -46,6 +46,13 @@ const Main = ({ showUpload, showFolders, role, user }) => {
           />
         )}
       </div>
+      {role === "Admin" ? (
+        <div>
+          <CreateUser />
+        </div>
+      ) : (
+        ""
+      )}
     </>
   );
 };

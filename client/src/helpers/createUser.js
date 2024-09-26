@@ -1,14 +1,16 @@
 import axios from "axios";
 
-export const createUser = async () => {
+export const createUser = async (newUser, newPwd, newRole) => {
   try {
     const response = await axios.post("http://localhost:3500/users/register", {
-      username: "Admin1",
-      password: "Admin",
-      role: "Admin",
+      username: newUser,
+      password: newPwd,
+      role: newRole,
     });
-    console.log(response);
+    // console.log(response);
+    return response;
   } catch (error) {
     console.error("Login error: ", error);
+    return error;
   }
 };

@@ -6,7 +6,7 @@ export const registerUser = async (req, res) => {
   if (!username || !password || !role)
     return res.status(400).json({ message: "All fields are required." });
   const duplicate = await User.findOne({ username: username }).exec();
-  if (duplicate) return res.sendStatus(409);
+  if (duplicate) return res.status(409).json({ message: "User already exist" });
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);

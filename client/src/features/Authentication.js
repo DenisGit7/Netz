@@ -1,32 +1,32 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { IoLogIn } from "react-icons/io5";
-import { getList } from "../helpers/getList.js";
-import classes from "./FileList.module.css";
+import classes from "./Authentication.module.css";
 import { handleLogin } from "../helpers/handleLogin.js";
 import { handleLogout } from "../helpers/handleLogout.js";
-import { createUser } from "../helpers/createUser.js";
 
 const Authentication = ({ user, setUser, role, setRole }) => {
-  const [pwd, setPwd] = useState([]);
+  const [pwd, setPwd] = useState("");
+  const [login, setLogin] = useState("");
   const [message, setMessage] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await handleLogin(user, pwd);
+      const result = await handleLogin(login, pwd);
       console.log(result);
       if (result.username && result.role) {
         setUser(result.username);
         setRole(result.role);
-
+        setLogin("");
+        setPwd("");
         setMessage("");
+        console.log(pwd, login);
       } else if (result.status === 401) {
         console.log("User not found");
-        setRole([]);
+        setRole("");
         setMessage("Wrong user or password");
       } else if (result.status === 400) {
         console.log("Both fields are required");
-        setRole([]);
+        setRole("");
 
         setMessage("Both fields are required");
       }
@@ -38,6 +38,8 @@ const Authentication = ({ user, setUser, role, setRole }) => {
     e.preventDefault();
     try {
       const result = await handleLogout();
+      setUser("");
+      setRole("");
       console.log(result);
     } catch (error) {
       console.log("error");
@@ -45,17 +47,29 @@ const Authentication = ({ user, setUser, role, setRole }) => {
   };
 
   return (
-    <div className={classes.arrowContainer}>
-      <form onSubmit={handleSubmit}>
-        <input type="text" onChange={(e) => setUser(() => e.target.value)} />
-        <input type="password" onChange={(e) => setPwd(() => e.target.value)} />
-        <button type="submit">Login</button>
-      </form>
+    <>
+      {user ? (
+        <button onClick={(e) => logout(e)}>Logout</button>
+      ) : (
+        <div className={classes.arrowContainer}>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              value={login}
+              onChange={(e) => setLogin(() => e.target.value)}
+            />
+            <input
+              type="password"
+              value={pwd}
+              onChange={(e) => setPwd(() => e.target.value)}
+            />
+            <button type="submit">Login</button>
+          </form>
 
-      <label>{message}</label>
-
-      <button onClick={(e) => logout(e)}>Logout</button>
-    </div>
+          <label>{message}</label>
+        </div>
+      )}
+    </>
   );
 };
 
