@@ -11,6 +11,14 @@ import loginRoute from "./routes/auth/loginRoute.js";
 import logoutRoute from "./routes/auth/logoutRoute.js";
 import refreshRoute from "./routes/refreshRoute.js";
 import usersRoute from "./routes/usersRoute.js";
+import createPost from "./routes/posts/createPost.js";
+import deletePost from "./routes/posts/deletePost.js";
+import editPost from "./routes/posts/editPost.js";
+import getPosts from "./routes/posts/getPosts.js";
+import createNew from "./routes/news/createNew.js";
+import deleteNew from "./routes/news/deleteNew.js";
+import editNew from "./routes/news/editNew.js";
+import getNews from "./routes/news/getNews.js";
 import cookieParser from "cookie-parser";
 import connectDB from "./db/connect.js";
 
@@ -43,6 +51,14 @@ app.use("/files/remove", removeRoute);
 app.use("/files/download", downloadRoute);
 app.use("/users/refresh", refreshRoute);
 app.use("/customers", usersRoute);
+app.use("/posts/create", createPost);
+app.use("/posts/delete", deletePost);
+app.use("/posts/edit", editPost);
+app.use("/posts/get", getPosts);
+app.use("/news/create", createNew);
+app.use("/news/delete", deleteNew);
+app.use("/news/edit", editNew);
+app.use("/news/get", getNews);
 
 async function start() {
   console.log("connecting...");
