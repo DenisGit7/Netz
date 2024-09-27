@@ -1,6 +1,6 @@
-import store from "../firebase.config.js";
+import store from "../../firebase.config.js";
 import path from "path";
-import { fileDestination } from "../helpers/fileDestenation.js";
+import { fileDestination } from "../../helpers/fileDestenation.js";
 import {
   deleteObject,
   getBytes,

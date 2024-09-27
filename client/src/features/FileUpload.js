@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import classes from "./FileUpload.module.css";
-import { getList } from "../helpers/getList.js";
+import { getList } from "../helpers/files/getList.js";
 
 const FileUpload = ({
   file,

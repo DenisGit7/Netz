@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import classes from "./Authentication.module.css";
-import { handleLogin } from "../helpers/handleLogin.js";
-import { handleLogout } from "../helpers/handleLogout.js";
+import { handleLogin } from "../helpers/auth/handleLogin.js";
+import { handleLogout } from "../helpers/auth/handleLogout.js";
 
 const Authentication = ({ user, setUser, role, setRole }) => {
   const [pwd, setPwd] = useState("");

@@ -1,4 +1,4 @@
-import store from "../firebase.config.js";
+import store from "../../firebase.config.js";
 import { deleteObject, getStorage, ref } from "firebase/storage";
 
 export const removeController = (fileName) => {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { FaArrowLeft } from "react-icons/fa6";
-import { getList } from "../helpers/getList.js";
+import { getList } from "../helpers/files/getList.js";
 import classes from "./FileList.module.css";
 
 const FileList = ({

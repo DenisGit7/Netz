@@ -10,7 +10,7 @@ export const createUser = async (newUser, newPwd, newRole) => {
     // console.log(response);
     return response;
   } catch (error) {
-    console.error("Login error: ", error);
+    // console.error("Register error: ", error);
     return error;
   }
 };

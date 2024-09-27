@@ -1,5 +1,5 @@
 import express from "express";
-import { downloadController } from "../controllers/downloadController.js";
+import { downloadController } from "../../controllers/files/downloadController.js";
 const router = express.Router();
 
 router.post("/", (req, res) => {

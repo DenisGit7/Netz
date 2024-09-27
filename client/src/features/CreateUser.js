@@ -1,13 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import classes from "./CreateUser.module.css";
-import { createUser } from "../helpers/createUser";
+import { createUser } from "../helpers/auth/createUser";
 
-const CreateUser = ({ user, setUser, role, setRole }) => {
+const CreateUser = () => {
   const [newUser, setNewUser] = useState("");
   const [newPwd, setNewPwd] = useState("");
   const [newRole, setNewRole] = useState("Customer");
   const [message, setMessage] = useState("");
+
   const handeCreate = async (e) => {
     e.preventDefault();
     if (!newUser || !newPwd || !newRole) {

@@ -1,5 +1,5 @@
 import express from "express";
-import { removeController } from "../controllers/removeController.js";
+import { removeController } from "../../controllers/files/removeController.js";
 
 const router = express.Router();
 

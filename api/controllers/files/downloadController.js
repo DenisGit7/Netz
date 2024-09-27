@@ -1,4 +1,4 @@
-import store from "../firebase.config.js";
+import store from "../../firebase.config.js";
 import { listAll, getStorage, ref, getDownloadURL } from "firebase/storage";
 
 export const downloadController = async (filePath) => {
