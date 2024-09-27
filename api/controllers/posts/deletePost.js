@@ -2,6 +2,7 @@ import { Post } from "../../models/Post.js";
 
 export const deletePost = async (req, res) => {
   const { id } = req.body;
+  // console.log(req.body);
   if (!id) return res.status(400).json({ message: "Id is required." });
   const post = await Post.findById(id).exec();
   if (!post) {
