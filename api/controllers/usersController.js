@@ -7,17 +7,22 @@ export const getAllUsers = async (req, res) => {
 };
 
 export const removeUser = async (req, res) => {
-  if (!req?.params?.id)
-    return res.status(400).json({ message: "User ID required" });
+  console.dir(req.body);
+  const { id } = req.body;
+  console.log("1", id);
+  if (!id) return res.status(400).json({ message: "User ID required" });
 
-  const user = await User.findOne({ _id: req.params.id }).exec();
+  const user = await User.findOne({ _id: id }).exec();
+  console.log("2");
 
   if (!user) {
-    return res
-      .status(400)
-      .json({ message: `User ID ${req.params.id} not found` });
+    console.log("3");
+
+    return res.status(400).json({ message: `User ID ${id} not found` });
   }
-  const result = await user.deleteOne({ _id: req.params.id });
+  const result = await user.deleteOne({ _id: id });
+  console.log("4");
+
   res.json(result);
 };
 
