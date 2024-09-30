@@ -1,16 +1,19 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import toast from "react-hot-toast";
 import classes from "./CreateUser.module.css";
-import { createUser } from "../helpers/auth/createUser";
+import { createUser } from "../../helpers/auth/createUser";
 
-const CreateUser = () => {
+const CreateUser = ({ role, setLoading }) => {
   const [newUser, setNewUser] = useState("");
   const [newPwd, setNewPwd] = useState("");
   const [newRole, setNewRole] = useState("Customer");
   const [message, setMessage] = useState("");
-
-  const handeCreate = async (e) => {
+  console.log("---------------------");
+  const handleCreate = async (e) => {
+    console.log("+++++++++++++");
     e.preventDefault();
+    setLoading(true);
     if (!newUser || !newPwd || !newRole) {
       setMessage("All fields are reuired");
     } else {
@@ -19,9 +22,11 @@ const CreateUser = () => {
         if (result.status === 409) {
           // User already exist
           setMessage(result.response.data.message);
+          toast.error("User already exists");
         } else if (result.status === 201) {
           // User created
           setMessage(result.data.message);
+          toast.success("User created");
           setNewPwd("");
           setNewUser("");
           setNewRole("Customer");
@@ -32,35 +37,48 @@ const CreateUser = () => {
           setMessage("Error");
         }
       } catch (error) {
-        console.log(error);
+        toast.error(error);
       }
+      setLoading(false);
     }
   };
   return (
-    <div className={classes.arrowContainer}>
-      <form onSubmit={handeCreate}>
+    <div className={classes.container}>
+      <form className={classes.formContainer} onSubmit={(e) => handleCreate(e)}>
         <input
           type="text"
+          required
+          className={classes.input}
+          placeholder="Username"
           value={newUser}
           onChange={(e) => setNewUser(() => e.target.value)}
         />
         <input
           type="password"
+          required
+          className={classes.input}
+          placeholder="Password"
           value={newPwd}
           onChange={(e) => setNewPwd(() => e.target.value)}
         />
         <select
           type="text"
+          className={classes.input}
           value={newRole}
           onChange={(e) => setNewRole(() => e.target.value)}
         >
           <option value="Admin ">Admin</option>
           <option value="Customer">Customer</option>
         </select>
-        <button type="submit">Register</button>
+        <button
+          // disabled={role === "Admin"}
+          type="submit"
+          className={classes.newButton}
+        >
+          Create
+        </button>
+        <label>{message}</label>
       </form>
-
-      <label>{message}</label>
     </div>
   );
 };

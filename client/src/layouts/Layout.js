@@ -1,45 +1,24 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
-import Header from "../components/Header.js";
-import Footer from "../components/Footer.js";
-import Nav from "../components/Nav.js";
+import React from 'react'
+import { Toaster } from 'react-hot-toast'
+import { Outlet } from 'react-router-dom'
+import Authentication from '../features/user/Authentication'
+import Footer from '../components/Footer.js'
 
-// TODO: if state has no use here, it can be passed down from App with useContext() to any descendant instead of props w/ useState()
-
-const Layout = ({
-  showUpload,
-  setShowUpload,
-  showFolders,
-  setShowFolders,
-  user,
-  setUser,
-  role,
-  setRole,
-}) => {
-  console.log(role);
+const Layout = ({ user, setUser, role, setRole }) => {
+  console.log(role)
   return (
     <div>
-      <Header
-        title="Netz App"
+      <Authentication
         user={user}
         setUser={setUser}
         role={role}
         setRole={setRole}
       />
-
-      <Nav
-        role={role}
-        user={user}
-        showUpload={showUpload}
-        setShowUpload={setShowUpload}
-        showFolders={showFolders}
-        setShowFolders={setShowFolders}
-      />
-
       <Outlet />
+      <Toaster />
       <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

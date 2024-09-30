@@ -1,0 +1,37 @@
+.mainContainer {
+  margin-top: 10%;
+  gap: 2rem;
+  width: 100vw;
+  max-height: 90vh;
+}
+
+.display {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.loader {
+  position: fixed;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ContentContainer {
+  display: inline-flex;
+  width: 80%;
+}
+
+.posts {
+  /* display: block; */
+  width: 50%;
+  margin-right: 3rem;
+}
+
+.news {
+  width: 50%;
+  margin-left: 3rem;
+}

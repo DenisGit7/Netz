@@ -1,28 +1,84 @@
-.container {
-  max-width: 500px;
+.navigation {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 50px;
+  /* background-color: rgba(36, 40, 50, 1);
+background-image: linear-gradient(135deg, rgba(36, 40, 50, 1) 0%, rgba(36, 40, 50, 1) 40%, rgba(37, 28, 40, 1) 100%); */
+
+  background-color: rgba(36, 40, 50, 1);
+  background-image: linear-gradient(
+    139deg,
+    rgba(36, 40, 50, 1) 0%,
+    rgba(36, 40, 50, 1) 0%,
+    rgba(37, 28, 40, 1) 100%
+  );
+
+  border-radius: 20px 0;
   margin: auto;
+  padding: 15px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.ul {
+.separator {
+  border-left: 1.5px solid #42434a;
+}
+
+.list {
+  list-style-type: none;
+  display: flex;
+  margin: auto;
+  justify-content: space-evenly;
+  gap: 1rem;
+}
+
+.element {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  list-style: none;
-}
-
-.li {
-  background-color: #28a745;
-  padding: 10px 20px;
-  color: white;
+  color: #7e8590;
+  gap: 10px;
+  transition: all 0.3s ease-out;
+  padding: 4px 7px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
-  border-radius: 5px;
-  &:hover {
-    background-color: #218838;
+  &:active {
+    transform: scale(0.99);
   }
 }
 
-.li.active {
-  background-color: #01330d;
+.element svg {
+  width: 19px;
+  height: 19px;
+  transition: all 0.3s ease-out;
+}
+
+.label {
+  font-weight: 600;
+
+  &:hover {
+    background-color: #5353ff;
+    color: #ffffff;
+    transform: translate(1px, -1px);
+  }
+}
+
+.card .list .delete:hover {
+  background-color: #8e2a2a;
+}
+
+.list:not(:last-child) .element:hover svg {
+  stroke: #ffffff;
+}
+
+.list:last-child svg {
+  stroke: #bd89ff;
+}
+.list:last-child .element {
+  color: #bd89ff;
+}
+
+.list:last-child .element:hover {
+  background-color: rgba(56, 45, 71, 0.836);
 }

@@ -1,27 +1,27 @@
-import axios from "axios";
-import { jwtDecode } from "jwt-decode";
+import axios from 'axios'
+import { jwtDecode } from 'jwt-decode'
 
 export const handleLogin = async (user, pwd) => {
   try {
     const response = await axios.post(
-      "http://localhost:3500/users/login",
+      'http://localhost:3500/users/login',
       {
         username: user,
-        password: pwd,
+        password: pwd
       },
       {
         withCredentials: true,
         headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json'
+        }
       }
-    );
-    const decoded = jwtDecode(response.data.accessToken);
+    )
+    const decoded = jwtDecode(response.data.accessToken)
 
-    return decoded.User;
+    return decoded.User
   } catch (error) {
-    // console.error("Login error: ", error.response);
-    return error.response;
+    console.error('Login error: ', error.response)
+    return error.response
   }
-};
+}

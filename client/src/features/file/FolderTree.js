@@ -1,18 +1,19 @@
-import React from "react";
-import classes from "./FolderTree.module.css";
-import FileList from "../features/FileList";
-import BackArrow from "./BackArrow";
+import React from 'react'
+import classes from './FolderTree.module.css'
+import FileList from './FileList'
+import BackArrow from '../../components/BackArrow'
 
 //TODO: This component is currently in the way between Main and the feature FileList, currently acting as container of all information, leaving only display to FileList
 
 const FolderTree = ({
+  setLoading,
   files,
   setFiles,
   folders,
   setFolders,
   folderPath,
   setFolderPath,
-  role,
+  role
 }) => {
   return (
     <div className={classes.container}>
@@ -23,7 +24,7 @@ const FolderTree = ({
           {folderPath.customerFolder ? (
             <span className={classes.span}> {folderPath.customerFolder}</span>
           ) : (
-            " Root"
+            ' Root'
           )}
           {folderPath.subFolder && (
             <span className={classes.span}> / {folderPath.subFolder}</span>
@@ -35,6 +36,7 @@ const FolderTree = ({
       </div>
 
       <FileList
+        setLoading={setLoading}
         role={role}
         files={files}
         setFiles={setFiles}
@@ -44,7 +46,7 @@ const FolderTree = ({
         setFolderPath={setFolderPath}
       />
     </div>
-  );
-};
+  )
+}
 
-export default FolderTree;
+export default FolderTree
