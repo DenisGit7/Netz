@@ -1,12 +1,27 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import classes from "./CreateNew.module.css";
 import { createNew } from "../../helpers/news/createNew.js";
 
-const CreateNew = ({ role, setLoading }) => {
+const CreateNew = ({
+  role,
+  setLoading,
+  setShCrtNws,
+  setShCrtUsr,
+  setShowCustomers,
+  setShUp,
+  setShNv,
+}) => {
   const [newTitle, setNewTitle] = useState("");
   const [newContent, setNewContent] = useState("");
+  useEffect(() => {
+    setShCrtUsr(false);
+    setShUp(false);
+    setShNv(false);
+
+    setShowCustomers(false);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,6 +40,8 @@ const CreateNew = ({ role, setLoading }) => {
 
   return (
     <div className={classes.container}>
+      <button onClick={() => setShCrtNws(false)}>Close</button>
+
       <form className={classes.formContainer} onSubmit={handleSubmit}>
         <input
           type="text"

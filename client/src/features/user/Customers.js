@@ -4,21 +4,45 @@ import toast from "react-hot-toast";
 import classes from "./Customers.module.css";
 import { removeUser, getAllUsers, getUser } from "../../helpers/usersHelper.js";
 
-const Customers = ({ setLoading }) => {
+const Customers = ({
+  setLoading,
+  setShCrtPst,
+  setShCrtNws,
+  setShCrtUsr,
+  setShUp,
+  setShNv,
+}) => {
   const [users, setUsers] = useState([]);
   const [rawUsers, setRawUsers] = useState([]);
+  const [sourceUsers, setSourceUsers] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     fetchData();
+    setShCrtUsr(false);
+    setShCrtPst(false);
+    setShCrtNws(false);
+    setShUp(false);
+    setShNv(false);
   }, []);
 
   useEffect(() => {
-    if (rawUsers.data.length > 0) {
-      const rawUsersMap = rawUsers.data.map((rawUser, index) => {
-        const id = rawUser.data._id;
+    const filteredUsers = rawUsers.filter((user) =>
+      user.username.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    setRawUsers(filteredUsers);
+    if (!searchValue) {
+      fetchData();
+    }
+  }, [searchValue]);
+
+  useEffect(() => {
+    if (rawUsers.length >= 0) {
+      const rawUsersMap = rawUsers.map((rawUser, index) => {
+        const id = rawUser._id;
         return (
           <div key={index}>
-            <h2>{rawUser.data.usernme}</h2>
+            <h2>{rawUser.username}</h2>
 
             <button
               className={classes.newButton}
@@ -31,19 +55,16 @@ const Customers = ({ setLoading }) => {
       });
       setUsers(rawUsersMap);
     }
-    // console.log(users + "-----------------");
   }, [rawUsers]);
 
   const fetchData = async () => {
     setLoading(true);
     const promise = Promise.resolve(getAllUsers());
     promise.then((value) => {
-      console.log(value.data);
-      console.log("0000000000000");
-
-      setRawUsers(value);
+      setRawUsers(value.data);
+      setSourceUsers(value.data);
     });
-    console.log(rawUsers);
+
     setLoading(false);
   };
 
@@ -52,7 +73,6 @@ const Customers = ({ setLoading }) => {
     setLoading(true);
     try {
       const result = await removeUser(id);
-      console.log(result);
       toast.success("User Removed");
     } catch (error) {
       toast.error(error);
@@ -72,9 +92,14 @@ const Customers = ({ setLoading }) => {
           type="search"
           id="search"
           placeholder="User id..."
+          value={searchValue}
+          // onChange={(e) => setSearchValue(() => e.target.value)}
+          onChange={(e) => {
+            setSearchValue(() => e.target.value);
+            setRawUsers(sourceUsers);
+          }}
         />
       </div>
-
       <div className={classes.container}>{users}</div>
     </>
   );

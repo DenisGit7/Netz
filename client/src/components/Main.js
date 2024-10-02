@@ -11,7 +11,7 @@ import FileUpload from "../features/file/FileUpload";
 import CreateUser from "../features/user/CreateUser";
 import CreatePost from "../features/post/CreatePost";
 
-const Main = ({ user, role }) => {
+const Main = ({ user, role, setUser, setRole }) => {
   //file nav and upload states
   const [files, setFiles] = useState([]);
   const [folders, setFolders] = useState([]);
@@ -48,11 +48,21 @@ const Main = ({ user, role }) => {
     setShUp(false);
     setShNv(false);
   }, [user]);
+  useEffect(() => {
+    if (role === "") {
+      setShCrtUsr(false);
+      setShCrtPst(false);
+      setShCrtNws(false);
+      setShowCustomers(false);
+    }
+  }, [role]);
 
   console.log(role);
   return (
     <>
       <Nav
+        setUser={setUser}
+        setRole={setRole}
         user={user}
         role={role}
         shUp={shUp}
@@ -74,13 +84,33 @@ const Main = ({ user, role }) => {
       />
 
       <main className={classes.mainContainer}>
-        <div className={classes.display}>
-          {role === "Admin" && showCustomers && (
-            <Customers role={role} setLoading={setLoading} />
-          )}
+        {role === "Admin" && showCustomers && (
+          <div className={classes.usersContainer}>
+            {" "}
+            <Customers
+              role={role}
+              setLoading={setLoading}
+              setShCrtPst={setShCrtPst}
+              setShCrtNws={setShCrtNws}
+              setShCrtUsr={setShCrtUsr}
+              setShUp={setShUp}
+              setShNv={setShNv}
+            />
+          </div>
+        )}
 
+        <div className={classes.display}>
           {role === "Admin" && shCrtUsr && (
-            <CreateUser role={role} setLoading={setLoading} />
+            <CreateUser
+              role={role}
+              setLoading={setLoading}
+              setShCrtUsr={setShCrtUsr}
+              setShowCustomers={setShowCustomers}
+              setShCrtPst={setShCrtPst}
+              setShCrtNws={setShCrtNws}
+              setShUp={setShUp}
+              setShNv={setShNv}
+            />
           )}
 
           {shUp && (
@@ -92,6 +122,10 @@ const Main = ({ user, role }) => {
               setFiles={setFiles}
               setFolders={setFolders}
               folderPath={folderPath}
+              setShCrtPst={setShCrtPst}
+              setShCrtNws={setShCrtNws}
+              setShCrtUsr={setShCrtUsr}
+              setShowCustomers={setShowCustomers}
             />
           )}
 
@@ -105,15 +139,25 @@ const Main = ({ user, role }) => {
               setFolders={setFolders}
               folderPath={folderPath}
               setFolderPath={setFolderPath}
+              setShCrtPst={setShCrtPst}
+              setShCrtNws={setShCrtNws}
+              setShCrtUsr={setShCrtUsr}
+              setShowCustomers={setShowCustomers}
             />
           )}
 
-          {/* {shPst && <ViewPosts setLoading={setLoading} />}
-          {shNws && <ViewNews setLoading={setLoading} />} */}
           <div className={classes.ContentContainer}>
             <div className={classes.posts}>
               {role === "Admin" && shCrtPst && (
-                <CreatePost role={role} setLoading={setLoading} />
+                <CreatePost
+                  role={role}
+                  setLoading={setLoading}
+                  setShCrtPst={setShCrtPst}
+                  setShUp={setShUp}
+                  setShNv={setShNv}
+                  setShCrtUsr={setShCrtUsr}
+                  setShowCustomers={setShowCustomers}
+                />
               )}
               <ViewPosts
                 setLoading={setLoading}
@@ -124,7 +168,15 @@ const Main = ({ user, role }) => {
 
             <div className={classes.news}>
               {role === "Admin" && shCrtNws && (
-                <CreateNew role={role} setLoading={setLoading} />
+                <CreateNew
+                  role={role}
+                  setLoading={setLoading}
+                  setShCrtNws={setShCrtNws}
+                  setShUp={setShUp}
+                  setShNv={setShNv}
+                  setShCrtUsr={setShCrtUsr}
+                  setShowCustomers={setShowCustomers}
+                />
               )}
               <ViewNews setLoading={setLoading} loading={loading} role={role} />
             </div>

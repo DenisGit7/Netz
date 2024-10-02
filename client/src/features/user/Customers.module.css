@@ -1,7 +1,8 @@
 .container {
-  display: flex;
+  display: block;
   align-items: center;
   justify-content: center;
+  border: 1px solid red;
 }
 
 .newButton {
@@ -30,7 +31,7 @@
 
 .label {
   display: block;
-  font: 1rem 'Fira Sans', sans-serif;
+  font: 1rem "Fira Sans", sans-serif;
 }
 
 .input,

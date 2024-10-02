@@ -1,7 +1,8 @@
-import React from 'react'
-import classes from './FolderTree.module.css'
-import FileList from './FileList'
-import BackArrow from '../../components/BackArrow'
+import React from "react";
+import classes from "./FolderTree.module.css";
+import FileList from "./FileList";
+import BackArrow from "../../components/BackArrow";
+import { useEffect } from "react";
 
 //TODO: This component is currently in the way between Main and the feature FileList, currently acting as container of all information, leaving only display to FileList
 
@@ -13,8 +14,18 @@ const FolderTree = ({
   setFolders,
   folderPath,
   setFolderPath,
-  role
+  role,
+  setShCrtUsr,
+  setShCrtPst,
+  setShCrtNws,
+  setShowCustomers,
 }) => {
+  useEffect(() => {
+    setShCrtUsr(false);
+    setShCrtPst(false);
+    setShCrtNws(false);
+    setShowCustomers(false);
+  }, []);
   return (
     <div className={classes.container}>
       <p className={classes.text}>Your files get organised here by Month</p>
@@ -24,7 +35,7 @@ const FolderTree = ({
           {folderPath.customerFolder ? (
             <span className={classes.span}> {folderPath.customerFolder}</span>
           ) : (
-            ' Root'
+            " Root"
           )}
           {folderPath.subFolder && (
             <span className={classes.span}> / {folderPath.subFolder}</span>
@@ -46,7 +57,7 @@ const FolderTree = ({
         setFolderPath={setFolderPath}
       />
     </div>
-  )
-}
+  );
+};
 
-export default FolderTree
+export default FolderTree;

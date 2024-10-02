@@ -1,9 +1,14 @@
 import React from "react";
 import classes from "./Nav.module.css";
+import { FaHome } from "react-icons/fa";
+
+import Authentication from "../features/user/Authentication.js";
 
 //controls of show / hide
 
 const Nav = ({
+  setUser,
+  setRole,
   user,
   role,
   shUp,
@@ -23,9 +28,36 @@ const Nav = ({
   shCrtNws,
   setShCrtNws,
 }) => {
-  console.log(role);
   return (
     <>
+      {/* <div className={classes.navigation}> */}
+      <div className={classes.mainNav}>
+        <ul className={classes.list}>
+          <li
+            className={classes.element}
+            onClick={() => setShowCustomers(!showCustomers)}
+          >
+            <FaHome />
+            <p className={classes.label}>Home</p>
+          </li>
+          <li
+            className={classes.element}
+            onClick={() => setShowCustomers(!showCustomers)}
+          >
+            <FaHome />
+            <p className={classes.label}>Contact</p>
+          </li>
+          <li
+            className={classes.element}
+            onClick={() => setShowCustomers(!showCustomers)}
+          >
+            <FaHome />
+            <p className={classes.label}>About</p>
+          </li>
+        </ul>
+      </div>
+      {/* </div> */}
+
       {role === "Admin" && (
         <div className={classes.navigation}>
           <ul className={classes.list}>
@@ -163,7 +195,7 @@ const Nav = ({
               </svg>
               <p className={classes.label}>Navigate Files</p>
             </li>
-
+            {/* 
             <li className={classes.element} onClick={() => setShPst(!shPst)}>
               <svg
                 className="lucide lucide-users-round"
@@ -182,9 +214,9 @@ const Nav = ({
                 <path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3"></path>
               </svg>
               <p className={classes.label}>Posts</p>
-            </li>
+            </li> */}
 
-            <li className={classes.element} onClick={() => setShNws(!shNws)}>
+            {/* <li className={classes.element} onClick={() => setShNws(!shNws)}>
               <svg
                 className="lucide lucide-users-round"
                 strokeLinejoin="round"
@@ -202,7 +234,7 @@ const Nav = ({
                 <path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3"></path>
               </svg>
               <p className={classes.label}>Notifications</p>
-            </li>
+            </li> */}
           </ul>
         </div>
       )}
@@ -249,7 +281,7 @@ const Nav = ({
               <p className={classes.label}>Navigate Files</p>
             </li>
 
-            <li className={classes.element} onClick={() => setShPst(!shPst)}>
+            {/* <li className={classes.element} onClick={() => setShPst(!shPst)}>
               <svg
                 className="lucide lucide-users-round"
                 strokeLinejoin="round"
@@ -267,9 +299,9 @@ const Nav = ({
                 <path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3"></path>
               </svg>
               <p className={classes.label}>Posts</p>
-            </li>
+            </li> */}
 
-            <li className={classes.element} onClick={() => setShNws(!shNws)}>
+            {/* <li className={classes.element} onClick={() => setShNws(!shNws)}>
               <svg
                 className="lucide lucide-users-round"
                 strokeLinejoin="round"
@@ -287,10 +319,20 @@ const Nav = ({
                 <path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3"></path>
               </svg>
               <p className={classes.label}>Notifications</p>
-            </li>
+            </li> */}
           </ul>
         </div>
       )}
+
+      {/* <button className={classes.mainNavBtn} onClick={(e) => logout(e)}>
+          Logout
+        </button> */}
+      <Authentication
+        user={user}
+        setUser={setUser}
+        role={role}
+        setRole={setRole}
+      />
     </>
   );
 };

@@ -1,17 +1,33 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import classes from "./CreateUser.module.css";
 import { createUser } from "../../helpers/auth/createUser";
 
-const CreateUser = ({ role, setLoading }) => {
+const CreateUser = ({
+  role,
+  setLoading,
+  setShCrtUsr,
+  setShowCustomers,
+  setShCrtNws,
+  setShCrtPst,
+  setShUp,
+  setShNv,
+}) => {
   const [newUser, setNewUser] = useState("");
   const [newPwd, setNewPwd] = useState("");
   const [newRole, setNewRole] = useState("Customer");
   const [message, setMessage] = useState("");
-  console.log("---------------------");
+
+  useEffect(() => {
+    setShowCustomers(false);
+    setShCrtNws(false);
+    setShCrtPst(false);
+    setShUp(false);
+    setShNv(false);
+  }, []);
+
   const handleCreate = async (e) => {
-    console.log("+++++++++++++");
     e.preventDefault();
     setLoading(true);
     if (!newUser || !newPwd || !newRole) {
@@ -44,6 +60,7 @@ const CreateUser = ({ role, setLoading }) => {
   };
   return (
     <div className={classes.container}>
+      <button onClick={() => setShCrtUsr(false)}>Close</button>
       <form className={classes.formContainer} onSubmit={(e) => handleCreate(e)}>
         <input
           type="text"
@@ -67,7 +84,7 @@ const CreateUser = ({ role, setLoading }) => {
           value={newRole}
           onChange={(e) => setNewRole(() => e.target.value)}
         >
-          <option value="Admin ">Admin</option>
+          <option value="Admin">Admin</option>
           <option value="Customer">Customer</option>
         </select>
         <button

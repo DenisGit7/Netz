@@ -1,4 +1,4 @@
-.container {
+/* .container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,12 +63,110 @@
     box-shadow: inset 20px 20px 60px #c5c5c5, inset -20px -20px 60px #ffffff;
     transition: 0.3s;
   }
-}
+} */
 
 /* TODO: FIX */
-.logoutButton {
+/* .logoutButton {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 2;
+} */
+
+.mainLog {
+  position: fixed;
+  color: red;
+  right: 0%;
+  top: 0;
+  /* border-radius: 20px 0; */
+  margin: auto;
+  padding: 15px 0px;
+  border: 1px solid red;
+  width: 30vw;
+  z-index: 1000;
+  height: 62px;
+  /* display: flex; */
+}
+
+.mainNavBtn {
+  /* display: flex; */
+  position: relative;
+  /* left: 80%; */
+  text-align: center;
+  /* top: 50%; */
+  /* scale: 3; */
+  /* align-items: center; */
+  color: #7e8590;
+  /* gap: 10px; */
+  transition: all 0.3s ease-out;
+  padding: 4px 7px;
+  /* border-radius: 6px; */
+  cursor: pointer;
+  &:active {
+    transform: scale(0.99);
+  }
+}
+
+.input {
+  /* display: flex; */
+  border: none;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: #e8e8e8;
+  margin: 0.5rem;
+  box-shadow: 20px 20px 60px #c5c5c5, -20px -20px 60px #ffffff;
+  transition: 0.3s;
+
+  &:focus {
+    outline-color: #e8e8e8;
+    background: #e8e8e8;
+    box-shadow: inset 20px 20px 60px #c5c5c5, inset -20px -20px 60px #ffffff;
+    transition: 0.3s;
+  }
+}
+
+.list {
+  list-style-type: none;
+  display: flex;
+  margin: auto;
+  height: 100%;
+  justify-content: space-evenly;
+  /* gap: 1rem; */
+  position: relative;
+  top: 0%;
+  border: 1px solid green;
+}
+.list:not(:last-child) .element:hover svg {
+  stroke: #ffffff;
+}
+
+.list:last-child svg {
+  stroke: #bd89ff;
+}
+.list:last-child .element {
+  color: #bd89ff;
+}
+
+.list:last-child .element:hover {
+  background-color: rgba(56, 45, 71, 0.836);
+}
+
+.card .list .delete:hover {
+  background-color: #8e2a2a;
+}
+
+.element {
+  display: flex;
+  /* position: relative;
+  top: 50%; */
+  align-items: center;
+  color: #7e8590;
+  /* gap: 10px; */
+  transition: all 0.3s ease-out;
+  /* padding: 4px 7px; */
+  /* border-radius: 6px; */
+  cursor: pointer;
+  &:active {
+    transform: scale(0.99);
+  }
 }
