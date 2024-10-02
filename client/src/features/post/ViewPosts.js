@@ -5,6 +5,7 @@ import classes from "./ViewPosts.module.css";
 import { getPosts } from "../../helpers/posts/getPosts.js";
 import { deletePost } from "../../helpers/posts/deletePost.js";
 import { editPost } from "../../helpers/posts/editPost.js";
+import EditPost from "./EditPost.js";
 
 const ViewPosts = ({ setLoading, loading, role }) => {
   const [posts, setPosts] = useState([]);
@@ -25,6 +26,7 @@ const ViewPosts = ({ setLoading, loading, role }) => {
               <h2>{rawPost.title}</h2>
               <h3>{rawPost.content}</h3>
               <h3>{rawPost.updated}</h3>
+
               {role === "Admin" ? (
                 <>
                   <button
@@ -79,9 +81,9 @@ const ViewPosts = ({ setLoading, loading, role }) => {
     e.preventDefault();
     console.log("EDITING");
     setEditing(true);
-    // setLoading(true);
-    // const title = "";
-    // const content = "";
+    setLoading(true);
+    const title = "test";
+    const content = "test";
 
     // try {
     //   const result = await editPost(id, title, content);
@@ -91,7 +93,7 @@ const ViewPosts = ({ setLoading, loading, role }) => {
     //   toast.error(error);
     // }
     // fetchData();
-    // setLoading(false);
+    setLoading(false);
   };
 
   return (
