@@ -1,4 +1,5 @@
-.container {
+.posts {
+  list-style: none;
   display: block;
   align-items: center;
   justify-content: center;

@@ -1,13 +1,15 @@
+import classes from './Loader.module.css'
+
 const Loader = () => {
   return (
     <>
-      <div class="🤚">
-        <div class="👉"></div>
-        <div class="👉"></div>
-        <div class="👉"></div>
-        <div class="👉"></div>
-        <div class="🌴"></div>
-        <div class="👍"></div>
+      <div className={classes.container}>
+        <div className={classes.cradle}>
+          <div className={classes.dot}></div>
+          <div className={classes.dot}></div>
+          <div className={classes.dot}></div>
+          <div className={classes.dot}></div>
+        </div>
       </div>
     </>
   )
