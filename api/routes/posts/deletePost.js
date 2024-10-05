@@ -1,7 +1,7 @@
-import express from "express";
-import { deletePost } from "../../controllers/posts/deletePost.js";
-const router = express.Router();
+import express from 'express'
+import { deletePost } from '../../controllers/posts/deletePost.js'
+const router = express.Router()
 
-router.delete("/", deletePost);
+router.delete('/:id', deletePost)
 
-export default router;
+export default router

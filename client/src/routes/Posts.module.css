@@ -1,3 +1,8 @@
+.postsContainer {
+  margin-top: 7rem;
+  max-width: 50%;
+}
+
 .element {
   display: flex;
   align-items: center;

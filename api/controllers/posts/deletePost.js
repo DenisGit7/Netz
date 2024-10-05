@@ -1,18 +1,21 @@
-import { Post } from "../../models/Post.js";
+import { Post } from '../../models/Post.js'
 
 export const deletePost = async (req, res) => {
-  const { id } = req.body;
-  // console.log(req.body);
-  if (!id) return res.status(400).json({ message: "Id is required." });
-  const post = await Post.findById(id).exec();
+  const id = req?.params?.id
+  console.log(55555, req.params, id)
+  if (!id) return res.status(400).json({ message: 'Id is required.' })
+  const post = await Post.findOne({ _id: id })
+  console.log(666666, post)
+
   if (!post) {
-    return res.status(400).json({ message: "Post not found" });
+    return res.status(400).json({ message: 'Post not found' })
   }
   try {
-    const result = await post.deleteOne();
-    console.log(result);
-    res.status(201).json({ message: `Post deleted` });
+    console.log(77777, post)
+    const result = await post.deleteOne()
+    console.log(88888, result)
+    res.status(201).json({ message: `Post deleted` })
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: err.message })
   }
-};
+}

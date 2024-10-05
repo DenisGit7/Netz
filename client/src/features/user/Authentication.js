@@ -4,11 +4,12 @@ import toast from "react-hot-toast";
 import classes from "./Authentication.module.css";
 import { handleLogin } from "../../helpers/auth/handleLogin.js";
 import { handleLogout } from "../../helpers/auth/handleLogout.js";
-
+import { useNavigate } from "react-router-dom";
 const Authentication = ({ user, setUser, role, setRole }) => {
   const [pwd, setPwd] = useState("");
   const [login, setLogin] = useState("");
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,7 +52,7 @@ const Authentication = ({ user, setUser, role, setRole }) => {
       setUser("");
       setRole("");
       toast.success("Goodbye");
-
+      navigate("/");
       console.log(result);
     } catch (error) {
       toast.error(error);
@@ -93,9 +94,8 @@ const Authentication = ({ user, setUser, role, setRole }) => {
             <button className={classes.authBtn} type="submit">
               Login
             </button>
+            <label>{message}</label>
           </form>
-
-          <label>{message}</label>
         </div>
       )}
     </div>

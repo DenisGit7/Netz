@@ -16,8 +16,10 @@ const Header = ({ user, role, setUser, setRole }) => {
       <div className={classes.mainNav}>
         <ul className={classes.list}>
           <li className={classes.element}>
-            <FaHome />
-            <p className={classes.label}>Home</p>
+            <Link to="/" className={classes.element}>
+              <FaHome />
+              <p className={classes.label}>Home</p>
+            </Link>
           </li>
           <li className={classes.element}>
             <FaAddressBook />
@@ -45,7 +47,7 @@ const Header = ({ user, role, setUser, setRole }) => {
 
               {role === "Admin" ? (
                 <li className={classes.element}>
-                  <Link to="customer" className={classes.element}>
+                  <Link to="customers" className={classes.element}>
                     <FaEnvelope />
                     <p className={classes.label}>Customers</p>
                   </Link>
