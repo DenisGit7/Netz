@@ -1,15 +1,10 @@
 import axios from "axios";
 import { getList } from "./getList.js";
-export const handleRemove = async (
-  filepath,
-  setFiles,
-  setFolder,
-  customerFolder,
-  subFolder,
-  setFolderPath
-) => {
+import { useNavigate } from "react-router-dom";
+
+export const handleRemove = async (file) => {
   const data = {
-    fileName: filepath,
+    fileName: file,
   };
   try {
     const response = await axios.post(
@@ -20,7 +15,7 @@ export const handleRemove = async (
   } catch (error) {
     console.error("Error uploading file:", error);
   }
-  setTimeout(() => {
-    getList(setFiles, setFolder, customerFolder, subFolder, setFolderPath);
-  }, 1000);
+  // setTimeout(() => {
+  //   getList(setFiles, setFolder, customerFolder, subFolder, setFolderPath);
+  // }, 1000);
 };

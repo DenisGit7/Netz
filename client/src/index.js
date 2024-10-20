@@ -79,44 +79,9 @@ const router = createBrowserRouter([
                 action: editNewAction,
                 loader: newLoader,
               },
-
-              // ],
-              // path: "/",
-              // element: <News />,
-              // loader: newsLoader,
-              // children: [
-              //   {
-              //     path: "/create-new",
-              //     element: <CreateNew />,
-              //     action: createNewAction,
-              //   },
-              //   {
-              //     path: "/:id",
-              //     element: <NewDetails />,
-              //     action: editNewAction,
-              //     loader: newLoader,
-              //   },
             ],
           },
 
-          // {
-          //   path: "/",
-          //   element: <News />,
-          //   loader: newsLoader,
-          //   children: [
-          //     {
-          //       path: "/create-new",
-          //       element: <CreateNew />,
-          //       action: createNewAction,
-          //     },
-          //     {
-          //       path: "/:id",
-          //       element: <NewDetails />,
-          //       action: editNewAction,
-          //       loader: newLoader,
-          //     },
-          //   ],
-          // },
           {
             path: "/customers",
             element: <Customers />,

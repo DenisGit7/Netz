@@ -4,6 +4,7 @@ import { getListController } from "../../controllers/files/getListController.js"
 const router = express.Router();
 
 router.post("/", (req, res) => {
+  console.log(req.body.customerFolder);
   try {
     if (req.body.customerFolder == null || req.body.subFolder == null) {
       res.json("Data error");

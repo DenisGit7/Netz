@@ -2,19 +2,11 @@ import axios from "axios";
 import classes from "./Files.module.css";
 import FileList from "../../features/file/FileList";
 import BackArrow from "../../components/BackArrow";
+import { useState } from "react";
 
-const Files = (
-  {
-    // files,
-    // setFiles,
-    // folders,
-    // setFolders,
-    // folderPath,
-    // setFolderPath,
-    // role
-  }
-) => {
-  const folderpath = null;
+const Files = () => {
+  const [fetchResult, setFetchResult] = useState([]);
+
   return (
     <div className={classes.container}>
       <p className={classes.text}>Your files get organised here by Month</p>
@@ -35,15 +27,7 @@ const Files = (
         )} */}
       </div>
 
-      <FileList
-      // role={role}
-      // files={files}
-      // setFiles={setFiles}
-      // folders={folders}
-      // setFolders={setFolders}
-      // folderPath={folderPath}
-      // setFolderPath={setFolderPath}
-      />
+      <FileList />
     </div>
   );
 };
@@ -52,8 +36,8 @@ export default Files;
 
 export const loader = async () => {
   const data = {
-    customerFolder: "customerFolder",
-    subFolder: "subFolder",
+    customerFolder: "Admin",
+    subFolder: "Month",
   };
 
   try {
@@ -61,6 +45,7 @@ export const loader = async () => {
       "http://localhost:3500/files/getlist",
       data
     );
+    return response.data.result;
   } catch (error) {
     console.error("Error uploading file:", error);
   }
