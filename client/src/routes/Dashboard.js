@@ -4,8 +4,8 @@ import classes from './Dashboard.module.css'
 const Dashboard = () => {
   return (
     <>
-      <Outlet />
       <main>
+        <Outlet />
         <div className={classes.postsContainer}></div>
         <div className={classes.newsContainer}></div>
         <div className={classes.filesContainer}></div>

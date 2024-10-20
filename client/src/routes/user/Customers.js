@@ -1,12 +1,9 @@
-import React from "react";
-import { Link, Outlet } from "react-router-dom";
-import { FaEnvelope } from "react-icons/fa6";
+import { Link, Outlet } from 'react-router-dom'
+import classes from './Customers.module.css'
+import CustomersList from '../../features/customers/CustomersList.js'
+import { getAllUsers } from '../../helpers/usersHelper.js'
+import { FaEnvelope } from 'react-icons/fa6'
 
-import { useState, useEffect } from "react";
-import toast from "react-hot-toast";
-import classes from "./Customers.module.css";
-import { removeUser, getAllUsers, getUser } from "../helpers/usersHelper.js";
-import CustomersList from "../features/customers/CustomersList.js";
 const Customers = () => {
   // const [users, setUsers] = useState([]);
   // const [rawUsers, setRawUsers] = useState([]);
@@ -68,8 +65,8 @@ const Customers = () => {
     <>
       <>
         <Outlet />
-        <main className={classes.postsContainer}>
-          <Link to="create-user" className={classes.element}>
+        <main className={classes.customersContainer}>
+          <Link to="create-user" className={classes.create}>
             <FaEnvelope />
             <p className={classes.label}>Create user</p>
           </Link>
@@ -95,12 +92,12 @@ const Customers = () => {
       </div>
       <div className={classes.container}>{users}</div> */}
     </>
-  );
-};
+  )
+}
 
-export default Customers;
+export default Customers
 
 export const loader = async () => {
-  const response = await getAllUsers();
-  return response;
-};
+  const response = await getAllUsers()
+  return response
+}

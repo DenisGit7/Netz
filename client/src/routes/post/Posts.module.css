@@ -1,0 +1,45 @@
+.postsContainer {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 50vw;
+}
+
+.create {
+  display: flex;
+  align-items: center;
+  position: relative;
+  /* pink color */
+  color: #bd89ff;
+  gap: 10px;
+  transition: all 0.3s ease-out;
+  padding: 4px 7px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:active {
+    transform: scale(0.99);
+  }
+  &:hover {
+    /* blue background activated when element is hovered */
+    background-color: #5353ff;
+    color: #ffffff;
+    transform: translate(1px, -1px);
+  }
+
+  svg {
+    width: 19px;
+    height: 19px;
+    transition: all 0.3s ease-out;
+  }
+
+  .label {
+    font-weight: 600;
+    &:hover {
+      color: #ffffff;
+    }
+  }
+}

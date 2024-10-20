@@ -1,15 +1,17 @@
 .posts {
-  list-style: none;
-  display: block;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 90%;
   text-align: center;
 }
 
-.post {
-  display: block;
+.text {
   text-align: center;
   margin: 1rem;
   padding: 1rem;
-  /* max-width: 50%; */
 }

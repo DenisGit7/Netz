@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import classes from "./Customer.module.css";
+import { Link } from 'react-router-dom'
+import classes from './Customer.module.css'
 
 const Customer = ({ id, username }) => {
   return (
@@ -8,7 +8,7 @@ const Customer = ({ id, username }) => {
         <p className={classes.title}>{username}</p>
       </Link>
     </li>
-  );
-};
+  )
+}
 
-export default Customer;
+export default Customer

@@ -1,9 +1,9 @@
-import axios from "axios";
-import { Link, Form, redirect } from "react-router-dom";
-import classes from "./NewPost.module.css";
-import Modal from "../components/Modal";
+import axios from 'axios'
+import { Link, Form, redirect } from 'react-router-dom'
+import classes from './CreatePost.module.css'
+import Modal from '../../components/Modal'
 
-const NewPost = () => {
+const CreatePost = () => {
   return (
     <Modal>
       <Form method="post" className={classes.form}>
@@ -25,33 +25,33 @@ const NewPost = () => {
         </p>
       </Form>
     </Modal>
-  );
-};
+  )
+}
 
-export default NewPost;
+export default CreatePost
 
 export const action = async ({ request }) => {
-  const formData = await request.formData();
+  const formData = await request.formData()
 
   // const title = formData.get('title')
   // console.log(1, title)
   // const content = formData.get('content')
   // console.log(2, content)
 
-  const postData = Object.fromEntries(formData);
+  const postData = Object.fromEntries(formData)
 
   try {
     // Taken out of helper createPost, making that file useless.
     //This is necessary for loader to update display after posting. obselete file path:
     //C:\Archive\Programing\accounting\client\src\helpers\posts\createPost.js
 
-    await axios.post("http://localhost:3500/posts/create", {
+    await axios.post('http://localhost:3500/posts/create', {
       title: postData.title,
-      content: postData.content,
-    });
+      content: postData.content
+    })
   } catch (error) {
-    console.log(Error);
+    console.log(Error)
   }
 
-  return redirect("/");
-};
+  return redirect('/')
+}

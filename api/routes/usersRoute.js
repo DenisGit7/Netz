@@ -1,15 +1,17 @@
-import express from "express";
+import express from 'express'
 import {
+  editUser,
   getAllUsers,
   getUser,
-  removeUser,
-} from "../controllers/usersController.js";
-import { roleVerification } from "../middleware/roleVerification.js";
+  removeUser
+} from '../controllers/usersController.js'
+import { roleVerification } from '../middleware/roleVerification.js'
 
-const router = express.Router();
+const router = express.Router()
 
-router.delete("/", removeUser);
-router.get("/", getAllUsers);
-router.get("/:id", getUser);
+router.get('/', getAllUsers)
+router.get('/:id', getUser)
+router.patch('/:id', editUser)
+router.delete('/:id', removeUser)
 
-export default router;
+export default router

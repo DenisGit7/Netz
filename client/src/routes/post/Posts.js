@@ -1,15 +1,15 @@
 import { Link, Outlet } from "react-router-dom";
-import PostsList from "../features/post/PostsList";
+import PostsList from "../../features/post/PostsList";
 import classes from "./Posts.module.css";
+import { getPosts } from "../../helpers/posts/getPosts";
 import { FaEnvelope } from "react-icons/fa6";
-import { getPosts } from "../helpers/posts/getPosts";
 
 const Posts = () => {
   return (
     <>
       <Outlet />
       <main className={classes.postsContainer}>
-        <Link to="create-post" className={classes.element}>
+        <Link to="create-post" className={classes.create}>
           <FaEnvelope />
           <p className={classes.label}>Create Post</p>
         </Link>

@@ -1,9 +1,9 @@
-import axios from "axios";
-import { Link, Form, redirect } from "react-router-dom";
-import classes from "./NewUser.module.css";
-import Modal from "../components/Modal";
+import axios from 'axios'
+import { Link, Form, redirect } from 'react-router-dom'
+import classes from './CreateUser.module.css'
+import Modal from '../../components/Modal'
 
-const NewUser = () => {
+const CreateUser = () => {
   return (
     <Modal>
       <Form method="post" className={classes.form}>
@@ -17,7 +17,6 @@ const NewUser = () => {
           />
         </p>
         <p>
-          {" "}
           <input
             name="password"
             type="password"
@@ -40,25 +39,25 @@ const NewUser = () => {
         </p>
       </Form>
     </Modal>
-  );
-};
+  )
+}
 
-export default NewUser;
+export default CreateUser
 
 export const action = async ({ request }) => {
-  const formData = await request.formData();
+  const formData = await request.formData()
 
-  const userData = Object.fromEntries(formData);
+  const userData = Object.fromEntries(formData)
   try {
-    await axios.post("http://localhost:3500/users/register", {
+    await axios.post('http://localhost:3500/users/register', {
       username: userData.username,
       password: userData.password,
-      role: userData.role,
-    });
+      role: userData.role
+    })
   } catch (error) {
     // console.error("Register error: ", error);
-    return error;
+    return error
   }
 
-  return redirect("/customers");
-};
+  return redirect('/customers')
+}

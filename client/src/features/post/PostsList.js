@@ -3,8 +3,9 @@ import classes from "./PostsList.module.css";
 import Post from "./Post.js";
 
 const PostsList = () => {
-  const posts = useLoaderData();
+  const data = useLoaderData();
 
+  const posts = data.posts;
   return (
     <>
       {posts.length > 0 && (
@@ -22,7 +23,7 @@ const PostsList = () => {
       )}
 
       {posts.length === 0 && (
-        <p className={classes.post}>There are no posts yet</p>
+        <p className={classes.text}>There are no posts yet</p>
       )}
     </>
   );

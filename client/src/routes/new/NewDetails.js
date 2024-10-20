@@ -1,3 +1,4 @@
+import { useState } from "react";
 import axios from "axios";
 import {
   useLoaderData,
@@ -8,41 +9,43 @@ import {
 } from "react-router-dom";
 import toast from "react-hot-toast";
 
-import Modal from "../components/Modal";
-import classes from "./PostDetails.module.css";
-import { getPost, getPosts } from "../helpers/posts/getPosts";
-import { useState } from "react";
-import { deletePost } from "../helpers/posts/deletePost";
+import Modal from "../../components/Modal";
+import classes from "./NewDetails.module.css";
+import { deleteNew } from "../../helpers/news/deleteNew";
+import { getNew } from "../../helpers/news/getNews";
 
-function PostDetails() {
+const NewDetails = () => {
   const [editing, setEditing] = useState(false);
-  const post = useLoaderData();
+  const newItem = useLoaderData();
   const navigate = useNavigate();
 
-  const { title, content } = post;
-  const id = post._id;
+  const { title, content } = newItem;
+  const id = newItem._id;
 
   const deleteHandler = async () => {
     try {
-      const result = await deletePost(id);
+      const result = await deleteNew(id);
 
       if (result.status === 201) {
-        toast.success("Post deleted");
+        toast.success("New deleted");
       }
     } catch (error) {
       toast.error(error);
     }
     navigate("/");
   };
+  const closeHandler = async () => {
+    navigate("/");
+  };
 
-  if (!post) {
+  if (!newItem) {
     return (
-      // Post not found display
+      // New not found display
       <Modal>
         <main className={classes.details}>
-          <h2 className={classes.content}>Could not find post</h2>
+          <h2 className={classes.content}>Could not find new</h2>
           <p className={classes.content}>
-            Unfortunately, the requested post could not be found.
+            Unfortunately, the requested new could not be found.
           </p>
           <p>
             <Link to=".." className={classes.btn}>
@@ -55,12 +58,12 @@ function PostDetails() {
   }
   return (
     <>
-      {/* Edit post */}
+      {/* Edit new */}
       {editing && (
         <Modal>
           <Form method="post" className={classes.form}>
             <p>
-              <label htmlFor="title">Post Title</label>
+              <label htmlFor="title">New Title</label>
               <input
                 defaultValue={title}
                 name="title"
@@ -90,59 +93,61 @@ function PostDetails() {
               >
                 Cancel
               </button>
-              <button>Update Post</button>
+              <button>Update New</button>
             </p>
           </Form>
         </Modal>
       )}
 
-      {/* View post */}
+      {/* View new */}
       {!editing && (
         <Modal>
           <main className={classes.details}>
-            <h3 className={classes.title}>{post.title}</h3>
-            <p className={classes.content}>{post.content}</p>
+            <h3 className={classes.title}>{newItem.title}</h3>
+            <p className={classes.content}>{newItem.content}</p>
           </main>
           <div className={classes.actions}>
             <Link to="/" className={classes.btn}>
-              <button onClick={deleteHandler}>Delete Post</button>
+              <button onClick={deleteHandler}>Delete New</button>
             </Link>
             <button
               onClick={() => {
                 setEditing(true);
               }}
             >
-              Edit Post
+              Edit New
             </button>
+            <Link to="/" className={classes.btn}>
+              <button onClick={closeHandler}>Close</button>
+            </Link>
           </div>
         </Modal>
       )}
     </>
   );
-}
+};
 
-export default PostDetails;
+export default NewDetails;
 
 export const loader = async ({ params }) => {
-  const post = await getPost(params.id);
-  return post;
+  const newItem = await getNew(params.id);
+  return newItem;
 };
 
 export const action = async ({ request, params }) => {
   const formData = await request.formData();
 
-  const title = formData.get("title");
-  const content = formData.get("content");
+  // const title = formData.get("title");
+  // const content = formData.get("content");
 
   const id = params.id;
 
-  const postData = Object.fromEntries(formData);
+  const newData = Object.fromEntries(formData);
 
   try {
-    //I GOT UP TO HERE, following this line there is internal server error 500, probably the patch url or backend code
-    await axios.patch(`http://localhost:3500/posts/edit/${id}`, {
-      newTitle: postData.title,
-      newContent: postData.content,
+    await axios.patch(`http://localhost:3500/news/edit/${id}`, {
+      newTitle: newData.title,
+      newContent: newData.content,
     });
   } catch (error) {
     console.log(Error);

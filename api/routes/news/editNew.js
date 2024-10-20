@@ -1,7 +1,7 @@
-import express from "express";
-import { editNew } from "../../controllers/news/editNew.js";
-const router = express.Router();
+import express from 'express'
+import { editNew } from '../../controllers/news/editNew.js'
+const router = express.Router()
 
-router.patch("/", editNew);
+router.patch('/:id', editNew)
 
-export default router;
+export default router
