@@ -1,7 +1,5 @@
 import axios from "axios";
-import { FaTrash, FaFolder } from "react-icons/fa6";
-
-import { FaFileInvoice } from "react-icons/fa6";
+import { FaTrash, FaFolder, FaFileInvoice } from "react-icons/fa6";
 
 import { handleRemove } from "./handleRemove.js";
 import { handleChangeFolder } from "./handleChangeFolder.js";

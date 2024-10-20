@@ -8,19 +8,17 @@ import { handleDownload } from "../../helpers/files/handleDownload.js";
 import { handleChangeFolder } from "../../helpers/files/handleChangeFolder.js";
 import { handleRemove } from "../../helpers/files/handleRemove.js";
 import { useNavigate } from "react-router-dom";
-//TODO: Implement setLoading use
 
 const FileList = () => {
-  const [downloadURL, setDownloadURL] = useState("");
   const navigate = useNavigate();
   const data = useLoaderData();
 
-  useEffect(() => {
-    console.log("render");
-  }, [data]);
+  useEffect(() => {}, [data]);
   const handleRemoveFunction = async (file) => {
-    handleRemove(file);
-    navigate("/files");
+    await handleRemove(file);
+    setTimeout(() => {
+      navigate("/files");
+    }, 100);
   };
 
   const handleChangeAdminBack = (e) => {
@@ -31,12 +29,10 @@ const FileList = () => {
     const folderName = folder.split("/").pop();
     return (
       <div key={index} className="folder-container">
-        <Link to="/files">
-          <FaFolder
-            className="icon-file"
-            onClick={(e) => handleChangeFolder(e, folder)}
-          />
-        </Link>
+        <FaFolder
+          className="icon-file"
+          onClick={(e) => handleChangeFolder(e, folder)}
+        />
 
         <h4 className="file-name">{folderName}</h4>
       </div>

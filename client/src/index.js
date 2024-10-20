@@ -53,7 +53,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/",
-            element: [<News />, <Posts />],
+            element: [<News key={1} />, <Posts key={2} />],
             loader: combinedLoader,
             children: [
               {
