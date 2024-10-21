@@ -4,7 +4,7 @@ import FileList from "../../features/file/FileList";
 import BackArrow from "../../components/BackArrow";
 import { useEffect, useState } from "react";
 import { getList } from "../../helpers/files/getList";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, Outlet } from "react-router-dom";
 
 const Files = () => {
   const data = useLoaderData();
@@ -29,27 +29,34 @@ const Files = () => {
   }, [data]);
 
   return (
-    <div className={classes.container}>
-      <p className={classes.text}>Your files get organised here by Month</p>
-      <div className={classes.navigation}>
-        {/* <p className={classes.navText}>
-          Current Folder :
-          {folderPath.customerFolder ? (
-            <span className={classes.span}> {folderPath.customerFolder}</span>
-          ) : (
-            ' Root'
-          )}
-          {folderPath.subFolder && (
-            <span className={classes.span}> / {folderPath.subFolder}</span>
-          )}
-        </p>
-        {folderPath.subFolder && (
-          <BackArrow folderPath={folderPath} setFolderPath={setFolderPath} />
-        )} */}
-      </div>
+    <>
+      <Outlet />
 
-      <FileList folderPathHandler={folderPathHandler} folderPath={folderPath} />
-    </div>
+      <div className={classes.container}>
+        <p className={classes.text}>Your files get organised here by Month</p>
+        <div className={classes.navigation}>
+          <p className={classes.navText}>
+            Current Folder :
+            {folderPath.customerFolder ? (
+              <span className={classes.span}> {folderPath.customerFolder}</span>
+            ) : (
+              data.state.user
+            )}
+            {folderPath.subFolder && (
+              <span className={classes.span}> / {folderPath.subFolder}</span>
+            )}
+          </p>
+          <Link to="/files/upload" type="button">
+            <button>Upload</button>
+          </Link>
+        </div>
+
+        <FileList
+          folderPathHandler={folderPathHandler}
+          folderPath={folderPath}
+        />
+      </div>
+    </>
   );
 };
 
