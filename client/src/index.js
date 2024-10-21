@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./index.css";
 
-import RootLayout from "./routes/RootLayout";
+import RootLayout, { loader as stateLoader } from "./routes/RootLayout";
 import Dashboard from "./routes/Dashboard";
 
 import Posts, { loader as postsLoader } from "./routes/post/Posts";
@@ -103,7 +103,16 @@ const router = createBrowserRouter([
           {
             path: "/files",
             element: <Files />,
-            loader: userFilesLoader,
+            loader: async () => {
+              const [files, state] = await Promise.all([
+                userFilesLoader(),
+                stateLoader(),
+              ]);
+              return { files, state };
+            },
+            // loader: userFilesLoader,
+            // stateLoader,
+            // loader: stateLoader,
             children: [
               {
                 path: "/files/upload",

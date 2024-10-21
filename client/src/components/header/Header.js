@@ -1,9 +1,9 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import classes from './Header.module.css'
-import { FaHome } from 'react-icons/fa'
-import Authentication from '../../features/user/Authentication'
-import { FaAddressBook, FaCircleInfo, FaEnvelope } from 'react-icons/fa6'
+import React from "react";
+import { Link } from "react-router-dom";
+import classes from "./Header.module.css";
+import { FaHome } from "react-icons/fa";
+import Authentication from "../../features/user/Authentication";
+import { FaAddressBook, FaCircleInfo, FaEnvelope } from "react-icons/fa6";
 
 const Header = ({ user, role, setUser, setRole }) => {
   return (
@@ -35,17 +35,21 @@ const Header = ({ user, role, setUser, setRole }) => {
       {/* Admin logged in, App navigation, 65vw center */}
 
       <div className={classes.appNav}>
-        {role !== '' && (
+        {role !== "" && (
           <>
             <ul className={classes.list}>
               <li className={classes.element}>
-                <Link to="files" className={classes.element}>
+                <Link
+                  to="files"
+                  className={classes.element}
+                  onClick={() => localStorage.setItem("subFolder", "")}
+                >
                   <FaEnvelope />
                   <p className={classes.label}>Files</p>
                 </Link>
               </li>
 
-              {role.includes('Admin') && (
+              {role.includes("Admin") && (
                 <li className={classes.element}>
                   <Link to="customers" className={classes.element}>
                     <FaEnvelope />
@@ -68,7 +72,7 @@ const Header = ({ user, role, setUser, setRole }) => {
         </li>
       </ul>
     </>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

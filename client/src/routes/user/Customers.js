@@ -1,8 +1,8 @@
-import { Link, Outlet } from 'react-router-dom'
-import classes from './Customers.module.css'
-import CustomersList from '../../features/customers/CustomersList.js'
-import { getAllUsers } from '../../helpers/usersHelper.js'
-import { FaEnvelope } from 'react-icons/fa6'
+import { Link, Outlet } from "react-router-dom";
+import classes from "./Customers.module.css";
+import CustomersList from "../../features/customers/CustomersList.js";
+import { getAllUsers } from "../../helpers/usersHelper.js";
+import { FaEnvelope } from "react-icons/fa6";
 
 const Customers = () => {
   // const [users, setUsers] = useState([]);
@@ -92,12 +92,12 @@ const Customers = () => {
       </div>
       <div className={classes.container}>{users}</div> */}
     </>
-  )
-}
+  );
+};
 
-export default Customers
+export default Customers;
 
 export const loader = async () => {
-  const response = await getAllUsers()
-  return response
-}
+  const response = await getAllUsers();
+  return response;
+};

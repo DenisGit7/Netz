@@ -1,9 +1,9 @@
-export const handleChangeFolder = (e, folder) => {
+import { loader } from "../../routes/file/Files";
+
+export const handleChangeFolder = (e, folder, folderPathHandler) => {
   e.preventDefault();
   const [customerFolder, subFolder] = folder.split("/");
-  // setFolderPath({
-  //   customerFolder: customerFolder || "General",
-  //   subFolder: subFolder || "",
-  // });
+
+  folderPathHandler(customerFolder, subFolder);
   console.log(customerFolder, subFolder);
 };

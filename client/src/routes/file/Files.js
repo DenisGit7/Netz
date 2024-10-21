@@ -2,10 +2,31 @@ import axios from "axios";
 import classes from "./Files.module.css";
 import FileList from "../../features/file/FileList";
 import BackArrow from "../../components/BackArrow";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getList } from "../../helpers/files/getList";
+import { Link, useLoaderData } from "react-router-dom";
 
 const Files = () => {
-  const [fetchResult, setFetchResult] = useState([]);
+  const data = useLoaderData();
+  console.log(data);
+
+  const [folderPath, setFolderPath] = useState({
+    customerFolder: localStorage.getItem("customerFolder"),
+    subFolder: localStorage.getItem("subFolder"),
+  });
+
+  const folderPathHandler = (customerFolder, subFolder = "") => {
+    setFolderPath({ customerFolder: customerFolder, subFolder: subFolder });
+    localStorage.setItem("customerFolder", customerFolder);
+    localStorage.setItem("subFolder", subFolder);
+  };
+
+  useEffect(() => {
+    folderPathHandler(
+      localStorage.getItem("customerFolder"),
+      localStorage.getItem("subFolder")
+    );
+  }, [data]);
 
   return (
     <div className={classes.container}>
@@ -27,7 +48,7 @@ const Files = () => {
         )} */}
       </div>
 
-      <FileList />
+      <FileList folderPathHandler={folderPathHandler} folderPath={folderPath} />
     </div>
   );
 };
@@ -36,8 +57,8 @@ export default Files;
 
 export const loader = async () => {
   const data = {
-    customerFolder: "Admin",
-    subFolder: "Month",
+    customerFolder: localStorage.getItem("customerFolder"),
+    subFolder: localStorage.getItem("subFolder"),
   };
 
   try {
@@ -50,3 +71,8 @@ export const loader = async () => {
     console.error("Error uploading file:", error);
   }
 };
+
+// export const loader = async () => {
+//   const filesData = localStorage.getItem("filesData");
+//   return { filesData };
+// };

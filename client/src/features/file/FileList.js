@@ -9,20 +9,43 @@ import { handleChangeFolder } from "../../helpers/files/handleChangeFolder.js";
 import { handleRemove } from "../../helpers/files/handleRemove.js";
 import { useNavigate } from "react-router-dom";
 
-const FileList = () => {
+const FileList = ({ folderPathHandler, folderPath }) => {
   const navigate = useNavigate();
-  const data = useLoaderData();
+  const rawData = useLoaderData();
+  const data = rawData.files;
+  const role = rawData.state.role;
+  const user = rawData.state.user;
 
   useEffect(() => {}, [data]);
+  const timeout = 50;
   const handleRemoveFunction = async (file) => {
     await handleRemove(file);
     setTimeout(() => {
       navigate("/files");
-    }, 100);
+    }, timeout);
   };
 
-  const handleChangeAdminBack = (e) => {
+  const handleBack = (e) => {
     e.preventDefault();
+    handleChangeFolder(e, folderPath.customerFolder, folderPathHandler);
+    setTimeout(() => {
+      navigate("/files");
+    }, timeout);
+  };
+  const handleBackAdmin = (e) => {
+    e.preventDefault();
+    handleChangeFolder(e, "", folderPathHandler);
+    setTimeout(() => {
+      navigate("/files");
+    }, timeout);
+  };
+
+  const handleChangeFolderRefresh = (e, folder) => {
+    e.preventDefault();
+    handleChangeFolder(e, folder, folderPathHandler);
+    setTimeout(() => {
+      navigate("/files");
+    }, timeout);
   };
 
   const foldersMap = data.folders.map((folder, index) => {
@@ -31,7 +54,9 @@ const FileList = () => {
       <div key={index} className="folder-container">
         <FaFolder
           className="icon-file"
-          onClick={(e) => handleChangeFolder(e, folder)}
+          onClick={(e) =>
+            handleChangeFolderRefresh(e, folder, folderPathHandler)
+          }
         />
 
         <h4 className="file-name">{folderName}</h4>
@@ -65,8 +90,25 @@ const FileList = () => {
       </div>
       {
         <div className={classes.arrowContainer}>
-          <FaArrowLeft onClick={(e) => handleChangeAdminBack(e)} />
-          Back to Root
+          <>
+            {folderPath.subFolder ? (
+              <>
+                {" "}
+                <FaArrowLeft onClick={(e) => handleBack(e)} />
+                Back to {folderPath.customerFolder}
+              </>
+            ) : (
+              ""
+            )}
+          </>
+          {role === "Admin" && folderPath.customerFolder != "" ? (
+            <>
+              <FaArrowLeft onClick={(e) => handleBackAdmin(e)} />
+              Back Admin
+            </>
+          ) : (
+            ""
+          )}
         </div>
       }
     </>

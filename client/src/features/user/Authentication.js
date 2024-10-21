@@ -1,65 +1,71 @@
-import React from 'react'
-import { useState } from 'react'
-import toast from 'react-hot-toast'
-import classes from './Authentication.module.css'
-import { handleLogin } from '../../helpers/auth/handleLogin.js'
-import { handleLogout } from '../../helpers/auth/handleLogout.js'
-import { useNavigate } from 'react-router-dom'
+import React from "react";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import classes from "./Authentication.module.css";
+import { handleLogin } from "../../helpers/auth/handleLogin.js";
+import { handleLogout } from "../../helpers/auth/handleLogout.js";
+import { useNavigate } from "react-router-dom";
 const Authentication = ({ user, setUser, role, setRole }) => {
-  const [pwd, setPwd] = useState('')
-  const [login, setLogin] = useState('')
-  const [message, setMessage] = useState('')
-  const navigate = useNavigate()
+  const [pwd, setPwd] = useState("");
+  const [login, setLogin] = useState("");
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
-      const result = await handleLogin(login, pwd)
-      console.log(result)
+      const result = await handleLogin(login, pwd);
+      console.log(result);
       if (result.username && result.role) {
-        setUser(result.username)
-        setRole(result.role)
-        setLogin('')
-        setPwd('')
-        console.log(pwd, login)
-
-        toast.success(`Welcome ${result.username}`)
+        setUser(result.username);
+        setRole(result.role);
+        setLogin("");
+        setPwd("");
+        console.log(pwd, login);
+        if (result.role === "Admin") {
+          localStorage.setItem("customerFolder", "");
+        } else {
+          localStorage.setItem("customerFolder", result.username);
+        }
+        toast.success(`Welcome ${result.username}`);
       } else if (result.status === 401) {
-        console.log('User not found')
-        setRole('')
-        setMessage('Wrong user or password')
+        console.log("User not found");
+        setRole("");
+        setMessage("Wrong user or password");
 
-        toast.error(message)
+        toast.error(message);
       } else if (result.status === 400) {
-        console.log('Both fields are required')
-        setRole('')
-        setMessage('Both fields are required')
+        console.log("Both fields are required");
+        setRole("");
+        setMessage("Both fields are required");
 
-        toast.error(message)
+        toast.error(message);
       }
     } catch (error) {
-      console.log('error')
-      toast.error(error)
+      console.log("error");
+      toast.error(error);
     }
-  }
+  };
 
   const logout = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
-      const result = await handleLogout()
-      setUser('')
-      setRole('')
-      toast.success('Goodbye')
-      navigate('/')
-      console.log(result)
+      const result = await handleLogout();
+      setUser("");
+      setRole("");
+      toast.success("Goodbye");
+      navigate("/");
+      console.log(result);
+      localStorage.setItem("customerFolder", "");
+      localStorage.setItem("subFolder", "");
     } catch (error) {
-      toast.error(error)
+      toast.error(error);
 
-      console.log('error')
+      console.log("error");
     }
-  }
+  };
 
   return (
     <div className={classes.authContainer}>
@@ -98,7 +104,7 @@ const Authentication = ({ user, setUser, role, setRole }) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Authentication
+export default Authentication;
