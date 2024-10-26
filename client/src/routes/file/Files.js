@@ -1,18 +1,21 @@
 import axios from "axios";
 import classes from "./Files.module.css";
 import FileList from "../../features/file/FileList";
-import BackArrow from "../../components/BackArrow";
 import { useEffect, useState } from "react";
-import { getList } from "../../helpers/files/getList";
-import { Link, useLoaderData, Outlet } from "react-router-dom";
+
+import { Link, Outlet } from "react-router-dom";
+import { useSession } from "../../context/SessionContext";
 
 const Files = () => {
-  const data = useLoaderData();
-  console.log(data);
+  const { isLoggedIn, userInformation } = useSession();
+
+  console.log(userInformation, isLoggedIn);
 
   const [folderPath, setFolderPath] = useState({
-    customerFolder: localStorage.getItem("customerFolder"),
-    subFolder: localStorage.getItem("subFolder"),
+    customerFolder: "",
+    subFolder: "",
+    // customerFolder: localStorage.getItem("customerFolder"),
+    // subFolder: localStorage.getItem("subFolder"),
   });
 
   const folderPathHandler = (customerFolder, subFolder = "") => {
@@ -20,13 +23,18 @@ const Files = () => {
     localStorage.setItem("customerFolder", customerFolder);
     localStorage.setItem("subFolder", subFolder);
   };
-
   useEffect(() => {
+    console.log(folderPath);
+  }, [folderPath]);
+  useEffect(() => {
+    // setFolderPath({ customerFolder: userInformation.username, subFolder: "" });
     folderPathHandler(
-      localStorage.getItem("customerFolder"),
-      localStorage.getItem("subFolder")
+      userInformation.username,
+      ""
+      // localStorage.getItem('customerFolder'),
+      // localStorage.getItem('subFolder')
     );
-  }, [data]);
+  }, [userInformation]);
 
   return (
     <>
@@ -40,13 +48,13 @@ const Files = () => {
             {folderPath.customerFolder ? (
               <span className={classes.span}> {folderPath.customerFolder}</span>
             ) : (
-              data.state.user
+              userInformation?.username
             )}
             {folderPath.subFolder && (
               <span className={classes.span}> / {folderPath.subFolder}</span>
             )}
           </p>
-          <Link to="/files/upload" type="button">
+          <Link to="/dashboard/files/upload" type="button">
             <button>Upload</button>
           </Link>
         </div>

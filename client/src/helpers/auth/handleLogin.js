@@ -1,13 +1,13 @@
 import axios from 'axios'
 import { jwtDecode } from 'jwt-decode'
 
-export const handleLogin = async (user, pwd) => {
+export const handleLogin = async (username, password) => {
   try {
     const response = await axios.post(
       'http://localhost:3500/users/login',
       {
-        username: user,
-        password: pwd
+        username: username,
+        password: password
       },
       {
         withCredentials: true,

@@ -8,20 +8,28 @@ import { handleDownload } from "../../helpers/files/handleDownload.js";
 import { handleChangeFolder } from "../../helpers/files/handleChangeFolder.js";
 import { handleRemove } from "../../helpers/files/handleRemove.js";
 import { useNavigate } from "react-router-dom";
+import { useSession } from "../../context/SessionContext";
 
 const FileList = ({ folderPathHandler, folderPath }) => {
   const navigate = useNavigate();
-  const rawData = useLoaderData();
-  const data = rawData.files;
-  const role = rawData.state.role;
-  const user = rawData.state.user;
+  const { isLoggedIn, userInformation } = useSession();
 
-  useEffect(() => {}, [data]);
-  const timeout = 50;
+  const rawData = useLoaderData();
+  console.log(rawData);
+  // const data = rawData.files[0];
+  const [data, setData] = useState(rawData.files[0]);
+
+  const role = userInformation.role;
+  const user = userInformation.username;
+
+  useEffect(() => {
+    setData(rawData.files[0]);
+  }, [rawData]);
+  const timeout = 200;
   const handleRemoveFunction = async (file) => {
     await handleRemove(file);
     setTimeout(() => {
-      navigate("/files");
+      navigate("/dashboard/files");
     }, timeout);
   };
 
@@ -29,14 +37,14 @@ const FileList = ({ folderPathHandler, folderPath }) => {
     e.preventDefault();
     handleChangeFolder(e, folderPath.customerFolder, folderPathHandler);
     setTimeout(() => {
-      navigate("/files");
+      navigate("/dashboard/files");
     }, timeout);
   };
   const handleBackAdmin = (e) => {
     e.preventDefault();
     handleChangeFolder(e, "", folderPathHandler);
     setTimeout(() => {
-      navigate("/files");
+      navigate("/dashboard/files");
     }, timeout);
   };
 
@@ -44,7 +52,7 @@ const FileList = ({ folderPathHandler, folderPath }) => {
     e.preventDefault();
     handleChangeFolder(e, folder, folderPathHandler);
     setTimeout(() => {
-      navigate("/files");
+      navigate("/dashboard/files");
     }, timeout);
   };
 

@@ -1,11 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import classes from "./Header.module.css";
-import { FaHome } from "react-icons/fa";
-import Authentication from "../../features/user/Authentication";
-import { FaAddressBook, FaCircleInfo, FaEnvelope } from "react-icons/fa6";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import classes from './Header.module.css'
+import { FaHome } from 'react-icons/fa'
+import Authentication from '../../features/user/Authentication'
+import { FaAddressBook, FaCircleInfo, FaEnvelope } from 'react-icons/fa6'
+import { useSession } from '../../context/SessionContext'
 
-const Header = ({ user, role, setUser, setRole }) => {
+const Header = ({ onLogin, onLogout }) => {
+  const { isLoggedIn, userInformation } = useSession()
+
   return (
     <>
       <h1 className={classes.element}>HEADER </h1>
@@ -32,26 +35,28 @@ const Header = ({ user, role, setUser, setRole }) => {
         </ul>
       </div>
 
-      {/* Admin logged in, App navigation, 65vw center */}
+      {/* Customer/Admin login, App navigation, 65vw center */}
 
       <div className={classes.appNav}>
-        {role !== "" && (
+        {isLoggedIn && (
           <>
             <ul className={classes.list}>
               <li className={classes.element}>
                 <Link
-                  to="files"
+                  to="dashboard/files"
                   className={classes.element}
-                  onClick={() => localStorage.setItem("subFolder", "")}
+                  onClick={() => localStorage.setItem('subFolder', '')}
                 >
                   <FaEnvelope />
                   <p className={classes.label}>Files</p>
                 </Link>
               </li>
 
-              {role.includes("Admin") && (
+              {/* Admin logged in*/}
+
+              {userInformation?.role?.includes('Admin') && (
                 <li className={classes.element}>
-                  <Link to="customers" className={classes.element}>
+                  <Link to="dashboard/customers" className={classes.element}>
                     <FaEnvelope />
                     <p className={classes.label}>Customers</p>
                   </Link>
@@ -63,16 +68,11 @@ const Header = ({ user, role, setUser, setRole }) => {
       </div>
       <ul className={classes.list}>
         <li>
-          <Authentication
-            user={user}
-            role={role}
-            setUser={setUser}
-            setRole={setRole}
-          />
+          <Authentication onLogin={onLogin} onLogout={onLogout} />
         </li>
       </ul>
     </>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

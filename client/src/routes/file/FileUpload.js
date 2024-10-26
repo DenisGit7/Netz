@@ -15,12 +15,9 @@ const FileUpload = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(file);
 
     const formData = new FormData();
     formData.append("file", file);
-    // formData.append("customerFolder", uploadPath.customerFolder);
-    // formData.append("subFolder", uploadPath.subFolder);
     formData.append("customerFolder", "Admin");
     formData.append("subFolder", "Month");
     try {
@@ -36,23 +33,12 @@ const FileUpload = () => {
 
       console.log(response);
       toast.success("File uploaded successfuly");
-
-      setTimeout(() => {
-        navigate("/files");
-      }, 1000);
     } catch (error) {
       toast.error(error);
     }
-    // setLoading(false);
-    // setTimeout(() => {
-    //   getList(
-    //     setFiles,
-    //     setFolders,
-    //     folderPath.customerFolder,
-    //     folderPath.subFolder
-    //   );
-    // }, 1000);
-    // setFile([]);
+    setTimeout(() => {
+      navigate("/dashboard/files");
+    }, 1000);
   };
 
   return (
@@ -93,6 +79,7 @@ export default FileUpload;
 
 export const action = async ({ request }) => {
   const formData = await request.formData();
+  console.log(formData);
 
   const fileData = Object.fromEntries(formData);
   try {
@@ -104,5 +91,5 @@ export const action = async ({ request }) => {
     return error;
   }
 
-  return redirect("/files");
+  // return redirect("/dashboard/files");
 };
