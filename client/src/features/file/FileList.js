@@ -15,12 +15,9 @@ const FileList = ({ folderPathHandler, folderPath }) => {
   const { isLoggedIn, userInformation } = useSession();
 
   const rawData = useLoaderData();
-  console.log(rawData);
-  // const data = rawData.files[0];
   const [data, setData] = useState(rawData.files[0]);
 
   const role = userInformation.role;
-  const user = userInformation.username;
 
   useEffect(() => {
     setData(rawData.files[0]);

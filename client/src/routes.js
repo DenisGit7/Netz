@@ -121,7 +121,7 @@ const router = createBrowserRouter([
               },
               {
                 path: "/dashboard/files",
-                element: <Files key={Math.random()} />,
+                element: <Files />,
                 loader: async () => {
                   const files = await Promise.all([userFilesLoader()]);
                   return { files };

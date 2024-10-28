@@ -7,7 +7,8 @@ import { Link, Outlet } from "react-router-dom";
 import { useSession } from "../../context/SessionContext";
 
 const Files = () => {
-  const { isLoggedIn, userInformation } = useSession();
+  const { isLoggedIn, userInformation, folderPathProvider } = useSession();
+
   const [folderPath, setFolderPath] = useState({
     customerFolder: "",
     subFolder: "",
@@ -18,9 +19,7 @@ const Files = () => {
     localStorage.setItem("customerFolder", customerFolder);
     localStorage.setItem("subFolder", subFolder);
   };
-  useEffect(() => {
-    console.log(folderPath);
-  }, [folderPath]);
+  useEffect(() => {}, [folderPath]);
   useEffect(() => {
     folderPathHandler(userInformation.username, "");
   }, [userInformation]);
@@ -71,7 +70,6 @@ export const loader = async () => {
       "http://localhost:3500/files/getlist",
       data
     );
-    console.log(response.data.result);
     return response.data.result;
   } catch (error) {
     console.error("Error uploading file:", error);
