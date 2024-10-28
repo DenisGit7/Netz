@@ -47,6 +47,7 @@ export const action = async ({ request }) => {
   const data = new FormData();
   data.append("file", fileData.file);
   data.append("customerFolder", fileData.username);
+
   data.append("subFolder", subFolder);
   try {
     const response = await axios.post(

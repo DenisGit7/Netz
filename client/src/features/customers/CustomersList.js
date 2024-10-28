@@ -1,9 +1,10 @@
-import { useLoaderData } from 'react-router-dom'
-import classes from './CustomersList.module.css'
-import Customer from './Customer.js'
+import { useLoaderData } from "react-router-dom";
+import classes from "./CustomersList.module.css";
+import Customer from "./Customer.js";
 
 const CustomersList = () => {
-  const customers = useLoaderData()
+  const customers = useLoaderData();
+
   return (
     <>
       {customers.length > 0 && (
@@ -23,7 +24,7 @@ const CustomersList = () => {
         <p className={classes.text}>There are no customers yet</p>
       )}
     </>
-  )
-}
+  );
+};
 
-export default CustomersList
+export default CustomersList;

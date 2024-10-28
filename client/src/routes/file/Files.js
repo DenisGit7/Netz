@@ -63,7 +63,6 @@ export const loader = async () => {
     customerFolder: localStorage.getItem("customerFolder"),
     subFolder: localStorage.getItem("subFolder"),
   };
-  console.log(data.customerFolder, data.subFolder);
 
   try {
     const response = await axios.post(

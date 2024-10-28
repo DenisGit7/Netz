@@ -22,7 +22,9 @@ const FileList = ({ folderPathHandler, folderPath }) => {
   useEffect(() => {
     setData(rawData.files[0]);
   }, [rawData]);
+
   const timeout = 200;
+
   const handleRemoveFunction = async (file) => {
     await handleRemove(file);
     setTimeout(() => {
@@ -37,6 +39,7 @@ const FileList = ({ folderPathHandler, folderPath }) => {
       navigate("/dashboard/files");
     }, timeout);
   };
+
   const handleBackAdmin = (e) => {
     e.preventDefault();
     handleChangeFolder(e, "", folderPathHandler);

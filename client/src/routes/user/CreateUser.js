@@ -1,9 +1,20 @@
 import axios from "axios";
-import { Link, Form, redirect } from "react-router-dom";
+import {
+  Link,
+  Form,
+  redirect,
+  useLoaderData,
+  useActionData,
+} from "react-router-dom";
 import classes from "./CreateUser.module.css";
 import Modal from "../../components/Modal";
-
+import toast from "react-hot-toast";
 const CreateUser = () => {
+  const response = useActionData();
+  if (response?.status === 409) {
+    toast.error("User already exists");
+  }
+
   return (
     <Modal>
       <Form method="post" className={classes.form}>
@@ -57,7 +68,7 @@ export const action = async ({ request }) => {
   } catch (error) {
     console.error("Register error: ", error);
     console.error("Error message: ", error.response.data.message);
-    return error;
+    return error.response;
   }
 
   return redirect("/dashboard/customers");

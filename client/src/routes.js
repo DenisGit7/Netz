@@ -46,6 +46,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <RootLayout />,
     errorElement: <Error />,
+
     children: [
       {
         path: "/",
@@ -55,6 +56,18 @@ const router = createBrowserRouter([
             path: "/",
             element: [<News key={1} />, <Posts key={2} />],
             loader: combinedLoader,
+            children: [
+              {
+                path: "/dashboard/post/:id",
+                element: <PostDetails />,
+                loader: postLoader,
+              },
+              {
+                path: "/dashboard/new/:id",
+                element: <NewDetails />,
+                loader: newLoader,
+              },
+            ],
           },
         ],
       },
@@ -120,7 +133,7 @@ const router = createBrowserRouter([
                 ],
               },
               {
-                path: "/dashboard/files",
+                path: "/dashboard/files/",
                 element: <Files />,
                 loader: async () => {
                   const files = await Promise.all([userFilesLoader()]);

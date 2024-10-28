@@ -1,6 +1,6 @@
-import { Outlet } from 'react-router-dom'
-import classes from './Dashboard.module.css'
-
+import { Outlet } from "react-router-dom";
+import classes from "./Dashboard.module.css";
+import { useSession } from "../context/SessionContext";
 const Dashboard = () => {
   return (
     <>
@@ -12,7 +12,7 @@ const Dashboard = () => {
         <div className={classes.userContainer}></div>
       </main>
     </>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
