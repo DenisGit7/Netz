@@ -32,10 +32,10 @@ const PostDetails = () => {
     } catch (error) {
       toast.error(error);
     }
-    navigate("/");
+    navigate("/dashboard");
   };
   const closeHandler = async () => {
-    navigate("/");
+    navigate("/dashboard");
   };
 
   if (!post) {

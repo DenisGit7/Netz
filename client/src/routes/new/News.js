@@ -9,7 +9,7 @@ const News = () => {
     <>
       <Outlet />
       <main className={classes.newsContainer}>
-        <Link to="create-new" className={classes.create}>
+        <Link to="/dashboard/create-new" className={classes.create}>
           <FaEnvelope />
           <p className={classes.label}>Create New</p>
         </Link>

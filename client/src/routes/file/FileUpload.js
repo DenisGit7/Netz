@@ -1,64 +1,27 @@
 import axios from "axios";
-import toast from "react-hot-toast";
 import classes from "./FileUpload.module.css";
-import { getList } from "../../helpers/files/getList.js";
-import { Form, Link, redirect, Outlet } from "react-router-dom";
+import { Form, Link, redirect } from "react-router-dom";
 import Modal from "../../components/Modal.js";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { handleSubFolder } from "../../helpers/files/handleSubFolder.js";
+import { useSession } from "../../context/SessionContext";
 
 const FileUpload = () => {
-  const [file, setFile] = useState();
-  const navigate = useNavigate();
-  const handleFileInput = (e) => {
-    setFile(e.target.files[0]);
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("customerFolder", "Admin");
-    formData.append("subFolder", "Month");
-    try {
-      const response = await axios.post(
-        "http://localhost:3500/files/upload",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      console.log(response);
-      toast.success("File uploaded successfuly");
-    } catch (error) {
-      toast.error(error);
-    }
-    setTimeout(() => {
-      navigate("/dashboard/files");
-    }, 1000);
-  };
-
+  const { isLoggedIn, userInformation } = useSession();
   return (
     <Modal>
       <p>Choose a file from your computer, then click 'Upload'</p>
-      <Form method="post" className={classes.form} onSubmit={handleSubmit}>
+      <Form
+        method="post"
+        encType="multipart/form-data"
+        className={classes.form}
+      >
         <p>
           <label htmlFor="file">
             Choose file
-            <input
-              type="file"
-              name="file"
-              id="file"
-              onChange={(e) => {
-                handleFileInput(e);
-              }}
-              required
-            />
+            <input type="file" name="file" id="file" required />
           </label>
         </p>
+        <input type="hidden" name="username" value={userInformation.username} />
         <p>
           <h4 className={classes.label}>
             {/* {!file.name ? "Waiting for file" : file.name} */}
@@ -79,17 +42,26 @@ export default FileUpload;
 
 export const action = async ({ request }) => {
   const formData = await request.formData();
-  console.log(formData);
-
+  const subFolder = handleSubFolder();
   const fileData = Object.fromEntries(formData);
+  const data = new FormData();
+  data.append("file", fileData.file);
+  data.append("customerFolder", fileData.username);
+  data.append("subFolder", subFolder);
   try {
-    await axios.post("http://localhost:3500/files/upload", {
-      file: fileData.file,
-    });
+    const response = await axios.post(
+      "http://localhost:3500/files/upload",
+      data,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    console.log(response);
   } catch (error) {
-    // console.error("Register error: ", error);
+    console.error("Upload error: ", error);
     return error;
   }
-
-  // return redirect("/dashboard/files");
+  return redirect("/dashboard/files");
 };

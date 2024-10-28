@@ -1,39 +1,39 @@
-import { useState } from 'react'
-import axios from 'axios'
+import { useState } from "react";
+import axios from "axios";
 import {
   useLoaderData,
   Outlet,
   Link,
   Form,
   redirect,
-  useNavigate
-} from 'react-router-dom'
-import toast from 'react-hot-toast'
+  useNavigate,
+} from "react-router-dom";
+import toast from "react-hot-toast";
 
-import Modal from '../../components/Modal'
-import classes from './CustomerDetails.module.css'
-import { getUser, removeUser } from '../../helpers/usersHelper'
+import Modal from "../../components/Modal";
+import classes from "./CustomerDetails.module.css";
+import { getUser, removeUser } from "../../helpers/usersHelper";
 
 const CustomerDetails = () => {
-  const [editing, setEditing] = useState(false)
-  const user = useLoaderData()
-  const navigate = useNavigate()
+  const [editing, setEditing] = useState(false);
+  const user = useLoaderData();
+  const navigate = useNavigate();
 
-  const username = user.username
+  const username = user.username;
 
-  const id = user._id
+  const id = user._id;
   const deleteHandler = async () => {
     try {
-      const result = await removeUser(id)
+      const result = await removeUser(id);
 
       if (result.status === 201) {
-        toast.success('User deleted')
+        toast.success("User deleted");
       }
     } catch (error) {
-      toast.error(error)
+      toast.error(error);
     }
-    navigate('/customers')
-  }
+    navigate("/dashboard/customers");
+  };
 
   if (!user) {
     return (
@@ -45,13 +45,13 @@ const CustomerDetails = () => {
             Unfortunately, the requested user could not be found.
           </p>
           <p>
-            <Link to="/customers" className={classes.btn}>
+            <Link to="/dashbaord/customers" className={classes.btn}>
               Okay
             </Link>
           </p>
         </main>
       </Modal>
-    )
+    );
   }
   return (
     <>
@@ -75,7 +75,7 @@ const CustomerDetails = () => {
               <button
                 type="button"
                 onClick={() => {
-                  setEditing(false)
+                  setEditing(false);
                 }}
               >
                 Cancel
@@ -94,12 +94,12 @@ const CustomerDetails = () => {
             <p className={classes.role}>Role: {user.role}</p>
           </main>
           <div className={classes.actions}>
-            <Link to="/customers" className={classes.btn}>
+            <Link to="/dashboard/customers" className={classes.btn}>
               <button onClick={deleteHandler}>Delete User</button>
             </Link>
             <button
               onClick={() => {
-                setEditing(true)
+                setEditing(true);
               }}
             >
               Edit User
@@ -108,36 +108,36 @@ const CustomerDetails = () => {
         </Modal>
       )}
     </>
-  )
-}
+  );
+};
 
-export default CustomerDetails
+export default CustomerDetails;
 
 export const loader = async ({ params }) => {
-  const user = await getUser(params.id)
+  const user = await getUser(params.id);
   // console.log(user)
-  return user
-}
+  return user;
+};
 
 export const action = async ({ request, params }) => {
-  const formData = await request.formData()
+  const formData = await request.formData();
 
-  const username = formData.get('username')
-  console.log(1, username)
+  const username = formData.get("username");
+  console.log(1, username);
 
-  const id = params.id
-  console.log(2, id)
+  const id = params.id;
+  console.log(2, id);
 
-  const userData = Object.fromEntries(formData)
+  const userData = Object.fromEntries(formData);
 
-  console.log(3, userData)
+  console.log(3, userData);
   try {
     await axios.patch(`http://localhost:3500/customers/${id}`, {
-      username: userData.username
-    })
+      username: userData.username,
+    });
   } catch (error) {
-    console.log(Error)
+    console.log(Error);
   }
 
-  return redirect('/customers')
-}
+  return redirect("/dashboard/customers");
+};

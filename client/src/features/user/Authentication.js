@@ -1,86 +1,86 @@
-import React from 'react'
-import { useState } from 'react'
-import toast from 'react-hot-toast'
-import classes from './Authentication.module.css'
-import { handleLogin } from '../../helpers/auth/handleLogin.js'
-import { handleLogout } from '../../helpers/auth/handleLogout.js'
-import { useNavigate } from 'react-router-dom'
-import { useSession } from '../../context/SessionContext.js'
+import React from "react";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import classes from "./Authentication.module.css";
+import { handleLogin } from "../../helpers/auth/handleLogin.js";
+import { handleLogout } from "../../helpers/auth/handleLogout.js";
+import { useNavigate } from "react-router-dom";
+import { useSession } from "../../context/SessionContext.js";
 
 const Authentication = ({ onLogin, onLogout }) => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [message, setMessage] = useState('')
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
-  const { isLoggedIn, userInformation } = useSession()
-  const navigate = useNavigate()
+  const { isLoggedIn, userInformation } = useSession();
+  const navigate = useNavigate();
 
   const loginHandler = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
-      const result = await handleLogin(username, password)
+      const result = await handleLogin(username, password);
 
       if (result.username && result.role) {
         // setUser(result.username)
         // setRole(result.role)
-        setUsername('')
-        setPassword('')
+        setUsername("");
+        setPassword("");
 
-        if (result.role === 'Admin') {
-          localStorage.setItem('customerFolder', '')
+        if (result.role === "Admin") {
+          localStorage.setItem("customerFolder", "");
         } else {
-          localStorage.setItem('customerFolder', result.username)
+          localStorage.setItem("customerFolder", result.username);
         }
 
-        toast.success(`Welcome ${result.username}`)
-        console.log('***handlelogin**inAuthentication***', result)
+        toast.success(`Welcome ${result.username}`);
+        console.log("***handlelogin**inAuthentication***", result);
         //send to SessionProvider through RootLayout
-        onLogin(result)
+        onLogin(result);
       } else if (result.status === 401) {
-        console.log('User not found')
-        setUsername('')
-        setPassword('')
-        setMessage('Wrong user or password')
+        console.log("User not found");
+        setUsername("");
+        setPassword("");
+        setMessage("Wrong user or password");
 
-        toast.error(message)
+        toast.error(message);
       } else if (result.status === 400) {
-        console.log('Both fields are required')
-        setUsername('')
-        setPassword('')
-        setMessage('Both fields are required')
+        console.log("Both fields are required");
+        setUsername("");
+        setPassword("");
+        setMessage("Both fields are required");
 
-        toast.error(message)
+        toast.error(message);
       }
     } catch (error) {
-      console.log('error')
-      setUsername('')
-      setPassword('')
-      setMessage('')
+      console.log("error");
+      setUsername("");
+      setPassword("");
+      setMessage("");
 
-      toast.error(error)
+      toast.error(error);
     }
-  }
+  };
 
   const logoutHandler = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
-      const result = await handleLogout()
+      const result = await handleLogout();
       if (result) {
-        console.log('***logout attempt**inAuth***', result)
-        onLogout(result)
-        toast.success('Goodbye')
-        navigate('/')
-        localStorage.setItem('customerFolder', '')
-        localStorage.setItem('subFolder', '')
+        console.log("***logout attempt**inAuth***", result);
+        onLogout(result);
+        toast.success("Goodbye");
+        navigate("/");
+        localStorage.setItem("customerFolder", "");
+        localStorage.setItem("subFolder", "");
       }
     } catch (error) {
-      toast.error(error)
+      toast.error(error);
 
-      console.log('error')
+      console.log("error");
     }
-  }
+  };
 
   return (
     <div className={classes.authContainer}>
@@ -119,7 +119,7 @@ const Authentication = ({ onLogin, onLogout }) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Authentication
+export default Authentication;

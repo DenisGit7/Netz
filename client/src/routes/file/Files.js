@@ -8,14 +8,9 @@ import { useSession } from "../../context/SessionContext";
 
 const Files = () => {
   const { isLoggedIn, userInformation } = useSession();
-
-  console.log(userInformation, isLoggedIn);
-
   const [folderPath, setFolderPath] = useState({
     customerFolder: "",
     subFolder: "",
-    // customerFolder: localStorage.getItem("customerFolder"),
-    // subFolder: localStorage.getItem("subFolder"),
   });
 
   const folderPathHandler = (customerFolder, subFolder = "") => {
@@ -27,13 +22,7 @@ const Files = () => {
     console.log(folderPath);
   }, [folderPath]);
   useEffect(() => {
-    // setFolderPath({ customerFolder: userInformation.username, subFolder: "" });
-    folderPathHandler(
-      userInformation.username,
-      ""
-      // localStorage.getItem('customerFolder'),
-      // localStorage.getItem('subFolder')
-    );
+    folderPathHandler(userInformation.username, "");
   }, [userInformation]);
 
   return (
@@ -75,19 +64,16 @@ export const loader = async () => {
     customerFolder: localStorage.getItem("customerFolder"),
     subFolder: localStorage.getItem("subFolder"),
   };
+  console.log(data.customerFolder, data.subFolder);
 
   try {
     const response = await axios.post(
       "http://localhost:3500/files/getlist",
       data
     );
+    console.log(response.data.result);
     return response.data.result;
   } catch (error) {
     console.error("Error uploading file:", error);
   }
 };
-
-// export const loader = async () => {
-//   const filesData = localStorage.getItem("filesData");
-//   return { filesData };
-// };

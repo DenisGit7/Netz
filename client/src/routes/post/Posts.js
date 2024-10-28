@@ -9,7 +9,7 @@ const Posts = () => {
     <>
       <Outlet />
       <main className={classes.postsContainer}>
-        <Link to="create-post" className={classes.create}>
+        <Link to="/dashboard/create-post" className={classes.create}>
           <FaEnvelope />
           <p className={classes.label}>Create Post</p>
         </Link>

@@ -112,7 +112,7 @@ const router = createBrowserRouter([
                     action: createUserAction,
                   },
                   {
-                    path: "dashboard/customers/:id",
+                    path: "/dashboard/customers/:id",
                     element: <CustomerDetails />,
                     action: editUserAction,
                     loader: userLoader,
@@ -121,14 +121,11 @@ const router = createBrowserRouter([
               },
               {
                 path: "/dashboard/files",
-                element: <Files />,
+                element: <Files key={Math.random()} />,
                 loader: async () => {
                   const files = await Promise.all([userFilesLoader()]);
                   return { files };
                 },
-                // loader: userFilesLoader,
-                // stateLoader,
-                // loader: stateLoader,
                 children: [
                   {
                     path: "/dashboard/files/upload",
@@ -136,6 +133,10 @@ const router = createBrowserRouter([
                     action: fileUploadAction,
                   },
                 ],
+
+                // loader: userFilesLoader,
+                // stateLoader,
+                // loader: stateLoader,
               },
             ],
           },
