@@ -16,8 +16,8 @@ const Files = () => {
 
   const folderPathHandler = (customerFolder, subFolder = "") => {
     setFolderPath({ customerFolder: customerFolder, subFolder: subFolder });
-    localStorage.setItem("customerFolder", customerFolder);
-    localStorage.setItem("subFolder", subFolder);
+    sessionStorage.setItem("customerFolder", customerFolder);
+    sessionStorage.setItem("subFolder", subFolder);
   };
   useEffect(() => {}, [folderPath]);
   useEffect(() => {
@@ -60,8 +60,8 @@ export default Files;
 
 export const loader = async () => {
   const data = {
-    customerFolder: localStorage.getItem("customerFolder"),
-    subFolder: localStorage.getItem("subFolder"),
+    customerFolder: sessionStorage.getItem("customerFolder"),
+    subFolder: sessionStorage.getItem("subFolder"),
   };
 
   try {

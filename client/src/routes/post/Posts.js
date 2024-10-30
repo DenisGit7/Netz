@@ -3,16 +3,22 @@ import PostsList from "../../features/post/PostsList";
 import classes from "./Posts.module.css";
 import { getPosts } from "../../helpers/posts/getPosts";
 import { FaEnvelope } from "react-icons/fa6";
+import { useSession } from "../../context/SessionContext";
 
 const Posts = () => {
+  const { isLoggedIn, userInformation } = useSession();
+
   return (
     <>
       <Outlet />
       <main className={classes.postsContainer}>
-        <Link to="/dashboard/create-post" className={classes.create}>
-          <FaEnvelope />
-          <p className={classes.label}>Create Post</p>
-        </Link>
+        {userInformation?.role?.includes("Admin") && (
+          <Link to="/dashboard/create-post" className={classes.create}>
+            <FaEnvelope />
+            <p className={classes.label}>Create Post</p>
+          </Link>
+        )}
+
         <PostsList />
       </main>
     </>

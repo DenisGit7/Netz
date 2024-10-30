@@ -8,13 +8,14 @@ import {
   useNavigate,
 } from "react-router-dom";
 import toast from "react-hot-toast";
-
 import Modal from "../../components/Modal";
 import classes from "./PostDetails.module.css";
 import { getPost } from "../../helpers/posts/getPosts";
 import { deletePost } from "../../helpers/posts/deletePost";
+import { useSession } from "../../context/SessionContext";
 
 const PostDetails = () => {
+  const { isLoggedIn, userInformation } = useSession();
   const [editing, setEditing] = useState(false);
   const post = useLoaderData();
   const navigate = useNavigate();
@@ -107,16 +108,21 @@ const PostDetails = () => {
             <p className={classes.content}>{post.content}</p>
           </main>
           <div className={classes.actions}>
-            <Link to="/" className={classes.btn}>
-              <button onClick={deleteHandler}>Delete Post</button>
-            </Link>
-            <button
-              onClick={() => {
-                setEditing(true);
-              }}
-            >
-              Edit Post
-            </button>
+            {userInformation?.role?.includes("Admin") && (
+              <Link to="/" className={classes.btn}>
+                <button onClick={deleteHandler}>Delete Post</button>
+              </Link>
+            )}
+            {userInformation?.role?.includes("Admin") && (
+              <button
+                onClick={() => {
+                  setEditing(true);
+                }}
+              >
+                Edit Post
+              </button>
+            )}
+
             <Link to="/" className={classes.btn}>
               <button onClick={closeHandler}>Close</button>
             </Link>

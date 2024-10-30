@@ -1,21 +1,28 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import classes from './Header.module.css'
-import { FaHome } from 'react-icons/fa'
-import Authentication from '../../features/user/Authentication'
-import { FaAddressBook, FaCircleInfo, FaEnvelope } from 'react-icons/fa6'
-import { useSession } from '../../context/SessionContext'
+import React from "react";
+import { Link } from "react-router-dom";
+import classes from "./Header.module.css";
+import { FaHome } from "react-icons/fa";
+import Authentication from "../../features/user/Authentication";
+import { FaAddressBook, FaCircleInfo, FaEnvelope } from "react-icons/fa6";
+import { useSession } from "../../context/SessionContext";
 
 const Header = ({ onLogin, onLogout }) => {
-  const { isLoggedIn, userInformation } = useSession()
+  const { isLoggedIn, userInformation } = useSession();
+
+  const handleRootFolder = () => {
+    sessionStorage.setItem("subFolder", "");
+
+    if (userInformation.role.includes("Admin")) {
+      sessionStorage.setItem("customerFolder", "");
+    } else {
+      sessionStorage.setItem("customerFolder", userInformation.username);
+    }
+  };
 
   return (
     <>
       <h1 className={classes.element}>HEADER </h1>
-      {/* purple bar 100vw */}
       <div className={classes.navContainer} />
-
-      {/* Always visible no condition Home Navigation 30vw left side */}
       <div className={classes.mainNav}>
         <ul className={classes.list}>
           <li className={classes.element}>
@@ -25,27 +32,25 @@ const Header = ({ onLogin, onLogout }) => {
             </Link>
           </li>
           <li className={classes.element}>
-            <FaAddressBook />
-            <p className={classes.label}>Contact</p>
+            <Link to="/contact" className={classes.element}>
+              {" "}
+              <FaAddressBook />
+              <p className={classes.label}>Contact</p>
+            </Link>
           </li>
           <li className={classes.element}>
-            <FaCircleInfo />
-            <p className={classes.label}>About</p>
+            <Link to="/about" className={classes.element}>
+              <FaCircleInfo />
+              <p className={classes.label}>About</p>
+            </Link>
           </li>
-        </ul>
-      </div>
-
-      {/* Customer/Admin login, App navigation, 65vw center */}
-
-      <div className={classes.appNav}>
-        {isLoggedIn && (
-          <>
-            <ul className={classes.list}>
+          {isLoggedIn && (
+            <>
               <li className={classes.element}>
                 <Link
                   to="dashboard/files"
                   className={classes.element}
-                  onClick={() => localStorage.setItem('subFolder', '')}
+                  onClick={() => handleRootFolder()}
                 >
                   <FaEnvelope />
                   <p className={classes.label}>Files</p>
@@ -54,7 +59,7 @@ const Header = ({ onLogin, onLogout }) => {
 
               {/* Admin logged in*/}
 
-              {userInformation?.role?.includes('Admin') && (
+              {userInformation?.role?.includes("Admin") && (
                 <li className={classes.element}>
                   <Link to="dashboard/customers" className={classes.element}>
                     <FaEnvelope />
@@ -62,17 +67,15 @@ const Header = ({ onLogin, onLogout }) => {
                   </Link>
                 </li>
               )}
-            </ul>
-          </>
-        )}
+            </>
+          )}
+          <li>
+            <Authentication onLogin={onLogin} onLogout={onLogout} />
+          </li>
+        </ul>
       </div>
-      <ul className={classes.list}>
-        <li>
-          <Authentication onLogin={onLogin} onLogout={onLogout} />
-        </li>
-      </ul>
     </>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

@@ -13,8 +13,11 @@ import Modal from "../../components/Modal";
 import classes from "./NewDetails.module.css";
 import { deleteNew } from "../../helpers/news/deleteNew";
 import { getNew } from "../../helpers/news/getNews";
+import { useSession } from "../../context/SessionContext";
 
 const NewDetails = () => {
+  const { isLoggedIn, userInformation } = useSession();
+
   const [editing, setEditing] = useState(false);
   const newItem = useLoaderData();
   const navigate = useNavigate();
@@ -27,7 +30,7 @@ const NewDetails = () => {
       const result = await deleteNew(id);
 
       if (result.status === 201) {
-        toast.success("New deleted");
+        toast.success("Notificaton deleted");
       }
     } catch (error) {
       toast.error(error);
@@ -45,7 +48,7 @@ const NewDetails = () => {
         <main className={classes.details}>
           <h2 className={classes.content}>Could not find new</h2>
           <p className={classes.content}>
-            Unfortunately, the requested new could not be found.
+            Unfortunately, the requested Notification could not be found.
           </p>
           <p>
             <Link to=".." className={classes.btn}>
@@ -63,7 +66,7 @@ const NewDetails = () => {
         <Modal>
           <Form method="post" className={classes.form}>
             <p>
-              <label htmlFor="title">New Title</label>
+              <label htmlFor="title">Notifications Title</label>
               <input
                 defaultValue={title}
                 name="title"
@@ -93,7 +96,7 @@ const NewDetails = () => {
               >
                 Cancel
               </button>
-              <button>Update New</button>
+              <button>Update Notification</button>
             </p>
           </Form>
         </Modal>
@@ -107,16 +110,20 @@ const NewDetails = () => {
             <p className={classes.content}>{newItem.content}</p>
           </main>
           <div className={classes.actions}>
-            <Link to="/" className={classes.btn}>
-              <button onClick={deleteHandler}>Delete New</button>
-            </Link>
-            <button
-              onClick={() => {
-                setEditing(true);
-              }}
-            >
-              Edit New
-            </button>
+            {userInformation?.role?.includes("Admin") && (
+              <Link to="/" className={classes.btn}>
+                <button onClick={deleteHandler}>Delete Notification</button>
+              </Link>
+            )}
+            {userInformation?.role?.includes("Admin") && (
+              <button
+                onClick={() => {
+                  setEditing(true);
+                }}
+              >
+                Edit Notification
+              </button>
+            )}
             <Link to="/" className={classes.btn}>
               <button onClick={closeHandler}>Close</button>
             </Link>

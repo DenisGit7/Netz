@@ -1,36 +1,35 @@
-import { Toaster } from 'react-hot-toast'
-import { Outlet, useNavigate } from 'react-router-dom'
-import Footer from '../components/Footer.js'
-import Header from '../components/header/Header.js'
-// import { useEffect, useState } from 'react'
-import { useSession } from '../context/SessionContext.js'
+import { Toaster } from "react-hot-toast";
+import { Outlet, useNavigate } from "react-router-dom";
+import Footer from "../components/Footer.js";
+import Header from "../components/header/Header.js";
+import { useSession } from "../context/SessionContext.js";
 
 const RootLayout = () => {
-  const navigate = useNavigate()
-  const { login, logout } = useSession()
+  const navigate = useNavigate();
+  const { login, logout } = useSession();
 
   const LoginHandler = (userData) => {
-    console.log('***Login**through**session**inRootLayout***', userData)
+    console.log("***Login**through**session**inRootLayout***", userData);
     //Passes data to SessionContext
-    login(userData)
+    login(userData);
 
-    if (userData.role.includes('Admin')) {
+    if (userData.role.includes("Admin")) {
       //TODO:/dashboard/admin ?
-      navigate('/dashboard')
+      navigate("/dashboard");
     } else {
-      navigate('/dashboard')
+      navigate("/dashboard");
     }
-  }
+  };
 
   const LogoutHandler = (data) => {
-    console.log('***Logout**through**session**inRootLayout***', data)
+    console.log("***Logout**through**session**inRootLayout***", data);
     //Passes data to SessionContext
-    logout(data)
+    logout(data);
 
     if (data) {
-      navigate('/')
+      navigate("/");
     }
-  }
+  };
   // const [user, setUser] = useState("");
   // const [role, setRole] = useState("");
 
@@ -68,10 +67,10 @@ const RootLayout = () => {
       <Outlet />
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default RootLayout
+export default RootLayout;
 // export const loader = async () => {
 //   const user = localStorage.getItem('user')
 //   const role = localStorage.getItem('role')

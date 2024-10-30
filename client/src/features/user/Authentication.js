@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import classes from "./Authentication.module.css";
@@ -22,27 +22,15 @@ const Authentication = ({ onLogin, onLogout }) => {
       const result = await handleLogin(username, password);
 
       if (result.username && result.role) {
-        // setUser(result.username)
-        // setRole(result.role)
         setUsername("");
         setPassword("");
-
-        if (result.role === "Admin") {
-          localStorage.setItem("customerFolder", "");
-        } else {
-          localStorage.setItem("customerFolder", result.username);
-        }
-
         toast.success(`Welcome ${result.username}`);
-        console.log("***handlelogin**inAuthentication***", result);
-        //send to SessionProvider through RootLayout
         onLogin(result);
       } else if (result.status === 401) {
         console.log("User not found");
         setUsername("");
         setPassword("");
         setMessage("Wrong user or password");
-
         toast.error(message);
       } else if (result.status === 400) {
         console.log("Both fields are required");
@@ -57,27 +45,21 @@ const Authentication = ({ onLogin, onLogout }) => {
       setUsername("");
       setPassword("");
       setMessage("");
-
       toast.error(error);
     }
   };
 
   const logoutHandler = async (e) => {
     e.preventDefault();
-
     try {
       const result = await handleLogout();
       if (result) {
-        console.log("***logout attempt**inAuth***", result);
         onLogout(result);
         toast.success("Goodbye");
         navigate("/");
-        localStorage.setItem("customerFolder", "");
-        localStorage.setItem("subFolder", "");
       }
     } catch (error) {
       toast.error(error);
-
       console.log("error");
     }
   };

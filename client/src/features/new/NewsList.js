@@ -9,7 +9,7 @@ const NewsList = () => {
     <>
       {news.length > 0 && (
         <ul className={classes.news}>
-          <h1>News</h1>
+          <h1>Notifications</h1>
           {news.map((newItem) => (
             <New
               key={newItem._id}

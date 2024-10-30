@@ -1,7 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import Error from "./pages/Error";
 import ProtectedRoute from "./components/ProtectedRoute";
-
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
 import RootLayout from "./routes/RootLayout";
 import Dashboard from "./routes/Dashboard";
 
@@ -69,6 +70,8 @@ const router = createBrowserRouter([
               },
             ],
           },
+          { path: "/about", element: <AboutPage /> },
+          { path: "/contact", element: <ContactPage /> },
         ],
       },
     ],
