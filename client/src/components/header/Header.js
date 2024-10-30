@@ -5,6 +5,7 @@ import { FaHome } from "react-icons/fa";
 import Authentication from "../../features/user/Authentication";
 import { FaAddressBook, FaCircleInfo, FaEnvelope } from "react-icons/fa6";
 import { useSession } from "../../context/SessionContext";
+import logo from "../../images/logo.mp4";
 
 const Header = ({ onLogin, onLogout }) => {
   const { isLoggedIn, userInformation } = useSession();
@@ -20,25 +21,26 @@ const Header = ({ onLogin, onLogout }) => {
   };
 
   return (
-    <>
-      <h1 className={classes.element}>HEADER </h1>
+    <div className={classes.mainContainer}>
+      {/* <h1 className={classes.element}> HEADER </h1> */}
       <div className={classes.navContainer} />
       <div className={classes.mainNav}>
         <ul className={classes.list}>
-          <li className={classes.element}>
+          <li>{/* <video src={logo} autoPlay /> */}</li>
+          <li>
             <Link to="/" className={classes.element}>
               <FaHome />
               <p className={classes.label}>Home</p>
             </Link>
           </li>
-          <li className={classes.element}>
+          <li>
             <Link to="/contact" className={classes.element}>
               {" "}
               <FaAddressBook />
               <p className={classes.label}>Contact</p>
             </Link>
           </li>
-          <li className={classes.element}>
+          <li>
             <Link to="/about" className={classes.element}>
               <FaCircleInfo />
               <p className={classes.label}>About</p>
@@ -46,7 +48,7 @@ const Header = ({ onLogin, onLogout }) => {
           </li>
           {isLoggedIn && (
             <>
-              <li className={classes.element}>
+              <li>
                 <Link
                   to="dashboard/files"
                   className={classes.element}
@@ -60,7 +62,7 @@ const Header = ({ onLogin, onLogout }) => {
               {/* Admin logged in*/}
 
               {userInformation?.role?.includes("Admin") && (
-                <li className={classes.element}>
+                <li>
                   <Link to="dashboard/customers" className={classes.element}>
                     <FaEnvelope />
                     <p className={classes.label}>Customers</p>
@@ -74,7 +76,7 @@ const Header = ({ onLogin, onLogout }) => {
           </li>
         </ul>
       </div>
-    </>
+    </div>
   );
 };
 

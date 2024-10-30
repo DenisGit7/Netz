@@ -1,8 +1,8 @@
 .authContainer {
   position: fixed;
   display: flex;
-  right: 0;
-  top: 0;
+  right: 10px;
+  top: 10px;
   padding: 0;
   width: 12rem;
   height: 80px;
@@ -22,9 +22,10 @@
     width: 6rem;
     padding: 0.2rem;
     border-radius: 1rem;
-    background: #e8e8e8;
+    background: #f0e0bc;
     margin: 0.3rem;
     transition: 0.3s;
+    text-align: center;
 
     &:focus {
       outline-color: #e8e8e8;
@@ -36,18 +37,25 @@
 }
 
 .authBtn {
+  /* margin: 0px 4px 0px 4px; */
+
   /* display: flex; */
   position: fixed;
-  top: 28px;
-  right: 1rem;
+  /* top: 28px; */
+  right: 2rem;
   text-align: center;
-  color: #7e8590;
+  background-color: #e0a95d;
+  color: #3b3016;
   transition: all 0.3s ease-out;
   padding: 4px 10px;
   border-radius: 1rem;
   cursor: pointer;
   &:active {
     transform: scale(0.99);
+  }
+  &:hover {
+    scale: 1.05;
+    transform: translate(1px, -1px);
   }
 }
 
@@ -59,24 +67,29 @@
 }
 
 .element {
+  /* border: 1px white solid; */
   display: flex;
   align-items: center;
   /* pink color */
-  color: #bd89ff;
+  height: 20px;
+  color: #f6e6d3;
   gap: 10px;
+  margin: 0px 4px 0px 4px;
   transition: all 0.3s ease-out;
-  padding: 4px 7px;
+  /* padding: 7px; */
+  padding: 0px 4px 0px 4px;
   border-radius: 6px;
-  cursor: pointer;
+  /* cursor: pointer; */
   &:active {
     transform: scale(0.99);
   }
-  &:hover {
-    /* blue background activated when element is hovered */
-    background-color: #5353ff;
+  /* &:hover {
+    background-color: #000000;
     color: #ffffff;
+    height: min-content;
+    width: max-content;
     transform: translate(1px, -1px);
-  }
+  } */
 
   svg {
     width: 19px;
@@ -86,8 +99,8 @@
 
   .label {
     font-weight: 600;
-    &:hover {
+    /* &:hover {
       color: #ffffff;
-    }
+    } */
   }
 }

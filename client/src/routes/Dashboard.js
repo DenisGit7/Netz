@@ -5,8 +5,9 @@ const Dashboard = () => {
   return (
     <>
       <main>
-        <Outlet />
-        <div className={classes.postsContainer}></div>
+        <div className={classes.container}>
+          <Outlet />
+        </div>
         <div className={classes.newsContainer}></div>
         <div className={classes.filesContainer}></div>
         <div className={classes.userContainer}></div>

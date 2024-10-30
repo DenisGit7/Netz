@@ -61,11 +61,15 @@ const router = createBrowserRouter([
               {
                 path: "/dashboard/post/:id",
                 element: <PostDetails />,
+                action: editPostAction,
+
                 loader: postLoader,
               },
               {
                 path: "/dashboard/new/:id",
                 element: <NewDetails />,
+                action: editNewAction,
+
                 loader: newLoader,
               },
             ],

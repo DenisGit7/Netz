@@ -24,21 +24,21 @@ export const loginUser = async (req, res) => {
         process.env.ACCESS_TOKEN_SECRET,
         { expiresIn: "15s" }
       );
-      const refreshToken = jwt.sign(
-        { username: user.username },
-        process.env.REFRESH_TOKEN_SECRET,
-        { expiresIn: "1d" }
-      );
-      user.refreshToken = refreshToken;
-      const result = await user.save();
-      console.log(result);
-      res.cookie("jwt", refreshToken, {
+      // const refreshToken = jwt.sign(
+      //   { username: user.username },
+      //   process.env.REFRESH_TOKEN_SECRET,
+      //   { expiresIn: "1d" }
+      // );
+      // user.refreshToken = refreshToken;
+      // const result = await user.save();
+      // console.log(result);
+      res.cookie("jwt", accessToken, {
         httpOnly: true,
         sameSite: "None",
         secure: false,
         maxAge: 24 * 60 * 60 * 1000,
       });
-      res.json({ accessToken, refreshToken });
+      res.json({ accessToken });
     } else {
       res.status(401).json({ message: "Wrong password" });
     }

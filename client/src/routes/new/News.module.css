@@ -1,5 +1,6 @@
 .newsContainer {
   position: absolute;
+  top: 7rem;
   left: 50%;
   display: flex;
   align-items: center;
@@ -13,7 +14,8 @@
   align-items: center;
   position: relative;
   /* pink color */
-  color: #bd89ff;
+  height: 40px;
+  color: #685642;
   gap: 10px;
   transition: all 0.3s ease-out;
   padding: 4px 7px;
@@ -26,7 +28,7 @@
   }
   &:hover {
     /* blue background activated when element is hovered */
-    background-color: #5353ff;
+    background-color: #303030;
     color: #ffffff;
     transform: translate(1px, -1px);
   }
