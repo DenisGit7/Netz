@@ -1,11 +1,11 @@
 .postsContainer {
   position: absolute;
+  top: 7rem;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
   width: 50vw;
-  top: 7rem;
 }
 
 .create {
@@ -29,7 +29,7 @@
   &:hover {
     /* blue background activated when element is hovered */
     background-color: #303030;
-    color: #ffffff;
+    color: #f6e6d3;
     transform: translate(1px, -1px);
   }
 
@@ -42,7 +42,7 @@
   .label {
     font-weight: 600;
     &:hover {
-      color: #ffffff;
+      color: #f6e6d3;
     }
   }
 }

@@ -1,8 +1,10 @@
 .new {
+  position: relative;
+  top: 15rem;
   margin: 0.2rem 0;
-  padding: 1rem;
+  padding: 5px;
   width: 20rem;
-  height: fit-content;
+  height: 100%;
   background-color: #f6e6d3;
   border-radius: 4px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
@@ -21,6 +23,8 @@
 }
 
 .content {
+  padding: 2px;
+
   word-wrap: break-word;
   white-space: pre-wrap;
   font-size: 1.25rem;

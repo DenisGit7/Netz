@@ -8,17 +8,19 @@ const NewsList = () => {
   return (
     <>
       {news.length > 0 && (
-        <ul className={classes.news}>
+        <>
           <h1>Notifications</h1>
-          {news.map((newItem) => (
-            <New
-              key={newItem._id}
-              id={newItem._id}
-              title={newItem.title}
-              content={newItem.content}
-            />
-          ))}
-        </ul>
+          <ul className={classes.news}>
+            {news.map((newItem) => (
+              <New
+                key={newItem._id}
+                id={newItem._id}
+                title={newItem.title}
+                content={newItem.content}
+              />
+            ))}
+          </ul>
+        </>
       )}
 
       {news.length === 0 && (

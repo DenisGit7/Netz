@@ -42,7 +42,8 @@ const PostDetails = () => {
   if (!post) {
     return (
       // Post not found display
-      <Modal>
+
+      <Modal className={classes.center}>
         <main className={classes.details}>
           <h2 className={classes.content}>Could not find post</h2>
           <p className={classes.content}>

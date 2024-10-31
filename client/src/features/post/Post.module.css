@@ -1,8 +1,10 @@
 .post {
+  position: relative;
+  top: 15rem;
   margin: 0.2rem 0;
-  padding: 1rem;
+  padding: 5px;
   width: 50rem;
-  height: fit-content;
+  height: 100%;
   background-color: #f6e6d3;
   border-radius: 4px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
@@ -16,11 +18,13 @@
   font-size: 0.8rem;
   font-weight: bold;
   color: #1b130e;
+
   margin: 0;
   text-transform: uppercase;
 }
 
 .content {
+  padding: 2px;
   white-space: pre-wrap;
   word-wrap: break-word;
   font-size: 1.25rem;

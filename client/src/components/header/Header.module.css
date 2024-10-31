@@ -86,7 +86,7 @@
     transform: scale(0.99);
   }
   &:hover {
-    background-color: #303030;
+    background-color: #181613;
     color: #ffffff;
     transform: translate(1px, -1px);
   }
@@ -111,7 +111,7 @@
   text-align: center;
   top: 50%;
   scale: 3;
-  color: #7e8590;
+  color: #181613;
   gap: 10px;
   transition: all 0.3s ease-out;
   padding: 4px 7px;

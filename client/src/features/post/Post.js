@@ -3,7 +3,7 @@ import classes from "./Post.module.css";
 
 const Post = ({ id, title, content }) => {
   const maxLengthTitle = 30;
-  const maxLengthContent = 700;
+  const maxLengthContent = 500;
   return (
     <li className={classes.post}>
       <Link to={`/dashboard/post/${id}`}>
