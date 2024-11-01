@@ -10,7 +10,7 @@ const PostsList = () => {
     <>
       {posts.length > 0 && (
         <>
-          <h1>Posts</h1>
+          <h1 className={classes.contentTitle}>Posts</h1>
           <ul className={classes.posts}>
             {posts.map((post) => (
               <Post

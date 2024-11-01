@@ -9,7 +9,7 @@ const NewsList = () => {
     <>
       {news.length > 0 && (
         <>
-          <h1>Notifications</h1>
+          <h1 className={classes.contentTitle}>Notifications</h1>
           <ul className={classes.news}>
             {news.map((newItem) => (
               <New

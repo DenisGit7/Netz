@@ -10,18 +10,18 @@ import { handleRemove } from "../../helpers/files/handleRemove.js";
 import { useNavigate } from "react-router-dom";
 import { useSession } from "../../context/SessionContext";
 
-const FileList = ({ folderPathHandler, folderPath }) => {
+const FileList = ({ folderPathHandler, folderPath, rawFolders, rawFiles }) => {
   const navigate = useNavigate();
   const { isLoggedIn, userInformation } = useSession();
 
-  const rawData = useLoaderData();
-  const [data, setData] = useState(rawData.files[0]);
+  // const rawData = useLoaderData();
+  // const [data, setData] = useState(rawData.files[0]);
 
   const role = userInformation.role;
 
-  useEffect(() => {
-    setData(rawData.files[0]);
-  }, [rawData]);
+  // useEffect(() => {
+  //   setData(rawData.files[0]);
+  // }, [rawData]);
 
   const timeout = 200;
 
@@ -32,21 +32,21 @@ const FileList = ({ folderPathHandler, folderPath }) => {
     }, timeout);
   };
 
-  const handleBack = (e) => {
-    e.preventDefault();
-    handleChangeFolder(e, folderPath.customerFolder, folderPathHandler);
-    setTimeout(() => {
-      navigate("/dashboard/files");
-    }, timeout);
-  };
+  // const handleBack = (e) => {
+  //   e.preventDefault();
+  //   handleChangeFolder(e, folderPath.customerFolder, folderPathHandler);
+  //   setTimeout(() => {
+  //     navigate("/dashboard/files");
+  //   }, timeout);
+  // };
 
-  const handleBackAdmin = (e) => {
-    e.preventDefault();
-    handleChangeFolder(e, "", folderPathHandler);
-    setTimeout(() => {
-      navigate("/dashboard/files");
-    }, timeout);
-  };
+  // const handleBackAdmin = (e) => {
+  //   e.preventDefault();
+  //   handleChangeFolder(e, "", folderPathHandler);
+  //   setTimeout(() => {
+  //     navigate("/dashboard/files");
+  //   }, timeout);
+  // };
 
   const handleChangeFolderRefresh = (e, folder) => {
     e.preventDefault();
@@ -56,7 +56,8 @@ const FileList = ({ folderPathHandler, folderPath }) => {
     }, timeout);
   };
 
-  const foldersMap = data.folders.map((folder, index) => {
+  // const foldersMap = data.folders.map((folder, index) => {
+  const foldersMap = rawFolders.map((folder, index) => {
     const folderName = folder.split("/").pop();
     return (
       <div key={index} className="folder-container">
@@ -72,7 +73,8 @@ const FileList = ({ folderPathHandler, folderPath }) => {
     );
   });
 
-  const filesMap = data.files.map((file, index) => {
+  // const filesMap = data.files.map((file, index) => {
+  const filesMap = rawFiles.map((file, index) => {
     const fileName = file.split("/").pop();
 
     return (
@@ -93,31 +95,34 @@ const FileList = ({ folderPathHandler, folderPath }) => {
   return (
     <>
       <div>
+        {foldersMap.length < 1 && filesMap.length < 1 && (
+          <p>No folders or files found</p>
+        )}
         {foldersMap}
         {filesMap}
       </div>
       {
-        <div className={classes.arrowContainer}>
-          <>
-            {folderPath.subFolder ? (
-              <>
-                {" "}
-                <FaArrowLeft onClick={(e) => handleBack(e)} />
-                Back to {folderPath.customerFolder}
-              </>
-            ) : (
-              ""
-            )}
-          </>
-          {role === "Admin" && folderPath.customerFolder != "" ? (
-            <>
-              <FaArrowLeft onClick={(e) => handleBackAdmin(e)} />
-              Back Admin
-            </>
-          ) : (
-            ""
-          )}
-        </div>
+        // <div className={classes.arrowContainer}>
+        //   <>
+        //     {folderPath.subFolder ? (
+        //       <>
+        //         {" "}
+        //         <FaArrowLeft onClick={(e) => handleBack(e)} />
+        //         Back to {folderPath.customerFolder}
+        //       </>
+        //     ) : (
+        //       ""
+        //     )}
+        //   </>
+        //   {role === "Admin" && folderPath.customerFolder != "" ? (
+        //     <>
+        //       <FaArrowLeft onClick={(e) => handleBackAdmin(e)} />
+        //       Back Admin
+        //     </>
+        //   ) : (
+        //     ""
+        //   )}
+        // </div>
       }
     </>
   );

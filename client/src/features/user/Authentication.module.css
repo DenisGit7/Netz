@@ -15,11 +15,13 @@
   align-items: center;
   width: 100%;
   height: 100%;
+  position: relative;
+  right: 4rem;
 
   input {
     display: flex;
     border: none;
-    width: 6rem;
+    width: 8rem;
     padding: 0.2rem;
     border-radius: 1rem;
     background: #f0e0bc;
@@ -37,17 +39,18 @@
 }
 
 .authBtn {
-  /* margin: 0px 4px 0px 4px; */
-
-  /* display: flex; */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  font-weight: bold;
   position: fixed;
-  /* top: 28px; */
-  right: 2rem;
+  right: 3rem;
   text-align: center;
   background-color: #e0a95d;
   color: #3b3016;
   transition: all 0.3s ease-out;
   padding: 4px 10px;
+
   border-radius: 1rem;
   cursor: pointer;
   &:active {
@@ -67,6 +70,8 @@
 }
 
 .element {
+  position: relative;
+  right: 5rem;
   /* border: 1px white solid; */
   display: flex;
   align-items: center;
@@ -74,10 +79,11 @@
   height: 20px;
   color: #f6e6d3;
   gap: 10px;
+
   margin: 0px 4px 0px 4px;
   transition: all 0.3s ease-out;
   /* padding: 7px; */
-  padding: 0px 4px 0px 4px;
+  padding: 0px 4px 0px 8px;
   border-radius: 6px;
   /* cursor: pointer; */
   &:active {

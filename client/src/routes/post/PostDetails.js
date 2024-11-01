@@ -42,8 +42,7 @@ const PostDetails = () => {
   if (!post) {
     return (
       // Post not found display
-
-      <Modal className={classes.center}>
+      <Modal>
         <main className={classes.details}>
           <h2 className={classes.content}>Could not find post</h2>
           <p className={classes.content}>
@@ -78,6 +77,7 @@ const PostDetails = () => {
             <p>
               <label htmlFor="content">Content</label>
               <textarea
+                className={classes.textContent}
                 defaultValue={content}
                 name="content"
                 id="content"

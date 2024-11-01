@@ -1,7 +1,7 @@
 .details {
   padding: 1rem;
   width: 50rem;
-  height: 50vh;
+  height: 40rem;
   overflow-y: scroll;
 
   background-color: #f6e6d3;
@@ -30,6 +30,7 @@
   background-color: #f6e6d3;
   padding: 1rem;
   width: 50rem;
+  height: 42rem;
 }
 
 .form label {
@@ -41,7 +42,7 @@
 
 .form input,
 .form textarea {
-  border: 1px solid #1b130e;
+  border: 1px solid #ccbca8;
   display: block;
   width: 95%;
   font: inherit;
@@ -50,9 +51,18 @@
   background-color: #f6e6d3;
   color: #28262c;
   resize: none;
+  field-sizing: content;
+  height: max-content;
+  max-height: 400px;
+}
+
+.textContent {
+  min-height: 400px;
 }
 
 .actions {
+  padding-top: 10px;
+
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -63,35 +73,19 @@
 
 .actions button {
   cursor: pointer;
-  font: inherit;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  font-weight: bold;
+  transition: all 0.3s ease-out;
+
   padding: 0.8rem 1.8rem;
   border: none;
   border-radius: 1rem;
   background: #f6e6d3;
-  color: #1b130e;
-
-  /* background-size: 120% 120%;
-  animation: gradient-animation 6s ease infinite;
-  box-shadow: 0px 0px 1.2px -24px rgba(0, 0, 0, 0.281),
-    0px 0px 3px -24px rgba(0, 0, 0, 0.404),
-    0px 0px 5.6px -24px rgba(0, 0, 0, 0.5),
-    0px 0px 10.1px -24px rgba(0, 0, 0, 0.596),
-    0px 0px 18.8px -24px rgba(0, 0, 0, 0.719),
-    0px 0px 45px -24px rgba(0, 0, 0, 1); */
-  /* color: #f6e6d3; */
+  color: #685642;
 }
-
-/* @keyframes gradient-animation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-} */
 
 .actions button:hover {
   background: #181613;

@@ -79,6 +79,7 @@ const NewDetails = () => {
             <p>
               <label htmlFor="content">Content</label>
               <textarea
+                className={classes.textContent}
                 defaultValue={content}
                 name="content"
                 id="content"

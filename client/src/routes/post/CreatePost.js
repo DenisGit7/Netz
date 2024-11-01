@@ -14,12 +14,18 @@ const CreatePost = () => {
 
         <p>
           <label htmlFor="content">Content</label>
-          <textarea name="content" id="content" required rows={7} />
+          <textarea
+            name="content"
+            id="content"
+            required
+            rows={7}
+            className={classes.content}
+          />
         </p>
 
         <p className={classes.actions}>
           <Link to=".." type="button">
-            Cancel
+            <button className={classes.actions}>Cancel</button>
           </Link>
           <button>Submit</button>
         </p>
