@@ -18,12 +18,12 @@ const Files = () => {
 
   const [searchValue, setSearchValue] = useState("");
   const [folderPath, setFolderPath] = useState({
-    customerFolder: "",
-    subFolder: "",
+    customerFolder: sessionStorage.getItem("customerFolder"),
+    subFolder: sessionStorage.getItem("subFolder"),
   });
 
   const navigate = useNavigate();
-
+  console.log(folderPath);
   useEffect(() => {
     setRawFiles(rawData.files[0].files);
     setRawFolders(rawData.files[0].folders);
@@ -67,6 +67,12 @@ const Files = () => {
     sessionStorage.setItem("subFolder", subFolder);
   };
   useEffect(() => {}, [folderPath]);
+  // useEffect(() => {
+  //   setFolderPath({
+  //     customerFolder: sessionStorage.getItem("customerFolder"),
+  //     subFolder: sessionStorage.getItem("subFolder"),
+  //   });
+  // }, []);
   useEffect(() => {
     folderPathHandler(userInformation.username, "");
   }, [userInformation]);
@@ -76,7 +82,7 @@ const Files = () => {
       <Outlet />
 
       <div className={classes.container}>
-        <h1 className={classes.contentTitle}>Posts</h1>
+        <h1 className={classes.contentTitle}>File Explorer</h1>
 
         {/* <p className={classes.text}>Your files get organised here by Month</p> */}
         <div className={classes.navigation}>
@@ -107,21 +113,21 @@ const Files = () => {
           />
           {/* <div className={classes.arrowContainer}> */}
           <div className={classes.arrowContainer}>
-            <>
-              {folderPath.subFolder ? (
-                <>
-                  <FaArrowLeft onClick={(e) => handleBack(e)} />
-                  Back to {folderPath.customerFolder}
-                </>
-              ) : (
-                ""
-              )}
-            </>
+            {folderPath.subFolder ? (
+              <Link className={classes.arrowBtn} onClick={(e) => handleBack(e)}>
+                <p>Back to {folderPath.customerFolder}</p>
+              </Link>
+            ) : (
+              ""
+            )}
+
             {role === "Admin" && folderPath.customerFolder != "" ? (
-              <>
-                <FaArrowLeft onClick={(e) => handleBackAdmin(e)} />
-                Back Admin
-              </>
+              <Link
+                className={classes.arrowBtn}
+                onClick={(e) => handleBackAdmin(e)}
+              >
+                <p>Back to Main</p>
+              </Link>
             ) : (
               ""
             )}

@@ -9,7 +9,6 @@ const FileUpload = () => {
   const { isLoggedIn, userInformation } = useSession();
   return (
     <Modal>
-      <p>Choose a file from your computer, then click 'Upload'</p>
       <Form
         method="post"
         encType="multipart/form-data"
@@ -17,7 +16,7 @@ const FileUpload = () => {
       >
         <p>
           <label htmlFor="file">
-            Choose file
+            Choose a file from your computer, then click 'Upload'
             <input type="file" name="file" id="file" required />
           </label>
         </p>
@@ -29,7 +28,7 @@ const FileUpload = () => {
         </p>
         <p className={classes.actions}>
           <Link to=".." type="button">
-            Cancel
+            <button>Cancel</button>
           </Link>
           <button>Upload</button>
         </p>
@@ -64,5 +63,7 @@ export const action = async ({ request }) => {
     console.error("Upload error: ", error);
     return error;
   }
+  sessionStorage.setItem("customerFolder", fileData.username);
+  sessionStorage.setItem("subFolder", subFolder);
   return redirect("/dashboard/files");
 };
