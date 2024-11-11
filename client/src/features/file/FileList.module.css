@@ -1,7 +1,124 @@
-.arrowContainer {
+.mainContainer {
+  margin-top: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 57vh;
+  text-align: center;
+
+  /* border: 1px solid red; */
+  @media (max-width: 768px) {
+    height: 35vh;
+  }
+}
+
+.folderContainer {
+  margin: 5px;
+  padding: 10px;
+  display: inline-block;
+  width: 7rem;
+  border-radius: 2rem;
+  word-wrap: break-word;
+
+  /* background-color: #1b130e; */
+  text-align: center;
+  box-shadow: 2.8px 3px 1.2px -25px rgba(0, 0, 0, 0.008),
+    6.7px 7.2px 2.9px -25px rgba(0, 0, 0, 0.012),
+    12.5px 13.5px 5.4px -25px rgba(0, 0, 0, 0.015),
+    22.3px 24.1px 9.6px -25px rgba(0, 0, 0, 0.018),
+    41.8px 45.1px 18px -25px rgba(0, 0, 0, 0.022),
+    100px 108px 43px -25px rgba(0, 0, 0, 0.03);
+  animation: animate-in 1s ease-out forwards;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+}
+
+.fileContainer {
+  margin: 5px;
+  padding: 10px;
+  display: inline-block;
+  width: 20rem;
+  border-radius: 2rem;
+  word-wrap: break-word;
+
+  /* background-color: #1b130e; */
+  text-align: center;
+  box-shadow: 2.8px 3px 1.2px -25px rgba(0, 0, 0, 0.008),
+    6.7px 7.2px 2.9px -25px rgba(0, 0, 0, 0.012),
+    12.5px 13.5px 5.4px -25px rgba(0, 0, 0, 0.015),
+    22.3px 24.1px 9.6px -25px rgba(0, 0, 0, 0.018),
+    41.8px 45.1px 18px -25px rgba(0, 0, 0, 0.022),
+    100px 108px 43px -25px rgba(0, 0, 0, 0.03);
+  animation: animate-in 1s ease-out forwards;
+  transition: all 0.3s ease-out;
+}
+
+@keyframes animate-in {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fileContainer:hover {
+  transition: all 0.3s ease-out;
+
+  background-color: #f2e0c9;
+  transform: translate(1px, -1px);
+}
+
+.folderContainer:hover {
+  transition: all 0.3s ease-out;
+
+  background-color: #f2e0c9;
+  transform: translate(1px, -1px);
+
+  .iconFolder {
+    color: #1b130edd;
+    scale: 2.8;
+  }
+}
+
+.fileName {
+  color: #1b130e;
+  font-size: 13px;
+}
+
+.icons {
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  gap: 40px;
   justify-content: center;
-  gap: 0.5rem;
-  margin: 1rem;
+  margin: 5px;
+}
+
+.iconFile {
+  color: #1b130e;
+  scale: 2;
+  cursor: pointer;
+}
+.iconFile:hover {
+  color: #3dba07;
+  scale: 2.3;
+  cursor: pointer;
+}
+
+.iconFolder {
+  margin-top: 1rem;
+  color: #1b130e;
+  scale: 2.5;
+}
+
+.iconRemove {
+  color: #1b130e;
+  scale: 2;
+
+  cursor: pointer;
+}
+.iconRemove:hover {
+  color: #f92a2a;
+  scale: 2.3;
+  cursor: pointer;
 }

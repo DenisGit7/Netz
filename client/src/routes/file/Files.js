@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa6";
 import { handleChangeFolder } from "../../helpers/files/handleChangeFolder.js";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 import { Link, Outlet, useLoaderData } from "react-router-dom";
 import { useSession } from "../../context/SessionContext";
@@ -16,25 +17,34 @@ const Files = () => {
   const [rawFiles, setRawFiles] = useState(rawData.files[0].files);
   const [rawFolders, setRawFolders] = useState(rawData.files[0].folders);
 
+  const [loading, setLoading] = useState(false);
+
   const [searchValue, setSearchValue] = useState("");
   const [folderPath, setFolderPath] = useState({
     customerFolder: sessionStorage.getItem("customerFolder"),
     subFolder: sessionStorage.getItem("subFolder"),
   });
+  if (loading) {
+    toast.loading("Loading...", { duration: 3000 });
+    if (rawData) {
+      setLoading(false);
+      toast.dismiss();
+    }
+  }
 
   const navigate = useNavigate();
-  console.log(folderPath);
   useEffect(() => {
     setRawFiles(rawData.files[0].files);
     setRawFolders(rawData.files[0].folders);
     setSearchValue("");
+    setLoading(true);
   }, [rawData]);
 
   useEffect(() => {
-    const filteredFiles = rawFiles.filter((file) =>
+    const filteredFiles = rawData.files[0].files.filter((file) =>
       file.toLowerCase().includes(searchValue.toLowerCase())
     );
-    const filteredFolders = rawFolders.filter((folder) =>
+    const filteredFolders = rawData.files[0].folders.filter((folder) =>
       folder.toLowerCase().includes(searchValue.toLowerCase())
     );
     setRawFolders(filteredFolders);
@@ -47,7 +57,10 @@ const Files = () => {
 
   const handleBack = (e) => {
     e.preventDefault();
+    setLoading(true);
+
     handleChangeFolder(e, folderPath.customerFolder, folderPathHandler);
+
     setTimeout(() => {
       navigate("/dashboard/files");
     }, 200);
@@ -55,6 +68,8 @@ const Files = () => {
 
   const handleBackAdmin = (e) => {
     e.preventDefault();
+    setLoading(true);
+
     handleChangeFolder(e, "", folderPathHandler);
     setTimeout(() => {
       navigate("/dashboard/files");
@@ -67,14 +82,20 @@ const Files = () => {
     sessionStorage.setItem("subFolder", subFolder);
   };
   useEffect(() => {}, [folderPath]);
-  // useEffect(() => {
-  //   setFolderPath({
-  //     customerFolder: sessionStorage.getItem("customerFolder"),
-  //     subFolder: sessionStorage.getItem("subFolder"),
-  //   });
-  // }, []);
   useEffect(() => {
-    folderPathHandler(userInformation.username, "");
+    // setFolderPath({
+    //   customerFolder: sessionStorage.getItem("customerFolder"),
+    //   subFolder: sessionStorage.getItem("subFolder"),
+    // });
+    const customerFolder = sessionStorage.getItem("customerFolder");
+    const subFolder = sessionStorage.getItem("subFolder");
+    folderPathHandler(customerFolder, subFolder);
+  }, [
+    sessionStorage.getItem("customerFolder"),
+    sessionStorage.getItem("subFolder"),
+  ]);
+  useEffect(() => {
+    // folderPathHandler(userInformation.username, "");
   }, [userInformation]);
 
   return (

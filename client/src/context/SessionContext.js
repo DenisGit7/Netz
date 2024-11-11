@@ -32,7 +32,6 @@ export const SessionProvider = ({ children }) => {
     sessionStorage.setItem("userData", JSON.stringify(userData));
 
     sessionStorage.setItem("subFolder", "");
-
     if (userData.role.includes("Admin")) {
       sessionStorage.setItem("customerFolder", "");
     } else {

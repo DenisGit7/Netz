@@ -3,6 +3,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer.js";
 import Header from "../components/header/Header.js";
 import { useSession } from "../context/SessionContext.js";
+import classes from "./RootLyaout.module.css";
 
 const RootLayout = () => {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ const RootLayout = () => {
     <>
       <Toaster />
       <Header onLogin={LoginHandler} onLogout={LogoutHandler} />
+
       <Outlet />
       <Footer />
     </>

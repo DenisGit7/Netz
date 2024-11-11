@@ -5,6 +5,7 @@ import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import RootLayout from "./routes/RootLayout";
 import Dashboard from "./routes/Dashboard";
+import HomePage from "./pages/HomePage";
 
 import Posts, { loader as postsLoader } from "./routes/post/Posts";
 import CreatePost, {
@@ -55,7 +56,8 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/",
-            element: [<News key={1} />, <Posts key={2} />],
+            element: <HomePage />,
+            // element: [<News key={1} />, <Posts key={2} />],
             loader: combinedLoader,
             children: [
               {
@@ -93,7 +95,8 @@ const router = createBrowserRouter([
             children: [
               {
                 path: "/dashboard",
-                element: [<News key={1} />, <Posts key={2} />],
+                element: <HomePage />,
+                // element: [<News key={1} />, <Posts key={2} />],
                 loader: combinedLoader,
                 children: [
                   {

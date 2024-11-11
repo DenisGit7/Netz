@@ -1,12 +1,16 @@
 .form {
   background-color: #f6e6d3;
   padding: 1rem;
-  width: 30rem;
+
+  width: 50rem;
   height: 20rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   animation: animate-in 1s ease-out forwards;
   a {
     text-decoration: none;
+  }
+  @media (max-width: 768px) {
+    width: 80vw;
   }
 }
 
@@ -17,9 +21,9 @@
   font-weight: bold;
 }
 
-.form input {
+.form p input {
   border: 1px solid #ccbca8;
-
+  height: 100%;
   display: block;
   width: 95%;
   font: inherit;
@@ -37,14 +41,12 @@
   max-height: 400px;
 }
 
-.content {
-  min-height: 400px;
-}
 .actions {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: 1rem;
+  margin-top: 100px;
 }
 
 .actions button {

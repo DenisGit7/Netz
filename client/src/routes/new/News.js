@@ -11,7 +11,8 @@ const News = () => {
   return (
     <>
       <Outlet />
-      <main className={classes.newsContainer}>
+      <div className={classes.newsContainer}>
+        {/* <main className={classes.newsContainer}> */}
         {userInformation?.role?.includes("Admin") && (
           <Link to="/dashboard/create-new" className={classes.create}>
             <FaEnvelope />
@@ -19,7 +20,8 @@ const News = () => {
           </Link>
         )}
         <NewsList />
-      </main>
+      </div>
+      {/* </main> */}
     </>
   );
 };

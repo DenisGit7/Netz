@@ -1,18 +1,62 @@
 import axios from "axios";
+import { useEffect, useState } from "react";
+
 import classes from "./FileUpload.module.css";
-import { Form, Link, redirect } from "react-router-dom";
+
+import {
+  Form,
+  Link,
+  redirect,
+  useActionData,
+  useNavigate,
+} from "react-router-dom";
 import Modal from "../../components/Modal.js";
 import { handleSubFolder } from "../../helpers/files/handleSubFolder.js";
 import { useSession } from "../../context/SessionContext";
+import toast from "react-hot-toast";
 
 const FileUpload = () => {
   const { isLoggedIn, userInformation } = useSession();
+  const [res, setRes] = useState("");
+  const [loading, setLoading] = useState(false);
+  const response = useActionData();
+  const navigate = useNavigate();
+
+  if (res?.status) {
+    console.log("res");
+
+    setLoading(false);
+    toast.dismiss();
+
+    if (res.status === 200) {
+      toast.success("File uploaded", { duration: 2000 });
+      setRes("");
+      navigate("/dashboard/files");
+    }
+    console.log(res);
+    if (res?.status === 409) {
+      toast.error("Uploading error", { duration: 2000 });
+      setRes("");
+    }
+  }
+  useEffect(() => {
+    if (!response) {
+      setRes(response);
+    }
+  }, [response]);
+  if (loading) {
+    toast.loading("Uploading...", { duration: 3000 });
+
+    setLoading(false);
+  }
+
   return (
     <Modal>
       <Form
         method="post"
         encType="multipart/form-data"
         className={classes.form}
+        onSubmit={() => setLoading(true)}
       >
         <p>
           <label htmlFor="file">
@@ -21,11 +65,6 @@ const FileUpload = () => {
           </label>
         </p>
         <input type="hidden" name="username" value={userInformation.username} />
-        <p>
-          <h4 className={classes.label}>
-            {/* {!file.name ? "Waiting for file" : file.name} */}
-          </h4>
-        </p>
         <p className={classes.actions}>
           <Link to=".." type="button">
             <button>Cancel</button>
@@ -59,11 +98,13 @@ export const action = async ({ request }) => {
       }
     );
     console.log(response);
+    sessionStorage.setItem("customerFolder", fileData.username);
+    sessionStorage.setItem("subFolder", subFolder);
+    return response;
   } catch (error) {
     console.error("Upload error: ", error);
     return error;
   }
-  sessionStorage.setItem("customerFolder", fileData.username);
-  sessionStorage.setItem("subFolder", subFolder);
+
   return redirect("/dashboard/files");
 };

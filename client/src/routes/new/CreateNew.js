@@ -2,11 +2,31 @@ import axios from "axios";
 import { Link, Form, redirect } from "react-router-dom";
 import classes from "./CreateNew.module.css";
 import Modal from "../../components/Modal";
+import {
+  useLoaderData,
+  Outlet,
+  Link,
+  Form,
+  redirect,
+  useNavigate,
+  useActionData,
+} from "react-router-dom";
+import toast from "react-hot-toast";
 
 const CreateNew = () => {
+  const [res, setRes] = useState("");
+  const [loading, setLoading] = useState(false);
+  if (loading) {
+    toast.loading("Waiting...", { duration: 3000 });
+    setLoading(false);
+  }
   return (
     <Modal>
-      <Form method="post" className={classes.form}>
+      <Form
+        method="post"
+        className={classes.form}
+        onSubmit={() => setLoading(true)}
+      >
         <p>
           <label htmlFor="title">New Title</label>
           <input name="title" type="text" id="title" required />

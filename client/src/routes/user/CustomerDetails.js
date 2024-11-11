@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import {
   useLoaderData,
@@ -7,6 +7,7 @@ import {
   Form,
   redirect,
   useNavigate,
+  useActionData,
 } from "react-router-dom";
 import toast from "react-hot-toast";
 
@@ -16,21 +17,53 @@ import { getUser, removeUser } from "../../helpers/usersHelper";
 
 const CustomerDetails = () => {
   const [editing, setEditing] = useState(false);
+  const [res, setRes] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const user = useLoaderData();
   const navigate = useNavigate();
+  const response = useActionData();
+
+  useEffect(() => {
+    setRes(response);
+  }, [response]);
+
+  if (loading) {
+    toast.loading("Waiting...", { duration: 3000 });
+    setLoading(false);
+  }
+  if (res?.status) {
+    setLoading(false);
+    toast.dismiss();
+
+    if (res.status === 201) {
+      toast.success("User updated", { duration: 2000 });
+      setRes("");
+      navigate("/dashboard/customers");
+    }
+    console.log(res);
+    if (res?.status === 409) {
+      toast.error("User already exists", { duration: 2000 });
+      setRes("");
+    }
+  }
 
   const username = user.username;
-
   const id = user._id;
+
   const deleteHandler = async () => {
     try {
-      const result = await removeUser(id);
+      toast.loading("Waiting...", { duration: 3000 });
 
-      if (result.status === 201) {
-        toast.success("User deleted");
+      const result = await removeUser(id);
+      console.log(result);
+      if (result?.status === 200) {
+        toast.dismiss();
+        toast.success("User deleted", { duration: 2000 });
       }
     } catch (error) {
-      toast.error(error);
+      toast.dismiss();
+      toast.error(error, { duration: 2000 });
     }
     navigate("/dashboard/customers");
   };
@@ -59,7 +92,11 @@ const CustomerDetails = () => {
       {/* Edit user */}
       {editing && (
         <Modal>
-          <Form method="post" className={classes.form}>
+          <Form
+            method="post"
+            className={classes.form}
+            onSubmit={() => setLoading(true)}
+          >
             <p>
               <label htmlFor="username">Username</label>
               <input
@@ -90,10 +127,13 @@ const CustomerDetails = () => {
       {!editing && (
         <Modal>
           <main className={classes.details}>
-            <h3 className={classes.user}>Username: {user.username}</h3>
+            <h3 className={classes.user}>{user.username}</h3>
             <p className={classes.role}>Role: {user.role}</p>
           </main>
           <div className={classes.actions}>
+            <Link to=".." type="button">
+              <button>Cancel</button>
+            </Link>
             <Link to="/dashboard/customers" className={classes.btn}>
               <button onClick={deleteHandler}>Delete User</button>
             </Link>
@@ -121,23 +161,21 @@ export const loader = async ({ params }) => {
 
 export const action = async ({ request, params }) => {
   const formData = await request.formData();
-
-  const username = formData.get("username");
-  console.log(1, username);
-
   const id = params.id;
-  console.log(2, id);
-
   const userData = Object.fromEntries(formData);
 
-  console.log(3, userData);
   try {
-    await axios.patch(`http://localhost:3500/customers/${id}`, {
-      username: userData.username,
-    });
+    const response = await axios.patch(
+      `http://localhost:3500/customers/${id}`,
+      {
+        username: userData.username,
+      }
+    );
+    return response;
   } catch (error) {
-    console.log(Error);
+    console.log(error.response);
+    return error.response;
   }
 
-  return redirect("/dashboard/customers");
+  // return redirect("/dashboard/customers");
 };

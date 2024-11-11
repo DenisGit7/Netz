@@ -1,29 +1,41 @@
-.post {
-  margin: 1rem 0;
+.list {
+  margin-top: 5px;
+  width: 100%;
   padding: 1rem;
-  background-color: #9c7eee;
+  background-color: #f6e6d3;
   border-radius: 8px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-out;
+
   animation: animate-in 1s ease-out forwards;
   a {
     text-decoration: none;
   }
+  &:hover {
+    background-color: #1b130e;
+    transform: translate(1px, -1px);
+    .title {
+      color: #f6e6d3;
+    }
+  }
 }
 
 .title {
+  transition: all 0.3s ease-out;
+
   font-size: 0.8rem;
   font-weight: bold;
-  color: #543280;
+  color: #1b130e;
   margin: 0;
   text-transform: uppercase;
 }
-
+/* 
 .content {
   white-space: pre-wrap;
   font-size: 1.25rem;
   margin: 0.25rem 0 0 0;
   color: #593884;
-}
+} */
 
 @keyframes animate-in {
   from {

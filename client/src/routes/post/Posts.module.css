@@ -1,11 +1,18 @@
 .postsContainer {
-  position: absolute;
-  top: 7rem;
+  position: relative;
+  top: 1rem;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  /* justify-content: flex-start; */
   flex-direction: column;
   width: 50vw;
+  /* border: 1px solid green; */
+  /* margin: 1rem; */
+  padding: 1rem;
+
+  @media (max-width: 768px) {
+    width: 80vw;
+  }
 }
 
 .create {

@@ -1,52 +1,33 @@
-import { useState, useEffect } from "react";
-import { FaArrowLeft } from "react-icons/fa6";
-import { getList } from "../../helpers/files/getList.js";
-import classes from "./FileList.module.css";
-import { Link, useLoaderData } from "react-router-dom";
 import { FaTrash, FaFolder, FaFileInvoice } from "react-icons/fa6";
 import { handleDownload } from "../../helpers/files/handleDownload.js";
 import { handleChangeFolder } from "../../helpers/files/handleChangeFolder.js";
 import { handleRemove } from "../../helpers/files/handleRemove.js";
 import { useNavigate } from "react-router-dom";
 import { useSession } from "../../context/SessionContext";
+import classes from "./FileList.module.css";
+import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
 
 const FileList = ({ folderPathHandler, folderPath, rawFolders, rawFiles }) => {
   const navigate = useNavigate();
   const { isLoggedIn, userInformation } = useSession();
-
-  // const rawData = useLoaderData();
-  // const [data, setData] = useState(rawData.files[0]);
+  const [files, setFiles] = useState("");
+  const [folders, setFolders] = useState("");
 
   const role = userInformation.role;
-
-  // useEffect(() => {
-  //   setData(rawData.files[0]);
-  // }, [rawData]);
 
   const timeout = 200;
 
   const handleRemoveFunction = async (file) => {
+    toast.loading("Waiting...", { duration: 3000 });
+
     await handleRemove(file);
     setTimeout(() => {
+      toast.dismiss();
+      toast.success("File deleted successfully", { duration: 3000 });
       navigate("/dashboard/files");
     }, timeout);
   };
-
-  // const handleBack = (e) => {
-  //   e.preventDefault();
-  //   handleChangeFolder(e, folderPath.customerFolder, folderPathHandler);
-  //   setTimeout(() => {
-  //     navigate("/dashboard/files");
-  //   }, timeout);
-  // };
-
-  // const handleBackAdmin = (e) => {
-  //   e.preventDefault();
-  //   handleChangeFolder(e, "", folderPathHandler);
-  //   setTimeout(() => {
-  //     navigate("/dashboard/files");
-  //   }, timeout);
-  // };
 
   const handleChangeFolderRefresh = (e, folder) => {
     e.preventDefault();
@@ -57,18 +38,22 @@ const FileList = ({ folderPathHandler, folderPath, rawFolders, rawFiles }) => {
   };
 
   // const foldersMap = data.folders.map((folder, index) => {
+  useEffect(() => {
+    setFiles(filesMap);
+    setFolders(foldersMap);
+  }, [rawFiles, rawFolders]);
+
   const foldersMap = rawFolders.map((folder, index) => {
     const folderName = folder.split("/").pop();
     return (
-      <div key={index} className="folder-container">
-        <FaFolder
-          className="icon-file"
-          onClick={(e) =>
-            handleChangeFolderRefresh(e, folder, folderPathHandler)
-          }
-        />
+      <div
+        key={index}
+        className={classes.folderContainer}
+        onClick={(e) => handleChangeFolderRefresh(e, folder, folderPathHandler)}
+      >
+        <FaFolder className={classes.iconFolder} />
 
-        <h4 className="file-name">{folderName}</h4>
+        <h4 className={classes.fileName}>{folderName}</h4>
       </div>
     );
   });
@@ -78,52 +63,31 @@ const FileList = ({ folderPathHandler, folderPath, rawFolders, rawFiles }) => {
     const fileName = file.split("/").pop();
 
     return (
-      <div key={index} className="file-container">
-        <FaFileInvoice
-          className="icon-file"
-          onClick={(e) => handleDownload(file)}
-        />
-        <h4 className="file-name">{fileName}</h4>
-
-        <FaTrash
-          className="icon-remove"
-          onClick={() => handleRemoveFunction(file)}
-        />
+      <div key={index} className={classes.fileContainer}>
+        <h4 className={classes.fileName}>{fileName}</h4>
+        <div className={classes.icons}>
+          {" "}
+          <FaFileInvoice
+            className={classes.iconFile}
+            onClick={(e) => handleDownload(file)}
+          />
+          <FaTrash
+            className={classes.iconRemove}
+            onClick={() => handleRemoveFunction(file)}
+          />
+        </div>
       </div>
     );
   });
   return (
     <>
-      <div>
-        {foldersMap.length < 1 && filesMap.length < 1 && (
+      <div className={classes.mainContainer}>
+        {folders.length < 1 && files.length < 1 && (
           <p>No folders or files found</p>
         )}
-        {foldersMap}
-        {filesMap}
+        {folders}
+        {files}
       </div>
-      {
-        // <div className={classes.arrowContainer}>
-        //   <>
-        //     {folderPath.subFolder ? (
-        //       <>
-        //         {" "}
-        //         <FaArrowLeft onClick={(e) => handleBack(e)} />
-        //         Back to {folderPath.customerFolder}
-        //       </>
-        //     ) : (
-        //       ""
-        //     )}
-        //   </>
-        //   {role === "Admin" && folderPath.customerFolder != "" ? (
-        //     <>
-        //       <FaArrowLeft onClick={(e) => handleBackAdmin(e)} />
-        //       Back Admin
-        //     </>
-        //   ) : (
-        //     ""
-        //   )}
-        // </div>
-      }
     </>
   );
 };

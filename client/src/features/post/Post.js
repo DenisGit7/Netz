@@ -14,9 +14,11 @@ const Post = ({ id, title, content }) => {
             : title}
         </p>
         <p className={classes.content}>
-          {content.length > maxLengthContent
-            ? content.slice(0, maxLengthContent) + "..."
-            : content}
+          <p>
+            {content.length > maxLengthContent
+              ? content.slice(0, maxLengthContent) + "..."
+              : content}
+          </p>
         </p>
       </Link>
     </li>

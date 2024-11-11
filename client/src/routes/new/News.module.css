@@ -1,12 +1,19 @@
 .newsContainer {
-  position: absolute;
-  top: 7rem;
-  left: 50%;
+  position: relative;
+  top: 1rem;
+  /* left: 50%; */
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
   flex-direction: column;
   width: 50vw;
+  /* border: 1px solid green; */
+  /* margin: 1rem; */
+  padding: 1rem;
+
+  @media (max-width: 768px) {
+    width: 80vw;
+  }
 }
 
 .create {

@@ -16,12 +16,12 @@ const CustomersList = () => {
     if (!searchValue) {
       setRawUsers(customers);
     }
-  }, [searchValue]);
+  }, [searchValue, rawUsers, customers]);
 
   return (
-    <>
+    <div className={classes.mainContainer}>
       <input
-        className={classes.label}
+        className={classes.search}
         type="search"
         id="search"
         placeholder="Username"
@@ -31,23 +31,24 @@ const CustomersList = () => {
           setSearchValue(() => e.target.value);
         }}
       />
-      {rawUsers.length > 0 && (
-        <ul className={classes.customers}>
-          <h1>Customers</h1>
-          {rawUsers.map((customer) => (
-            <Customer
-              key={customer._id}
-              id={customer._id}
-              username={customer.username}
-            />
-          ))}
-        </ul>
-      )}
+      <div className={classes.listContainer}>
+        {rawUsers.length > 0 && (
+          <div className={classes.customers}>
+            {rawUsers.map((customer) => (
+              <Customer
+                key={customer._id}
+                id={customer._id}
+                username={customer.username}
+              />
+            ))}
+          </div>
+        )}
 
-      {rawUsers.length === 0 && (
-        <p className={classes.text}>There are no customers yet</p>
-      )}
-    </>
+        {rawUsers.length === 0 && (
+          <p className={classes.text}>There are no customers yet</p>
+        )}
+      </div>
+    </div>
   );
 };
 
