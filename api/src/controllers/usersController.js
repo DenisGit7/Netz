@@ -20,16 +20,24 @@ export const getUser = async (req, res) => {
 
 export const editUser = async (req, res) => {
   const id = req?.params?.id;
-  const newUsername = req?.body?.username;
-  if (!newUsername)
+  const toUpdate = req?.body;
+  if (!toUpdate.username)
     return res.status(400).json({ message: "All fields are required." });
 
-  const duplicate = await User.findOne({ username: newUsername }).exec();
-  if (duplicate) return res.status(409).json({ message: "User already exist" });
+  const duplicate = await User.findOne({ username: toUpdate.username }).exec();
+  if (duplicate && id != duplicate.id)
+    return res.status(409).json({ message: "User already exist" });
 
   try {
     const result = await User.findByIdAndUpdate(id, {
-      username: newUsername,
+      username: toUpdate.username,
+      buisnessId: toUpdate.buisnessId,
+      firstName: toUpdate.firstName,
+      lastName: toUpdate.lastName,
+      email: toUpdate.email,
+      sector: toUpdate.sector,
+      phone: toUpdate.phone,
+      description: toUpdate.description,
     });
 
     res.status(201).json({ message: "User updated" });

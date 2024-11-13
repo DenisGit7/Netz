@@ -2,7 +2,18 @@ import { User } from "../../../src/models/Users.js";
 import bcrypt from "bcrypt";
 
 export const registerUser = async (req, res) => {
-  const { username, password, role } = req.body;
+  const {
+    username,
+    password,
+    role,
+    firstName,
+    lastName,
+    buisnessId,
+    sector,
+    email,
+    phone,
+    description,
+  } = req.body;
   if (!username || !password || !role)
     return res.status(400).json({ message: "All fields are required." });
   const duplicate = await User.findOne({ username: username }).exec();
@@ -14,6 +25,13 @@ export const registerUser = async (req, res) => {
       username: username,
       password: hashedPassword,
       role: role,
+      firstName: firstName ? firstName : "",
+      lastName: lastName ? lastName : "",
+      buisnessId: buisnessId ? buisnessId : "",
+      sector: sector ? sector : "",
+      email: email ? email : "",
+      phone: phone ? phone : "",
+      description: description ? description : "",
     });
     console.log(result);
     res.status(201).json({ message: `User ${username} created` });

@@ -8,6 +8,13 @@ const userSchema = new Schema({
   },
   password: { type: String, required: true },
   role: { type: String, default: "Customer", required: true },
+  firstName: { type: String },
+  lastName: { type: String },
+  buisnessId: { type: String },
+  sector: { type: String },
+  email: { type: String },
+  phone: { type: String },
+  description: { type: String },
   refreshToken: String,
 });
 
