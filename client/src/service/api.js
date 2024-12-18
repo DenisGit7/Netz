@@ -3,5 +3,5 @@ import axios from "axios";
 // export default axios.create({
 //   baseUrl: `http://localhost:3500/api`
 // })
-
-export const apiUrl = "http://localhost:3500";
+const apiUrl = "http://localhost:3500";
+export default apiUrl;
