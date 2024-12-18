@@ -13,7 +13,7 @@ import classes from "./PostDetails.module.css";
 import { getPost } from "../../helpers/posts/getPosts";
 import { deletePost } from "../../helpers/posts/deletePost";
 import { useSession } from "../../context/SessionContext";
-
+import { apiUrl } from "../../service/api";
 const PostDetails = () => {
   const { isLoggedIn, userInformation } = useSession();
   const [editing, setEditing] = useState(false);
@@ -152,7 +152,7 @@ export const action = async ({ request, params }) => {
   const postData = Object.fromEntries(formData);
 
   try {
-    await axios.patch(`http://localhost:3500/posts/edit/${id}`, {
+    await axios.patch(`${apiUrl}/posts/edit/${id}`, {
       newTitle: postData.title,
       newContent: postData.content,
     });

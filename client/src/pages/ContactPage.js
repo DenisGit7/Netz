@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-
+import { apiUrl } from "../service/api";
 // import { useSession } from "../../context/SessionContext";
 import classes from "../pages/Contact.module.css";
 import { useEffect, useState } from "react";
@@ -111,7 +111,7 @@ export default ContactPage;
 
 export const loader = async ({ params }) => {
   try {
-    const response = await axios.get(`http://localhost:3500/contact/get`);
+    const response = await axios.get(`${apiUrl}/contact/get`);
     const contactData = response.data.contact;
     return contactData;
   } catch (error) {
@@ -127,7 +127,7 @@ export const action = async ({ request, params }) => {
 
   const newData = Object.fromEntries(formData);
   try {
-    await axios.patch(`http://localhost:3500/contact/edit/`, {
+    await axios.patch(`${apiUrl}/contact/edit/`, {
       cellphone: newData.cellphone,
       phone: newData.phone,
       address: newData.address,

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const getNews = async () => {
-  const response = await axios.get("http://localhost:3500/news/get");
+  const response = await axios.get(`${apiUrl}/news/get`);
   try {
     const result = response.data.news;
 
@@ -14,10 +14,7 @@ export const getNews = async () => {
 
 export const getNew = async (id) => {
   try {
-    const response = await axios.get(
-      `http://localhost:3500/news/get/${id}`,
-      {}
-    );
+    const response = await axios.get(`${apiUrl}/news/get/${id}`, {});
     const result = response.data.news;
 
     return result;

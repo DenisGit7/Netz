@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-
+import { apiUrl } from "../service/api";
 // import { useSession } from "../../context/SessionContext";
 import classes from "../pages/About.module.css";
 import { useEffect, useState } from "react";
@@ -90,7 +90,7 @@ export default AboutPage;
 
 export const loader = async ({ params }) => {
   try {
-    const response = await axios.get(`http://localhost:3500/about/get`);
+    const response = await axios.get(`${apiUrl}/about/get`);
     const aboutData = response.data.about;
     return aboutData;
   } catch (error) {
@@ -106,7 +106,7 @@ export const action = async ({ request, params }) => {
 
   const newData = Object.fromEntries(formData);
   try {
-    await axios.patch(`http://localhost:3500/about/edit/`, {
+    await axios.patch(`${apiUrl}/about/edit/`, {
       content1: newData.content1,
       content2: newData.content2,
     });

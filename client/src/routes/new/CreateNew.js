@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import { apiUrl } from "../../service/api";
 // import { Link, Form, redirect } from "react-router-dom";
 import classes from "./CreateNew.module.css";
 import Modal from "../../components/Modal";
@@ -70,7 +70,7 @@ export const action = async ({ request }) => {
   const newData = Object.fromEntries(formData);
 
   try {
-    await axios.post("http://localhost:3500/news/create", {
+    await axios.post(`${apiUrl}/news/create`, {
       title: newData.title,
       content: newData.content,
     });

@@ -2,7 +2,7 @@ import axios from "axios";
 import { Link, Form, redirect } from "react-router-dom";
 import classes from "./CreatePost.module.css";
 import Modal from "../../components/Modal";
-
+import { apiUrl } from "../../service/api";
 const CreatePost = () => {
   return (
     <Modal>
@@ -51,7 +51,7 @@ export const action = async ({ request }) => {
     //This is necessary for loader to update display after posting. obselete file path:
     //C:\Archive\Programing\accounting\client\src\helpers\posts\createPost.js
 
-    await axios.post("http://localhost:3500/posts/create", {
+    await axios.post(`${apiUrl}/posts/create`, {
       title: postData.title,
       content: postData.content,
     });

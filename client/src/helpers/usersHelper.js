@@ -1,8 +1,8 @@
 import axios from "axios";
-
+import { apiUrl } from "../service/api";
 export const getAllUsers = async () => {
   try {
-    const response = await axios.get("http://localhost:3500/customers");
+    const response = await axios.get(`${apiUrl}/customers`);
     return response.data;
   } catch (error) {
     console.error(" error: ", error);
@@ -12,10 +12,7 @@ export const getAllUsers = async () => {
 
 export const getUser = async (id) => {
   try {
-    const response = await axios.get(
-      `http://localhost:3500/customers/${id}`,
-      {}
-    );
+    const response = await axios.get(`${apiUrl}/customers/${id}`, {});
     return response.data;
   } catch (error) {
     console.error(" error: ", error);
@@ -25,9 +22,7 @@ export const getUser = async (id) => {
 
 export const removeUser = async (id) => {
   try {
-    const response = await axios.delete(
-      `http://localhost:3500/customers/${id}`
-    );
+    const response = await axios.delete(`${apiUrl}/customers/${id}`);
     return response;
   } catch (error) {
     console.error(" error: ", error);

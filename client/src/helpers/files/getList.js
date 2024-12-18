@@ -1,6 +1,6 @@
 import axios from "axios";
 import { FaTrash, FaFolder, FaFileInvoice } from "react-icons/fa6";
-
+import { apiUrl } from "../../service/api.js";
 import { handleRemove } from "./handleRemove.js";
 import { handleChangeFolder } from "./handleChangeFolder.js";
 import { handleDownload } from "./handleDownload.js";
@@ -17,10 +17,7 @@ export const getList = async () =>
       subFolder: "Month",
     };
     try {
-      const response = await axios.post(
-        "http://localhost:3500/files/getlist",
-        data
-      );
+      const response = await axios.post(`${apiUrl}/files/getlist`, data);
       // const foldersMap = response.data.result.folders.map((folder, index) => {
       //   const folderName = folder.split("/").pop();
       //   return (

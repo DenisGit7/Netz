@@ -14,7 +14,7 @@ import toast from "react-hot-toast";
 import Modal from "../../components/Modal";
 import classes from "./CustomerDetails.module.css";
 import { getUser, removeUser } from "../../helpers/usersHelper";
-
+import { apiUrl } from "../../service/api";
 const CustomerDetails = () => {
   const [editing, setEditing] = useState(false);
   const [res, setRes] = useState("");
@@ -256,19 +256,16 @@ export const action = async ({ request, params }) => {
   const id = params.id;
   const userData = Object.fromEntries(formData);
   try {
-    const response = await axios.patch(
-      `http://localhost:3500/customers/${id}`,
-      {
-        password: userData.password,
-        buisnessId: userData.buisnessId,
-        firstName: userData.firstName,
-        lastName: userData.lastName,
-        email: userData.email,
-        sector: userData.sector,
-        phone: userData.phone,
-        description: userData.description,
-      }
-    );
+    const response = await axios.patch(`${apiUrl}/customers/${id}`, {
+      password: userData.password,
+      buisnessId: userData.buisnessId,
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      email: userData.email,
+      sector: userData.sector,
+      phone: userData.phone,
+      description: userData.description,
+    });
     return response;
   } catch (error) {
     console.log(error.response);

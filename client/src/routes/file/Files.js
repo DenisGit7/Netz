@@ -6,7 +6,7 @@ import { FaArrowLeft } from "react-icons/fa6";
 import { handleChangeFolder } from "../../helpers/files/handleChangeFolder.js";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-
+import apiUrl from "../../service/api";
 import { Link, Outlet, useLoaderData } from "react-router-dom";
 import { useSession } from "../../context/SessionContext";
 
@@ -175,10 +175,7 @@ export const loader = async () => {
   };
 
   try {
-    const response = await axios.post(
-      "http://localhost:3500/files/getlist",
-      data
-    );
+    const response = await axios.post(`${apiUrl}/files/getlist`, data);
     return response.data.result;
   } catch (error) {
     console.error("Error uploading file:", error);

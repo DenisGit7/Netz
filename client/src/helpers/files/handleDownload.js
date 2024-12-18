@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { apiUrl } from "../../service/api";
 export const handleDownload = async (file) => {
   const fileName = file.split("/").pop();
 
@@ -7,11 +7,9 @@ export const handleDownload = async (file) => {
     filePath: file,
   };
   try {
-    const response = await axios.post(
-      "http://localhost:3500/files/download",
-      data,
-      { responseType: "blob" }
-    );
+    const response = await axios.post(`${apiUrl}/files/download`, data, {
+      responseType: "blob",
+    });
 
     const blob = new Blob([response.data], {
       type: response.headers["content-type"],

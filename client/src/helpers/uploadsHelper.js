@@ -1,8 +1,8 @@
 import axios from "axios";
-
+import { apiUrl } from "../service/api";
 export const getUploads = async () => {
   try {
-    const response = await axios.get("http://localhost:3500/uploads/get");
+    const response = await axios.get(`${apiUrl}/uploads/get`);
 
     return response.data.uploads;
   } catch (error) {
@@ -13,9 +13,7 @@ export const getUploads = async () => {
 
 export const deleteUpload = async (id) => {
   try {
-    const response = await axios.delete(
-      `http://localhost:3500/uploads/delete/${id}`
-    );
+    const response = await axios.delete(`${apiUrl}/uploads/delete/${id}`);
     return response;
   } catch (error) {
     console.error(" error: ", error);

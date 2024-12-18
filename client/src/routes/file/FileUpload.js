@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 import classes from "./FileUpload.module.css";
-
+import { apiUrl } from "../../service/api.js";
 import {
   Form,
   Link,
@@ -85,15 +85,11 @@ export const action = async ({ request }) => {
 
   data.append("subFolder", subFolder);
   try {
-    const response = await axios.post(
-      "http://localhost:3500/files/upload",
-      data,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
+    const response = await axios.post(`${apiUrl}/files/upload`, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     sessionStorage.setItem("customerFolder", fileData.username);
     sessionStorage.setItem("subFolder", subFolder);
     return response;

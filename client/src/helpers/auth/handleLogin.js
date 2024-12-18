@@ -1,10 +1,10 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-
+import { apiUrl } from "../../service/api";
 export const handleLogin = async (username, password) => {
   try {
     const response = await axios.post(
-      "http://localhost:3500/users/login",
+      `${apiUrl}/users/login`,
       {
         username: username,
         password: password,

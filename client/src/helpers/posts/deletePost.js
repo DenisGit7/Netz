@@ -1,12 +1,10 @@
-import axios from 'axios'
-
+import axios from "axios";
+import { apiUrl } from "../../service/api";
 export const deletePost = async (id) => {
   try {
-    const response = await axios.delete(
-      `http://localhost:3500/posts/delete/${id}`
-    )
-    return response
+    const response = await axios.delete(`${apiUrl}/posts/delete/${id}`);
+    return response;
   } catch (error) {
-    return error
+    return error;
   }
-}
+};

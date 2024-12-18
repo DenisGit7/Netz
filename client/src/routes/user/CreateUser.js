@@ -12,6 +12,7 @@ import {
 import classes from "./CreateUser.module.css";
 import Modal from "../../components/Modal";
 import toast from "react-hot-toast";
+import { apiUrl } from "../../service/api";
 const CreateUser = () => {
   const [res, setRes] = useState("");
   const [loading, setLoading] = useState(false);
@@ -152,7 +153,7 @@ export const action = async ({ request }) => {
 
   const userData = Object.fromEntries(formData);
   try {
-    const response = await axios.post("http://localhost:3500/users/register", {
+    const response = await axios.post(`${apiUrl}/users/register`, {
       username: userData.username,
       password: userData.password,
       role: userData.role,

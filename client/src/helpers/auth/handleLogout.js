@@ -3,7 +3,7 @@ import axios from "axios";
 export const handleLogout = async () => {
   try {
     const response = await axios.post(
-      "http://localhost:3500/users/logout",
+      `${apiUrl}/users/logout`,
       {},
       {
         withCredentials: true,
