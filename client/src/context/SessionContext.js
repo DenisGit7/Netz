@@ -1,3 +1,5 @@
+// import "dotenv/config";
+
 import { createContext, useContext, useEffect, useState } from "react";
 // import { FolderProvider } from "./FolderContext";
 const SessionContext = createContext();
@@ -9,7 +11,7 @@ export const SessionProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInformation, setUserInformation] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  console.log(process.env.REACT_APP_APIURI);
   useEffect(() => {
     const storedUser = JSON.parse(sessionStorage.getItem("userData"));
     if (storedUser) {
