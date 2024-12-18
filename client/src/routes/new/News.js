@@ -4,15 +4,21 @@ import classes from "./News.module.css";
 import { getNews } from "../../helpers/news/getNews";
 import { FaEnvelope } from "react-icons/fa6";
 import { useSession } from "../../context/SessionContext";
+import { useState } from "react";
 
 const News = () => {
   const { isLoggedIn, userInformation } = useSession();
-
+  const [userClass, setUserClass] = useState(() => {
+    if (userInformation?.role.includes("Admin")) {
+      return `${classes.newsContainer} ${classes.newsContainerAdmin}`;
+    } else {
+      return `${classes.newsContainer}`;
+    }
+  });
   return (
     <>
       <Outlet />
-      <div className={classes.newsContainer}>
-        {/* <main className={classes.newsContainer}> */}
+      <div className={userClass}>
         {userInformation?.role?.includes("Admin") && (
           <Link to="/dashboard/create-new" className={classes.create}>
             <FaEnvelope />
@@ -21,7 +27,6 @@ const News = () => {
         )}
         <NewsList />
       </div>
-      {/* </main> */}
     </>
   );
 };

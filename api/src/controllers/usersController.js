@@ -1,4 +1,5 @@
 import { User } from "../../src/models/Users.js";
+import bcrypt from "bcrypt";
 
 export const getAllUsers = async (req, res) => {
   const users = await User.find();
@@ -21,16 +22,15 @@ export const getUser = async (req, res) => {
 export const editUser = async (req, res) => {
   const id = req?.params?.id;
   const toUpdate = req?.body;
-  if (!toUpdate.username)
-    return res.status(400).json({ message: "All fields are required." });
-
-  const duplicate = await User.findOne({ username: toUpdate.username }).exec();
-  if (duplicate && id != duplicate.id)
-    return res.status(409).json({ message: "User already exist" });
-
+  const user = await User.findById({ _id: id }).exec();
   try {
-    const result = await User.findByIdAndUpdate(id, {
-      username: toUpdate.username,
+    const hashedPassword =
+      toUpdate.password != ""
+        ? await bcrypt.hash(toUpdate.password, 10)
+        : user.password;
+
+    await User.findByIdAndUpdate(id, {
+      password: hashedPassword,
       buisnessId: toUpdate.buisnessId,
       firstName: toUpdate.firstName,
       lastName: toUpdate.lastName,

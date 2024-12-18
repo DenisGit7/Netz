@@ -26,6 +26,8 @@ import editContact from "./src/routes/editContact.js";
 import getContact from "./src/routes/getContact.js";
 import editAbout from "./src/routes/editAbout.js";
 import getAbout from "./src/routes/getAbout.js";
+import getUploads from "./src/routes/uploads/getUploads.js";
+import deleteUpload from "./src/routes/uploads/deleteUpload.js";
 
 //TODO:NEW
 import authRoutes from "./src/routes/auth/authRoutes.js";
@@ -87,6 +89,8 @@ app.use("/contact/edit", editContact);
 app.use("/contact/get", getContact);
 app.use("/about/edit", editAbout);
 app.use("/about/get", getAbout);
+app.use("/uploads/get", getUploads);
+app.use("/uploads/delete", deleteUpload);
 
 async function start() {
   console.log("connecting...");

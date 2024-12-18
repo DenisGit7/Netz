@@ -7,13 +7,9 @@ router.post("/", (req, res) => {
     if (req.body.filePath == null) {
       res.json("Data error");
     } else {
-      console.log(req.body.filePath);
       async function downloadFile() {
         try {
           const downloadURL = await downloadController(req.body.filePath);
-          console.log("---------------------");
-          console.log(req.body.filePath);
-          console.log(downloadURL);
           res.json({
             message: "Files downloaded successfully",
             url: downloadURL,

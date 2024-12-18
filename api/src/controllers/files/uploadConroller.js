@@ -1,15 +1,8 @@
 import store from "../../firebase.config.js";
 import path from "path";
 import { fileDestination } from "../../../src/helpers/fileDestenation.js";
-import {
-  deleteObject,
-  getBytes,
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "firebase/storage";
-
+import { getStorage, ref, uploadBytesResumable } from "firebase/storage";
+import { createUploadController } from "../uploads/createUploadController.js";
 export const uploadController = (customerFolder, subFolder, file) => {
   const fullPath = fileDestination(
     customerFolder,
@@ -20,6 +13,7 @@ export const uploadController = (customerFolder, subFolder, file) => {
   const storage = getStorage(store);
   const storageRef = ref(storage, fullPath);
   const uploadTask = uploadBytesResumable(storageRef, file.buffer);
+  createUploadController(customerFolder, fullPath);
 
   uploadTask.on(
     "state_changed",
@@ -28,6 +22,7 @@ export const uploadController = (customerFolder, subFolder, file) => {
       console.log(snapshot.bytesTransferred);
       console.log(snapshot.totalBytes);
       console.log("Upload is " + progress + "% done");
+
       switch (snapshot.state) {
         case "paused":
           console.log("Upload is paused");

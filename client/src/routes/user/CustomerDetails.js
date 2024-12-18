@@ -23,7 +23,6 @@ const CustomerDetails = () => {
   const user = useLoaderData();
   const navigate = useNavigate();
   const response = useActionData();
-
   useEffect(() => {
     setRes(response);
   }, [response]);
@@ -41,14 +40,12 @@ const CustomerDetails = () => {
       setRes("");
       navigate("/dashboard/customers");
     }
-    console.log(res);
     if (res?.status === 409) {
       toast.error("User already exists", { duration: 2000 });
       setRes("");
     }
   }
 
-  const username = user.username;
   const id = user._id;
 
   const deleteHandler = async () => {
@@ -56,7 +53,6 @@ const CustomerDetails = () => {
       toast.loading("Waiting...", { duration: 3000 });
 
       const result = await removeUser(id);
-      console.log(result);
       if (result?.status === 200) {
         toast.dismiss();
         toast.success("User deleted", { duration: 2000 });
@@ -98,13 +94,75 @@ const CustomerDetails = () => {
             onSubmit={() => setLoading(true)}
           >
             <p>
-              <label htmlFor="username">Username</label>
+              <label htmlFor="password">Password</label>
               <input
-                defaultValue={username}
-                name="username"
+                placeholder="Enter new password"
+                name="password"
                 type="text"
-                id="username"
-                required
+                id="password"
+              />
+            </p>
+            <p>
+              <label htmlFor="firstName">First name</label>
+              <input
+                defaultValue={user.firstName}
+                name="firstName"
+                type="text"
+                id="firstName"
+              />
+            </p>
+            <p>
+              <label htmlFor="lastName">Last name</label>
+              <input
+                defaultValue={user.lastName}
+                name="lastName"
+                type="text"
+                id="lastName"
+              />
+            </p>
+            <p>
+              <label htmlFor="buisnessId">Buisness ID</label>
+              <input
+                defaultValue={user.buisnessId}
+                name="buisnessId"
+                type="text"
+                id="buisnessId"
+              />
+            </p>
+            <p>
+              <label htmlFor="sector">Buisness sector</label>
+              <input
+                defaultValue={user.sector}
+                name="sector"
+                type="text"
+                id="sector"
+              />
+            </p>
+            <p>
+              <label htmlFor="email">Email</label>
+              <input
+                defaultValue={user.email}
+                name="email"
+                type="text"
+                id="email"
+              />
+            </p>
+            <p>
+              <label htmlFor="phone">Phone</label>
+              <input
+                defaultValue={user.phone}
+                name="phone"
+                type="text"
+                id="phone"
+              />
+            </p>
+            <p>
+              <label htmlFor="description">Description</label>
+              <input
+                defaultValue={user.description}
+                name="description"
+                type="text"
+                id="description"
               />
             </p>
 
@@ -127,8 +185,43 @@ const CustomerDetails = () => {
       {!editing && (
         <Modal>
           <main className={classes.details}>
-            <h3 className={classes.user}>{user.username}</h3>
-            <p className={classes.role}>Role: {user.role}</p>
+            <h2 className={classes.user}>{user.username}</h2>
+            <div>
+              <h3>Role:</h3>
+              <h3>{user.role}</h3>
+            </div>
+            <div>
+              <h3>First name:</h3>
+              <h3>{user.firstName}</h3>
+            </div>
+            <div>
+              <h3>Last name:</h3>
+              <h3>{user.lastName}</h3>
+            </div>
+            <div>
+              <h3>Buisness ID:</h3>
+              <h3>{user.buisnessId}</h3>
+            </div>
+            <div>
+              <h3>Buisness sector:</h3>
+              <h3>{user.sector}</h3>
+            </div>
+            <div>
+              <h3>Buisness sector:</h3>
+              <h3>{user.sector}</h3>
+            </div>
+            <div>
+              <h3>Email:</h3>
+              <h3>{user.email}</h3>
+            </div>
+            <div>
+              <h3>Phone:</h3>
+              <h3>{user.phone}</h3>
+            </div>
+            <div>
+              <h3>Description:</h3>
+              <h3>{user.description}</h3>
+            </div>
           </main>
           <div className={classes.actions}>
             <Link to=".." type="button">
@@ -155,7 +248,6 @@ export default CustomerDetails;
 
 export const loader = async ({ params }) => {
   const user = await getUser(params.id);
-  // console.log(user)
   return user;
 };
 
@@ -163,12 +255,18 @@ export const action = async ({ request, params }) => {
   const formData = await request.formData();
   const id = params.id;
   const userData = Object.fromEntries(formData);
-
   try {
     const response = await axios.patch(
       `http://localhost:3500/customers/${id}`,
       {
-        username: userData.username,
+        password: userData.password,
+        buisnessId: userData.buisnessId,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        email: userData.email,
+        sector: userData.sector,
+        phone: userData.phone,
+        description: userData.description,
       }
     );
     return response;

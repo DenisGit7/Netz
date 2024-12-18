@@ -1,0 +1,63 @@
+.postsContainer {
+  position: relative;
+  top: 1rem;
+  display: flex;
+  align-items: center;
+  /* justify-content: flex-start; */
+  flex-direction: column;
+  width: 30%;
+  /* border: 1px solid green; */
+  /* margin: 1rem; */
+  padding: 1rem;
+  @media (max-width: 1501px) {
+    width: 20%;
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+.contentTitle {
+  color: #1b130e;
+  opacity: 0.2;
+  text-align: center;
+}
+
+.create {
+  display: flex;
+  align-items: center;
+  position: relative;
+  /* pink color */
+  height: 40px;
+
+  color: #685642;
+  gap: 10px;
+  transition: all 0.3s ease-out;
+  padding: 4px 7px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:active {
+    transform: scale(0.99);
+  }
+  &:hover {
+    /* blue background activated when element is hovered */
+    background-color: #303030;
+    color: #f6e6d3;
+    transform: translate(1px, -1px);
+  }
+
+  svg {
+    width: 19px;
+    height: 19px;
+    transition: all 0.3s ease-out;
+  }
+
+  .label {
+    font-weight: 600;
+    &:hover {
+      color: #f6e6d3;
+    }
+  }
+}

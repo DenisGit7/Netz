@@ -5,14 +5,32 @@
   align-items: center;
   /* justify-content: flex-start; */
   flex-direction: column;
-  width: 50vw;
+  width: 50%;
   /* border: 1px solid green; */
   /* margin: 1rem; */
   padding: 1rem;
-
-  @media (max-width: 768px) {
-    width: 80vw;
+  @media (max-width: 1501px) {
+    width: 50%;
   }
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
+.postsContainerAdmin {
+  width: 35%;
+
+  @media (max-width: 1501px) {
+    width: 40%;
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+.contentTitle {
+  color: #1b130e;
+  opacity: 0.2;
+  text-align: center;
 }
 
 .create {

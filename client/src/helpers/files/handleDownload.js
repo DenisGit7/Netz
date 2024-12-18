@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const handleDownload = async (file) => {
   const fileName = file.split("/").pop();
+
   const data = {
     filePath: file,
   };

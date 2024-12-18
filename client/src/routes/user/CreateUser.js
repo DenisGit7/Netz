@@ -65,6 +65,67 @@ const CreateUser = () => {
             placeholder="Password"
           />
         </p>
+        <p>
+          {" "}
+          <input
+            type="text"
+            name="firstName"
+            className={classes.input}
+            placeholder="First Name"
+          />
+        </p>
+        <p>
+          <input
+            type="text"
+            name="lastName"
+            className={classes.input}
+            placeholder="Last Name"
+          />
+        </p>
+        <p>
+          {" "}
+          <input
+            type="text"
+            name="buisnessId"
+            className={classes.input}
+            placeholder="Buisness ID"
+          />
+        </p>
+        <p>
+          {" "}
+          <input
+            type="text"
+            name="sector"
+            className={classes.input}
+            placeholder="Buisness Sector"
+          />
+        </p>
+        <p>
+          <input
+            type="text"
+            name="email"
+            className={classes.input}
+            placeholder="Email"
+          />
+        </p>
+        <p>
+          <input
+            type="text"
+            name="phone"
+            className={classes.input}
+            placeholder="Phone"
+          />
+        </p>
+        <p>
+          {" "}
+          <input
+            type="text"
+            name="description"
+            className={classes.input}
+            placeholder="Description"
+          />
+        </p>
+
         <p className={classes.opt}>
           <select name="role" type="text">
             <option value="Customer">Customer</option>
@@ -95,6 +156,13 @@ export const action = async ({ request }) => {
       username: userData.username,
       password: userData.password,
       role: userData.role,
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      buisnessId: userData.buisnessId,
+      sector: userData.sector,
+      email: userData.email,
+      phone: userData.phone,
+      description: userData.description,
     });
     return response;
   } catch (error) {

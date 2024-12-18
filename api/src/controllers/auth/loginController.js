@@ -24,14 +24,7 @@ export const loginUser = async (req, res) => {
         process.env.ACCESS_TOKEN_SECRET,
         { expiresIn: "15s" }
       );
-      // const refreshToken = jwt.sign(
-      //   { username: user.username },
-      //   process.env.REFRESH_TOKEN_SECRET,
-      //   { expiresIn: "1d" }
-      // );
-      // user.refreshToken = refreshToken;
-      // const result = await user.save();
-      // console.log(result);
+
       res.cookie("jwt", accessToken, {
         httpOnly: true,
         sameSite: "None",

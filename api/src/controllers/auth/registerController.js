@@ -33,7 +33,6 @@ export const registerUser = async (req, res) => {
       phone: phone ? phone : "",
       description: description ? description : "",
     });
-    console.log(result);
     res.status(201).json({ message: `User ${username} created` });
   } catch (err) {
     res.status(500).json({ message: err.message });

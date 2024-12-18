@@ -1,12 +1,18 @@
 import { createBrowserRouter } from "react-router-dom";
 import Error from "./pages/Error";
 import ProtectedRoute from "./components/ProtectedRoute";
-import AboutPage from "./pages/AboutPage";
-import ContactPage from "./pages/ContactPage";
+import AboutPage, {
+  action as updateAbout,
+  loader as aboutLoader,
+} from "./pages/AboutPage";
+import ContactPage, {
+  action as updateContact,
+  loader as contactLoader,
+} from "./pages/ContactPage";
 import RootLayout from "./routes/RootLayout";
 import Dashboard from "./routes/Dashboard";
 import HomePage from "./pages/HomePage";
-
+import { loader as uploadsLoader } from "./routes/uploads/Uploads";
 import Posts, { loader as postsLoader } from "./routes/post/Posts";
 import CreatePost, {
   action as createPostAction,
@@ -38,9 +44,13 @@ import FileUpload, {
 } from "./routes/file/FileUpload";
 
 const combinedLoader = async () => {
-  const [posts, news] = await Promise.all([postsLoader(), newsLoader()]);
+  const [posts, news, uploads] = await Promise.all([
+    postsLoader(),
+    newsLoader(),
+    uploadsLoader(),
+  ]);
 
-  return { posts, news };
+  return { posts, news, uploads };
 };
 
 const router = createBrowserRouter([
@@ -76,8 +86,18 @@ const router = createBrowserRouter([
               },
             ],
           },
-          { path: "/about", element: <AboutPage /> },
-          { path: "/contact", element: <ContactPage /> },
+          {
+            path: "/about",
+            element: <AboutPage />,
+            action: updateAbout,
+            loader: aboutLoader,
+          },
+          {
+            path: "/contact",
+            element: <ContactPage />,
+            action: updateContact,
+            loader: contactLoader,
+          },
         ],
       },
     ],

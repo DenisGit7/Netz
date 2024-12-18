@@ -9,7 +9,6 @@ export const handleLogout = async () => {
         withCredentials: true,
       }
     );
-    console.log(response);
     return response;
   } catch (error) {
     console.log("response");

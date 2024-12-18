@@ -13,13 +13,14 @@ const Post = ({ id, title, content }) => {
             ? title.slice(0, maxLengthTitle) + "..."
             : title}
         </p>
-        <p className={classes.content}>
+
+        <div className={classes.content}>
           <p>
             {content.length > maxLengthContent
               ? content.slice(0, maxLengthContent) + "..."
               : content}
           </p>
-        </p>
+        </div>
       </Link>
     </li>
   );

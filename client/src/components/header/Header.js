@@ -22,7 +22,6 @@ const Header = ({ onLogin, onLogout }) => {
 
   const handleMenu = (e) => {
     setMenu(!menu);
-    console.log(menu);
   };
 
   const handleRootFolder = () => {
@@ -44,7 +43,6 @@ const Header = ({ onLogin, onLogout }) => {
   }
   function handleResize() {
     setWidth(getWindowDimensions());
-    console.log(width.width);
   }
 
   useEffect(() => {

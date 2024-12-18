@@ -1,0 +1,21 @@
+.container {
+  position: absolute;
+  /* width: max-content; */
+  /* top: 1rem; */
+  left: 1vw;
+  /* margin-bottom: 30vh; */
+  /* background-color: green; */
+  width: 98vw;
+  height: 100vh;
+  /* border: 2px solid red; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    top: 5rem;
+    height: 110vh;
+  }
+}

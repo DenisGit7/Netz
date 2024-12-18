@@ -34,13 +34,16 @@ const CustomersList = () => {
       <div className={classes.listContainer}>
         {rawUsers.length > 0 && (
           <div className={classes.customers}>
-            {rawUsers.map((customer) => (
-              <Customer
-                key={customer._id}
-                id={customer._id}
-                username={customer.username}
-              />
-            ))}
+            {rawUsers.map(
+              (customer) =>
+                customer.username !== "Admin" && (
+                  <Customer
+                    key={customer._id}
+                    id={customer._id}
+                    username={customer.username}
+                  />
+                )
+            )}
           </div>
         )}
 

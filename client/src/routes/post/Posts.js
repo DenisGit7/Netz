@@ -4,15 +4,22 @@ import classes from "./Posts.module.css";
 import { getPosts } from "../../helpers/posts/getPosts";
 import { FaEnvelope } from "react-icons/fa6";
 import { useSession } from "../../context/SessionContext";
+import { useState } from "react";
 
 const Posts = () => {
   const { isLoggedIn, userInformation } = useSession();
+  const [userClass, setUserClass] = useState(() => {
+    if (userInformation?.role.includes("Admin")) {
+      return `${classes.postsContainer} ${classes.postsContainerAdmin}`;
+    } else {
+      return `${classes.postsContainer}`;
+    }
+  });
 
   return (
     <>
       <Outlet />
-      <div className={classes.postsContainer}>
-        {/* <main className={classes.postsContainer}> */}
+      <div className={userClass}>
         {userInformation?.role?.includes("Admin") && (
           <Link to="/dashboard/create-post" className={classes.create}>
             <FaEnvelope />
@@ -22,7 +29,6 @@ const Posts = () => {
 
         <PostsList />
       </div>
-      {/* </main> */}
     </>
   );
 };

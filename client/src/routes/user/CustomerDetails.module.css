@@ -1,14 +1,53 @@
 .details {
   padding: 1rem;
   width: 50rem;
-  height: 20rem;
+  height: 45rem;
   overflow-y: scroll;
   background-color: #f6e6d3;
   @media (max-width: 768px) {
     width: 80vw;
   }
 }
+.details p {
+  margin: auto;
+}
+.details label {
+  /* display: flex;
+  flex-direction: row; */
+  /* margin-bottom: 1rem; */
+  color: #1b130e;
+  font-weight: bold;
+  font-size: 18px;
+  /* margin-left: 10rem; */
+  /* margin-right: 1rem; */
+  border: 1px solid red;
+  /* text-align: right; */
+  width: 100%;
+}
+.details h3 {
+  /* text-align: right; */
 
+  /* border: 1px solid red; */
+  width: 30%;
+  padding: 12px;
+  border-radius: 5px;
+  margin-bottom: 0rem;
+  margin-left: 1rem;
+  color: #1b130e;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.details div {
+  display: flex;
+  border-bottom: #ccbca863 1px solid;
+  /* height: 100%; */
+  flex-direction: row;
+  /* align-items: center; */
+  /* align-items: center; */
+  /* line-height: 60px; */
+  /* border: 1px solid #ccbca863; */
+}
 .user {
   text-align: center;
   font-size: 1.2rem;
@@ -31,7 +70,8 @@
 .form {
   background-color: #f6e6d3;
   width: 50rem;
-  height: 20rem;
+  height: 50rem;
+
   overflow-y: hidden;
   @media (max-width: 768px) {
     width: 80vw;
@@ -40,7 +80,7 @@
 
 .form label {
   display: block;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
   color: #1b130e;
   font-weight: bold;
 }
@@ -59,7 +99,7 @@
   field-sizing: content;
   height: max-content;
   max-height: 400px;
-  margin: 0 0 2rem 0;
+  /* margin: 0 0 2rem 0; */
 }
 
 .actions {

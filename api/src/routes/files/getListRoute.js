@@ -4,7 +4,6 @@ import { getListController } from "../../controllers/files/getListController.js"
 const router = express.Router();
 
 router.post("/", (req, res) => {
-  console.log(req.body.customerFolder);
   try {
     if (req.body.customerFolder == null || req.body.subFolder == null) {
       res.json("Data error");
@@ -15,7 +14,6 @@ router.post("/", (req, res) => {
             req.body.customerFolder,
             req.body.subFolder
           );
-          console.log(result.folders, result.files);
           res.json({
             message: "Files list fetched successfully",
             result: { folders: result.folders, files: result.files },

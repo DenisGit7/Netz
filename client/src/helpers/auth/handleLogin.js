@@ -18,9 +18,7 @@ export const handleLogin = async (username, password) => {
       }
     );
     const decoded = jwtDecode(response.data.accessToken);
-    // const refresh = jwtDecode(response.data.refreshToken);
-    console.log(decoded);
-    // console.log(refresh);
+
     return decoded.User;
   } catch (error) {
     console.error("Login error: ", error.response);

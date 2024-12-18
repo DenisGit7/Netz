@@ -9,13 +9,6 @@ export const SessionProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInformation, setUserInformation] = useState(null);
   const [loading, setLoading] = useState(true);
-  // const [folderPathProvider, setFolderPath] = useState({
-  //   customerFolder: "TEST",
-  //   subFolder: "",
-  // });
-  // const updateFolderPath = (customerFolder, subFolder = "") => {
-  //   setFolderPath({ customerFolder, subFolder });
-  // };
 
   useEffect(() => {
     const storedUser = JSON.parse(sessionStorage.getItem("userData"));

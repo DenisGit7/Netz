@@ -23,8 +23,6 @@ const FileUpload = () => {
   const navigate = useNavigate();
 
   if (res?.status) {
-    console.log("res");
-
     setLoading(false);
     toast.dismiss();
 
@@ -33,7 +31,6 @@ const FileUpload = () => {
       setRes("");
       navigate("/dashboard/files");
     }
-    console.log(res);
     if (res?.status === 409) {
       toast.error("Uploading error", { duration: 2000 });
       setRes("");
@@ -97,7 +94,6 @@ export const action = async ({ request }) => {
         },
       }
     );
-    console.log(response);
     sessionStorage.setItem("customerFolder", fileData.username);
     sessionStorage.setItem("subFolder", subFolder);
     return response;

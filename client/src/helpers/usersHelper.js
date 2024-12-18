@@ -11,13 +11,11 @@ export const getAllUsers = async () => {
 };
 
 export const getUser = async (id) => {
-  console.log("from usershelper, getuser", id);
   try {
     const response = await axios.get(
       `http://localhost:3500/customers/${id}`,
       {}
     );
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(" error: ", error);
@@ -26,12 +24,10 @@ export const getUser = async (id) => {
 };
 
 export const removeUser = async (id) => {
-  console.log("from usershelper, delete", id);
   try {
     const response = await axios.delete(
       `http://localhost:3500/customers/${id}`
     );
-    console.log(response);
     return response;
   } catch (error) {
     console.error(" error: ", error);

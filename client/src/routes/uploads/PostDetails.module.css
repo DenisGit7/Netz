@@ -1,0 +1,96 @@
+.details {
+  padding: 1rem;
+  width: 50rem;
+  height: 40rem;
+  overflow-y: scroll;
+  background-color: #f6e6d3;
+  @media (max-width: 768px) {
+    width: 80vw;
+  }
+}
+
+.title {
+  text-align: center;
+  word-wrap: break-word;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1b130e;
+  margin: 0.5rem;
+
+  text-transform: uppercase;
+}
+
+.content {
+  padding: 20px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: 1.25rem;
+  margin: 1rem 0;
+  color: #1b130e;
+}
+
+.form {
+  background-color: #f6e6d3;
+  width: 50rem;
+  height: 42rem;
+  overflow-y: hidden;
+  @media (max-width: 768px) {
+    width: 80vw;
+  }
+}
+
+.form label {
+  display: block;
+  margin-bottom: 0.1rem;
+  color: #1b130e;
+  font-weight: bold;
+}
+
+.form input,
+.form textarea {
+  border: 1px solid #ccbca8;
+  display: block;
+  width: 95%;
+  font: inherit;
+  padding: 0.5rem;
+  border-radius: 5px;
+  background-color: #f6e6d3;
+  color: #28262c;
+  resize: none;
+  field-sizing: content;
+  height: max-content;
+  max-height: 400px;
+}
+.textContent {
+  min-height: 400px;
+}
+
+.actions {
+  padding-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  background-color: #f6e6d3;
+}
+
+.actions button {
+  cursor: pointer;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  font-weight: bold;
+  transition: all 0.3s ease-out;
+
+  padding: 0.8rem 1.8rem;
+  border: none;
+  border-radius: 1rem;
+  background: #f6e6d3;
+  color: #685642;
+}
+
+.actions button:hover {
+  background: #181613;
+  color: #f6e6d3;
+}

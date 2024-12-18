@@ -6,6 +6,13 @@ export const createUser = async (newUser, newPwd, newRole) => {
       username: newUser,
       password: newPwd,
       role: newRole,
+      firstName: firstName,
+      lastName: lastName,
+      buisnessId: buisnessId,
+      sector: sector,
+      email: email,
+      phone: phone,
+      desctription: desctription,
     });
     // console.log(response);
     return response;
