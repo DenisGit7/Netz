@@ -1,5 +1,6 @@
 import axios from "axios";
-import { apiUrl } from "../service/api";
+import apiUrl from "../service/api";
+
 export const getAllUsers = async () => {
   try {
     const response = await axios.get(`${apiUrl}/customers`);

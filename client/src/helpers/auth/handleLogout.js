@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import apiUrl from "../../service/api";
 export const handleLogout = async () => {
   try {
     const response = await axios.post(

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { apiUrl } from "../../service/api";
+import apiUrl from "../../service/api";
+
 // import { Link, Form, redirect } from "react-router-dom";
 import classes from "./CreateNew.module.css";
 import Modal from "../../components/Modal";

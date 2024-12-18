@@ -8,7 +8,8 @@ import {
   useNavigate,
 } from "react-router-dom";
 import toast from "react-hot-toast";
-import { apiUrl } from "../../service/api";
+import apiUrl from "../../service/api";
+
 import Modal from "../../components/Modal";
 import classes from "./NewDetails.module.css";
 import { deleteNew } from "../../helpers/news/deleteNew";

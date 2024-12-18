@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { apiUrl } from "../service/api";
+import apiUrl from "../service/api";
+
 // import { useSession } from "../../context/SessionContext";
 import classes from "../pages/About.module.css";
 import { useEffect, useState } from "react";

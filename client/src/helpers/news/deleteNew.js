@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiUrl } from "../../service/api";
+import apiUrl from "../../service/api";
 
 export const deleteNew = async (id) => {
   try {

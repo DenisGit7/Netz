@@ -2,7 +2,8 @@ import axios from "axios";
 import { Link, Form, redirect } from "react-router-dom";
 import classes from "./CreatePost.module.css";
 import Modal from "../../components/Modal";
-import { apiUrl } from "../../service/api";
+import apiUrl from "../../service/api";
+
 const CreatePost = () => {
   return (
     <Modal>

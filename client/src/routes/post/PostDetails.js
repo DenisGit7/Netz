@@ -13,7 +13,8 @@ import classes from "./PostDetails.module.css";
 import { getPost } from "../../helpers/posts/getPosts";
 import { deletePost } from "../../helpers/posts/deletePost";
 import { useSession } from "../../context/SessionContext";
-import { apiUrl } from "../../service/api";
+import apiUrl from "../../service/api";
+
 const PostDetails = () => {
   const { isLoggedIn, userInformation } = useSession();
   const [editing, setEditing] = useState(false);

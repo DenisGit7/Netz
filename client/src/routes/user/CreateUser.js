@@ -12,7 +12,8 @@ import {
 import classes from "./CreateUser.module.css";
 import Modal from "../../components/Modal";
 import toast from "react-hot-toast";
-import { apiUrl } from "../../service/api";
+import apiUrl from "../../service/api";
+
 const CreateUser = () => {
   const [res, setRes] = useState("");
   const [loading, setLoading] = useState(false);

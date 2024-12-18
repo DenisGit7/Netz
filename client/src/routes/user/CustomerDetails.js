@@ -14,7 +14,8 @@ import toast from "react-hot-toast";
 import Modal from "../../components/Modal";
 import classes from "./CustomerDetails.module.css";
 import { getUser, removeUser } from "../../helpers/usersHelper";
-import { apiUrl } from "../../service/api";
+import apiUrl from "../../service/api";
+
 const CustomerDetails = () => {
   const [editing, setEditing] = useState(false);
   const [res, setRes] = useState("");

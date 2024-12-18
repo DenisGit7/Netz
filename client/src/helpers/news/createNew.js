@@ -1,5 +1,6 @@
 import axios from "axios";
-import { apiUrl } from "../../service/api";
+import apiUrl from "../../service/api";
+
 export const createNew = async (title, content) => {
   try {
     const response = await axios.post(`${apiUrl}/news/create`, {

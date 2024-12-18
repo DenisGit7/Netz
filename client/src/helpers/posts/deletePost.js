@@ -1,5 +1,6 @@
 import axios from "axios";
-import { apiUrl } from "../../service/api";
+import apiUrl from "../../service/api";
+
 export const deletePost = async (id) => {
   try {
     const response = await axios.delete(`${apiUrl}/posts/delete/${id}`);

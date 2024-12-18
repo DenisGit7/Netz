@@ -1,6 +1,7 @@
 import axios from "axios";
 import { FaTrash, FaFolder, FaFileInvoice } from "react-icons/fa6";
-import { apiUrl } from "../../service/api.js";
+import apiUrl from "../../service/api";
+
 import { handleRemove } from "./handleRemove.js";
 import { handleChangeFolder } from "./handleChangeFolder.js";
 import { handleDownload } from "./handleDownload.js";

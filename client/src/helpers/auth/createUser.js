@@ -1,5 +1,6 @@
 import axios from "axios";
-import { apiUrl } from "../../service/api";
+import apiUrl from "../../service/api";
+
 export const createUser = async (newUser, newPwd, newRole) => {
   try {
     const response = await axios.post(`${apiUrl}/users/register`, {

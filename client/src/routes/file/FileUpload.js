@@ -2,7 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 import classes from "./FileUpload.module.css";
-import { apiUrl } from "../../service/api.js";
+import apiUrl from "../../service/api";
+
 import {
   Form,
   Link,

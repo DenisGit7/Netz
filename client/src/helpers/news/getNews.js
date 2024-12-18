@@ -1,4 +1,5 @@
 import axios from "axios";
+import apiUrl from "../../service/api";
 
 export const getNews = async () => {
   const response = await axios.get(`${apiUrl}/news/get`);
