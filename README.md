@@ -8,6 +8,7 @@ Office manager application:
 
   Test user for manager: user: AdminTest
                          password: AdminTest
+  
   Test user for customer: user: CustomerTest
                           paswword: CustomerTest
 
